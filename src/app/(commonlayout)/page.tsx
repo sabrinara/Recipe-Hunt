@@ -1,5 +1,15 @@
-const Welcome = () => {
-    return <div>Root page </div>;
+import Banner from "./component/pages/home/Banner";
+
+
+
+
+const Home = () => {
+    return (
+        <div>
+         
+       <Banner/>
+    </div>
+    );
 };
 
-export default Welcome;
+export default Home;
