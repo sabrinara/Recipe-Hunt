@@ -6,8 +6,8 @@ export default function MotionRecipe() {
     <motion.div
       initial={{ x: 50 }}
       animate={{ y: 40, x: 0 }}
-      transition={{ ease: "easeOut", duration: 2 }}
-      className="w-3/5 flex justify-end gap-2"
+      transition={{ ease: "easeOut", duration: 3 }}
+      className="w-3/5 hidden md:flex justify-start gap-2 pb-10"
     >
       <Image
         alt="Card background"

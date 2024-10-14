@@ -5,12 +5,12 @@ import MotionRecipe from "./MotionRecipe";
 
 export default function Banner() {
   return (
-    <Card className="py-4 flex" shadow="none">
-      <CardBody className="overflow-visible py-2 ">
-        <div className="flex items-center justify-between gap-6">
-        <MotionRecipe />
-          <div className="w-2/5 px-10">
-            <h1 className="text-2xl md:text-5xl font-semibold mb-2 text-default-900 italic">
+    <Card className=" flex bg-transparent" >
+      <CardBody className="overflow-visible  ">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+        <MotionRecipe/>
+          <div className="w-full md:w-2/5 md:px-10">
+            <h1 className="text-3xl md:text-5xl font-semibold mb-2 text-default-900 italic">
                <span className="text-red-500 "> Create</span> & Explore Your <span className="text-red-500">Cooking</span> Skill With Recipe <span className="text-red-500">Hunt</span>{" "}
           
             </h1>

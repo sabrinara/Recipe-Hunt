@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Footer from "./component/pages/shared/Footer";
+import Navbar from "./component/pages/shared/Navbar";
 
 export const metadata: Metadata = {
     title: "Recipe Hunt",
@@ -12,8 +14,9 @@ export default function DashboardLayout({
 }>) {
     return (
         <div>
-            Common Navbar
+           <Navbar></Navbar>
             {children}
+            <Footer></Footer>
         </div>
     );
 }
