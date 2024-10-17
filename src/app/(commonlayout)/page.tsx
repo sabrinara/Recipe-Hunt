@@ -1,4 +1,5 @@
 import Banner from "./component/pages/home/Banner";
+import HomeCarosel from "./component/pages/home/HomeCarosel";
 
 
 
@@ -8,6 +9,7 @@ const Home = () => {
         <div>
          
        <Banner/>
+       <HomeCarosel/>
     </div>
     );
 };
