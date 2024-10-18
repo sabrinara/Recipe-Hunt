@@ -1,22 +1,15 @@
 "use client"
-import React, { useCallback } from 'react'
+import React from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
-import Autoplay from 'embla-carousel-autoplay'
-import { FaArrowCircleLeft, FaArrowCircleRight } from 'react-icons/fa'
+import Autoplay from 'embla-carousel-autoplay';
 import { Image } from '@nextui-org/react'
 
 const SomeRecipe = () => {
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
+    const [emblaRef] = useEmblaCarousel({ loop: true }, [
         Autoplay({ delay: 2000 })
     ])
 
-    const scrollPrev = useCallback(() => {
-        if (emblaApi) emblaApi.scrollPrev()
-    }, [emblaApi])
-
-    const scrollNext = useCallback(() => {
-        if (emblaApi) emblaApi.scrollNext()
-    }, [emblaApi])
+    
 
     return (
         <div className="embla relative">
@@ -55,20 +48,8 @@ const SomeRecipe = () => {
                             <h1>Hello</h1>
                         </div>
                     </div>
-                 
-                 
                 </div>
-            </div>
-
-            {/* Navigation buttons */}
-            <div className='absolute top-1/2 w-full flex justify-between items-center'>
-                <button className="embla__prev px-4 text-xl md:text-2xl pb-10" onClick={scrollPrev}>
-                    <FaArrowCircleLeft />
-                </button>
-                <button className="embla__next px-4 text-xl md:text-2xl pb-10" onClick={scrollNext}>
-                    <FaArrowCircleRight />
-                </button>
-            </div>
+            </div>           
         </div>
     )
 }
