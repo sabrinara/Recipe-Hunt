@@ -1,7 +1,7 @@
 import { Nexios } from "nexios-http";
 
 const nexiosInstance = new Nexios({
-  baseURL: "https://receipe-booking-server.vercel.app/api/",
+  baseURL: process.env.BACKEND_URL as string,
   timeout: 10000,
   headers: {
     "Content-Type": "application/json",

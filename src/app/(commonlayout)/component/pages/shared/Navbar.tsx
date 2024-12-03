@@ -48,6 +48,11 @@ export default function NavBar() {
           </Link>
         </NavbarItem>
         <NavbarItem>
+          <Link href="/login" aria-current="page">
+            Login
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
           <Link href={routeMap.user}>Dashboard</Link>
         </NavbarItem>
       </NavbarContent>

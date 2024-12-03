@@ -22,7 +22,7 @@ export const AuthOptions: NextAuthOptions = {
         }
 
         if (account?.provider === "google") {
-          const response: any = await nexiosInstance.post("/auth/login", {
+          const response: any = await nexiosInstance.post("/api/user/login", {
             name: profile.name,
             email: profile.email,
             img: profile.picture,

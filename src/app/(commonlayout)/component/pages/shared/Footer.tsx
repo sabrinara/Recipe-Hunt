@@ -12,7 +12,7 @@ export default function Footer() {
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center',
                                 backgroundRepeat: 'no-repeat',
-                                opacity: "85%"
+                                opacity: "80%"
                             }}>
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center">
@@ -22,7 +22,7 @@ export default function Footer() {
                   <Image src="/assets/footerlogo.png" className="h-14 md:h-28" alt="Logo" />
                 </div>
               </Link>
-              <p className="mb-2 text-sm text-red-700 font-bold">&copy; 2024 Recipe Hunt. All rights reserved.</p>
+              <p className="mb-2 text-sm text-white font-bold">&copy; 2024 Recipe Hunt. All rights reserved.</p>
             </div>
             < div className='flex flex-col justify-between items-center gap-4 my-10'>
               <div className="flex space-x-4 mb-4 md:mb-0 text-white font-bold">
@@ -37,7 +37,7 @@ export default function Footer() {
                 </a>
               </div>
               {/* Social Links */}
-              <div className="flex space-x-4 text-red-700">
+              <div className="flex space-x-4 text-red-800">
                 <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-white">
                   <FaFacebookF size={20} />
                 </a>

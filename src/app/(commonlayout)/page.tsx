@@ -8,7 +8,8 @@ import SomeRecipe from "./component/pages/home/SomeRecipe";
 
 const Home = () => {
     return (
-        <div>
+        <div className="mx-auto container">
+            
          
        <Banner/>
        <HomeCarosel/>
