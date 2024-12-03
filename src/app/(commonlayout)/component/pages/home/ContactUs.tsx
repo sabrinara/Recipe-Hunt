@@ -11,7 +11,7 @@ const ContactUs = () => {
                 height={600} 
             /> */}
               <div
-                            className='relative w-full h-[80vh] md:h-[100vh]'
+                            className='relative w-full h-[80vh] md:h-[80vh]'
                             style={{
                                 backgroundImage: `url('/assets/contactus.jpg')`,
                                 backgroundSize: 'cover',
