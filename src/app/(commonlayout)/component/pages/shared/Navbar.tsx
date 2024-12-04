@@ -53,6 +53,11 @@ export default function NavBar() {
           </Link>
         </NavbarItem>
         <NavbarItem>
+          <Link href="/register" aria-current="page">
+            Register
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
           <Link href={routeMap.user}>Dashboard</Link>
         </NavbarItem>
       </NavbarContent>
