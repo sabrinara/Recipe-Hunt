@@ -8,6 +8,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import GoogleLoginBtn from "../component/pages/shared/GoogleLoginBtn";
+import { Input } from "@nextui-org/input";
+import { FaRegEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+import React from "react";
 
 
 
@@ -35,6 +39,10 @@ const RegisterPage = () => {
       throw new Error(err.message);
     }
   };
+
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  const toggleVisibility = () => setIsVisible(!isVisible);
 
   return (
     <div className="my-10">
@@ -78,6 +86,24 @@ const RegisterPage = () => {
                 required
               />
             </div>
+            <Input
+              {...register("password")}
+              
+              label="Password"
+              variant="bordered"
+              placeholder="Enter your password"
+              endContent={
+                <button className="focus:outline-none" type="button" onClick={toggleVisibility} aria-label="toggle password visibility">
+                  {isVisible ? (
+                    <FaRegEye className="text-2xl text-default-400 pointer-events-none" />
+                  ) : (
+                    <FaEyeSlash  className="text-2xl text-default-400 pointer-events-none" />
+                  )}
+                </button>
+              }
+              type={isVisible ? "text" : "password"}
+              className="max-w-xs"
+            />
 
             <div className="form-control">
               <label className="label">

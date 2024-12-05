@@ -6,6 +6,10 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import GoogleLoginBtn from "../component/pages/shared/GoogleLoginBtn";
 import { loginUser } from "@/services/AuthServices";
+import { Input } from "@nextui-org/input";
+import { FaRegEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
+import React from "react";
 
 export type FormValues = {
   email: string;
@@ -27,17 +31,21 @@ const LoginPage = () => {
     try {
       const res = await loginUser(data);
       console.log(res);
-      if(res.accessToken){
+      if (res.accessToken) {
         alert(res.message);
         localStorage.setItem("accessToken", res.accessToken);
         router.push("/"); //dedicated path for login
       }
-    
+
     } catch (err: any) {
       console.error(err.message);
       throw new Error(err.message);
     }
   };
+
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  const toggleVisibility = () => setIsVisible(!isVisible);
 
   return (
     <div className="my-10">
@@ -69,8 +77,25 @@ const LoginPage = () => {
                 required
               />
             </div>
-
-            <div className="form-control">
+            <Input
+              {...register("password")}
+              
+              label="Password"
+              variant="bordered"
+              placeholder="Enter your password"
+              endContent={
+                <button className="focus:outline-none" type="button" onClick={toggleVisibility} aria-label="toggle password visibility">
+                  {isVisible ? (
+                    <FaRegEye className="text-2xl text-default-400 pointer-events-none" />
+                  ) : (
+                    <FaEyeSlash  className="text-2xl text-default-400 pointer-events-none" />
+                  )}
+                </button>
+              }
+              type={isVisible ? "text" : "password"}
+              className="max-w-xs"
+            />
+            {/* <div className="form-control">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
@@ -81,7 +106,7 @@ const LoginPage = () => {
                 className="input input-bordered"
                 required
               />
-            </div>
+            </div> */}
 
             <div className="form-control mt-6">
               <button type="submit" className="btn btn-accent btn-outline">
