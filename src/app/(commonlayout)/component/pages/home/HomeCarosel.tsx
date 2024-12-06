@@ -16,6 +16,8 @@ const HomeCarosel = () => {
         if (emblaApi) emblaApi.scrollNext()
     }, [emblaApi])
 
+    
+ 
     return (
         <div className="embla relative" >
 

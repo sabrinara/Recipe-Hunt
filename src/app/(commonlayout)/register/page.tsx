@@ -85,12 +85,12 @@ const RegisterPage = () => {
         }}
       >
 
-        <div className="w-1/2 h-auto shadow-xl bg-red-50 bg-opacity-80 p-8 rounded-lg text-center">
-          <h1 className="text-center text-4xl mb-10 text-red-700 font-bold">
-            Register <span className="text-red-700">Now</span>
+        <div className="w-1/2 h-auto shadow-xl bg-red-50 dark:bg-red-700 bg-opacity-80 dark:bg-opacity-80 p-8 rounded-lg text-center ">
+          <h1 className="text-center text-4xl mb-10 text-red-700 font-bold dark:text-white">
+            Register Now
           </h1>
           <form onSubmit={handleSubmit(onSubmit)} className=" py-3 font-semibold ">
-            <div className="flex  items-center justify-center gap-4">
+            <div className="flex  items-center justify-center gap-4 ">
               <Input
                 {...register("name")}
                 label="Full Name"
@@ -170,7 +170,7 @@ const RegisterPage = () => {
             <div className="form-control mt-6">
               <Button
                 type="submit"
-                className="bg-red-700 hover:bg-red-500 text-white  px-4 py-4 rounded-md w-full text-lg font-bold"
+                className="bg-red-700 dark:bg-white hover:bg-red-500 text-white dark:text-red-700 px-4 py-4 rounded-md w-full text-lg font-bold"
                 disabled={uploading}
               >
                 {uploading ? "Submitting..." : "Register"}
@@ -180,7 +180,7 @@ const RegisterPage = () => {
             <p className="text-center">
               Already have an account?{" "}
               <Link className="text-accent" href="/login">
-                <span className="underline text-red-700">Login</span>
+                <span className="underline text-red-700 dark:text-white">Login</span>
               </Link>
             </p>
           </form>
