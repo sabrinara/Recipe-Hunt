@@ -52,11 +52,13 @@ export const AuthOptions: NextAuthOptions = {
           const data = await response.json();
           console.log("User registered successfully:", data);
 
-          // //set data to local storage
-          // localStorage.setItem("accessToken", data.token);
-          // localStorage.setItem("user", data.user);
+        const token = data.data.token;
+        console.log("Token",token);
 
-          return true;
+        const user = data.data.user;
+        console.log(user);
+
+          return data.data;
         }
 
         return false;

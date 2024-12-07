@@ -12,7 +12,9 @@ import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@nextui-o
 import Link from "next/link";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { TfiMenuAlt } from "react-icons/tfi";
-export default function NavBar() {
+import { signOut } from "next-auth/react";
+import { useEffect } from "react";
+export default function NavBar({session}: {session: any}) {
   const routeMap: Record<string, string> = {
     user: "/dashboard",
     admin: "/dashboard/admin",
@@ -25,6 +27,12 @@ export default function NavBar() {
     { key: "about", label: "About", href: "/about" },
     { key: "dashboard", label: "Dashboard", href: routeMap.user },
   ];
+
+  useEffect(() => {
+    if (session) {
+      localStorage.setItem("user", JSON.stringify(session));
+    }
+  }, [session]);
 
   return (
     <Navbar maxWidth="2xl" className="flex flex-col items-center justify-between my-2">
@@ -48,6 +56,15 @@ export default function NavBar() {
           </Link>
         </NavbarItem>
         <NavbarItem>
+          <Link href={routeMap.user}>Dashboard</Link>
+        </NavbarItem>
+        {session?.user ? (
+          <NavbarItem>
+            <button onClick={() => signOut()}>Logout</button>
+          </NavbarItem>
+        ) : (
+          <>
+           <NavbarItem>
           <Link href="/login" aria-current="page">
             Login
           </Link>
@@ -57,9 +74,9 @@ export default function NavBar() {
             Register
           </Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link href={routeMap.user}>Dashboard</Link>
-        </NavbarItem>
+          </>
+        )
+        }
       </NavbarContent>
       <NavbarContent justify="end" className="hidden md:flex ">
         <NavbarItem>

@@ -1,29 +1,32 @@
-"use client";
-// import type { Metadata } from "next";
+// "use client";
+import { AuthOptions } from "@/config/nextauth.config";
+import type { Metadata } from "next";
 import Footer from "./component/pages/shared/Footer";
 import Navbar from "./component/pages/shared/Navbar";
-import { usePathname } from "next/navigation";
+import { getServerSession } from "next-auth";
 
-// export const metadata: Metadata = {
-//   title: "Recipe Hunt",
-//   description: "A recipe sharing website, where users can share their recipes.",
-// };
+export const metadata: Metadata = {
+  title: "Recipe Hunt",
+  description: "A recipe sharing website, where users can share their recipes.",
+};
 
-export default function DashboardLayout({
+export default async function CommonLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
 
-  // Define paths where Navbar and Footer should be hidden
-  const hideNavbarAndFooter = ["/login", "/register"].includes(pathname);
+  const session = await getServerSession(AuthOptions);
+  console.log("user",session)
+
+
+ 
 
   return (
     <div>
-      {!hideNavbarAndFooter && <Navbar />}
+      <Navbar session={session} />
       {children}
-      {!hideNavbarAndFooter && <Footer />}
+     <Footer />
     </div>
   );
 }
