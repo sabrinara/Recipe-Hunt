@@ -18,6 +18,7 @@ export const registerUser = async (data: UserData) => {
     }
 
     const userInfo = await response.json();
+    console.log("Data",userInfo)
     return userInfo;
 };
 

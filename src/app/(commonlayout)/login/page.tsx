@@ -31,9 +31,10 @@ const LoginPage = () => {
     try {
       const res = await loginUser(data);
       console.log(res);
-      if (res.accessToken) {
+      if (res.accessToken ) {
         alert(res.message);
-        localStorage.setItem("accessToken", res.accessToken);
+        // localStorage.setItem("accessToken", res.accessToken);
+        // localStorage.setItem("user",res.user);
         router.push("/"); //dedicated path for login
       }
 

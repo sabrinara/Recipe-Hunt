@@ -17,9 +17,9 @@ export default async function CommonLayout({
 }>) {
 
   const session = await getServerSession(AuthOptions);
-  console.log("user",session)
+  console.log("user",session);
 
-
+  
  
 
   return (

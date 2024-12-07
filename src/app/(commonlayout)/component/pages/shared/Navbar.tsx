@@ -13,8 +13,10 @@ import Link from "next/link";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { TfiMenuAlt } from "react-icons/tfi";
 import { signOut } from "next-auth/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 export default function NavBar({session}: {session: any}) {
+  const [userData, setUserData] = useState<string | null>(null);
+  const [userToken, setUserToken] = useState<string | null>(null);
   const routeMap: Record<string, string> = {
     user: "/dashboard",
     admin: "/dashboard/admin",
@@ -34,6 +36,25 @@ export default function NavBar({session}: {session: any}) {
     }
   }, [session]);
 
+  useEffect(()=>{
+    if(typeof window!== 'undefined'){
+      const token = localStorage.getItem("accessToken");
+      const user = localStorage.getItem("user");
+      setUserData(user);
+      setUserToken(token);
+     
+     }
+  },[]);
+  console.log("token", userToken);
+  console.log("user",userData)
+  
+  const handleClearStorage = () => {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("user");
+    setUserData(null);
+    setUserToken(null)
+  }
+  const isLoggedIn = Boolean(session?.user || (userData && userToken));
   return (
     <Navbar maxWidth="2xl" className="flex flex-col items-center justify-between my-2">
       <NavbarBrand>
@@ -58,9 +79,9 @@ export default function NavBar({session}: {session: any}) {
         <NavbarItem>
           <Link href={routeMap.user}>Dashboard</Link>
         </NavbarItem>
-        {session?.user ? (
+        { isLoggedIn ? (
           <NavbarItem>
-            <button onClick={() => signOut()}>Logout</button>
+            <button onClick={() => {signOut(); handleClearStorage();}}>Logout</button>
           </NavbarItem>
         ) : (
           <>
@@ -77,6 +98,7 @@ export default function NavBar({session}: {session: any}) {
           </>
         )
         }
+        
       </NavbarContent>
       <NavbarContent justify="end" className="hidden md:flex ">
         <NavbarItem>

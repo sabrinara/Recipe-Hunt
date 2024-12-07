@@ -63,7 +63,12 @@ const RegisterPage = () => {
 
       if (res.success) {
         alert(res.message);
-        router.push("/login");
+  
+        // Store token and user in localStorage
+        localStorage.setItem("accessToken", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+  
+        router.push("/");
       }
     } catch (err: any) {
       setUploading(false);

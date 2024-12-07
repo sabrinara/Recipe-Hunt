@@ -57,6 +57,7 @@ export const AuthOptions: NextAuthOptions = {
 
         const user = data.data.user;
         console.log(user);
+        
 
           return data.data;
         }
