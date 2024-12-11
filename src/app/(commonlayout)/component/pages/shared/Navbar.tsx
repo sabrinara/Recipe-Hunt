@@ -14,7 +14,16 @@ import { ThemeSwitcher } from "./ThemeSwitcher";
 import { TfiMenuAlt } from "react-icons/tfi";
 import { signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
-export default function NavBar({session}: {session: any}) {
+interface Session {
+  user: {
+    id: string;
+    name: string;
+    email: string;
+    imageUrl: string;
+  };
+  expires: string;
+}
+export default function NavBar({session}: {session : Session }) {
   const [userData, setUserData] = useState<string | null>(null);
   const [userToken, setUserToken] = useState<string | null>(null);
   const routeMap: Record<string, string> = {

@@ -70,11 +70,11 @@ const RegisterPage = () => {
   
         router.push("/");
       }
-    } catch (err: any) {
+    } catch (error) {
       setUploading(false);
       
-      console.error(err.message);
-      alert("Error: " + err.message);
+      console.log(error);
+      alert("Error: " + error);
     }
   };
 

@@ -38,9 +38,9 @@ const LoginPage = () => {
         router.push("/"); //dedicated path for login
       }
 
-    } catch (err: any) {
-      console.error(err.message);
-      throw new Error(err.message);
+    }  catch (error) {
+      console.log(error);
+      throw new Error("Failed to login");
     }
   };
 

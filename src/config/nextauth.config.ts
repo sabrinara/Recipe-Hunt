@@ -24,7 +24,7 @@ export const AuthOptions: NextAuthOptions = {
           const userData = {
             name: profile.name || "Unknown User",
             email: profile.email,
-            imageUrl: profile.picture || null,
+            imageUrl:(profile as any).picture || null,
             phone: "", // Default empty value
             address: "", // Default empty value
             role: "user", // Default role
