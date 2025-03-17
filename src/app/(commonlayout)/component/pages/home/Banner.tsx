@@ -10,7 +10,7 @@ export default function Banner() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
         <MotionRecipe/>
           <div className="w-full md:w-2/5 md:px-10">
-            <h1 className="text-3xl md:text-5xl font-semibold mb-2 text-default-900 italic">
+            <h1 className="text-3xl lg:text-5xl font-semibold mb-2 text-default-900 italic">
                <span className="text-[#E10101] "> Create</span> & Explore Your <span className="text-[#E10101]">Cooking</span> Skill With Recipe <span className="text-[#E10101]">Hunt</span>{" "}
           
             </h1>

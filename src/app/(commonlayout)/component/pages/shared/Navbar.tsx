@@ -21,7 +21,7 @@ type Session = {
     image?: string | null | undefined;
   }
 }
-export default function NavBar({session}: {session : Session | null} ) {
+export default function NavBar({ session }: { session: Session | null }) {
   const [userData, setUserData] = useState<string | null>(null);
   const [userToken, setUserToken] = useState<string | null>(null);
   const routeMap: Record<string, string> = {
@@ -43,18 +43,18 @@ export default function NavBar({session}: {session : Session | null} ) {
     }
   }, [session]);
 
-  useEffect(()=>{
-    if(typeof window!== 'undefined'){
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
       const token = localStorage.getItem("accessToken");
       const user = localStorage.getItem("user");
       setUserData(user);
       setUserToken(token);
-     
-     }
-  },[]);
+
+    }
+  }, []);
   console.log("token", userToken);
-  console.log("user",userData)
-  
+  console.log("user", userData)
+
   const handleClearStorage = () => {
     localStorage.removeItem("accessToken");
     localStorage.removeItem("user");
@@ -63,17 +63,17 @@ export default function NavBar({session}: {session : Session | null} ) {
   }
   const isLoggedIn = Boolean(session?.user || (userData && userToken));
   return (
-    <div>
-    <Navbar maxWidth="full" className="hidden md:flex flex-col items-center justify-between my-2">
+
+    <Navbar maxWidth="full" className="flex flex-col items-center justify-between my-2">
       <NavbarBrand>
         <Link className="flex" href="/">
           {/* <CookingPot className="text-[#E10101] text-3xl"/> */}
           {/* <p className="font-bold text-inherit px-4 text-[#E10101] text-2xl">Recipe Hunt</p> */}
-          <Image src="/assets/navlogo.png" alt="nav logo" className="w-44 md:w-60 h-12 md:h-[70px] " />
+          <Image src="/assets/navlogo.png" alt="nav logo" className="w-40 md:w-60 h-12 md:h-[70px] " />
         </Link>
       </NavbarBrand>
 
-      <NavbarContent className="hidden sm:flex gap-6 text-[#E10101] font-bold" justify="center">
+      <NavbarContent className="hidden md:flex gap-6 text-[#E10101] font-bold" justify="center">
         <NavbarItem>
           <Link color="foreground" href="/allrecipies" className="md:text-lg font-serif">
             Recipes
@@ -87,63 +87,48 @@ export default function NavBar({session}: {session : Session | null} ) {
         <NavbarItem>
           <Link href={routeMap.user} className="md:text-lg font-serif">Dashboard</Link>
         </NavbarItem>
-        { isLoggedIn ? (
+        {isLoggedIn ? (
           <NavbarItem>
-            <button onClick={() => {signOut(); handleClearStorage();}} className="md:text-lg font-serif">Logout</button>
+            <button onClick={() => { signOut(); handleClearStorage(); }} className="md:text-lg font-serif">Logout</button>
           </NavbarItem>
         ) : (
           <>
-           <NavbarItem>
-          <Link href="/login" aria-current="page" className="md:text-lg font-serif">
-            Login
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link href="/register" aria-current="page" className="md:text-lg font-serif">
-            Register
-          </Link>
-        </NavbarItem>
+            <NavbarItem>
+              <Link href="/login" aria-current="page" className="md:text-lg font-serif">
+                Login
+              </Link>
+            </NavbarItem>
+            <NavbarItem>
+              <Link href="/register" aria-current="page" className="md:text-lg font-serif">
+                Register
+              </Link>
+            </NavbarItem>
           </>
         )
         }
-        
+
       </NavbarContent>
-      <NavbarContent justify="end" className="hidden md:flex ">
+      <NavbarContent justify="end" className="flex items-center">
+        <NavbarItem className="flex md:hidden">
+          <Dropdown  >
+            <DropdownTrigger>
+              <Button className="text-[#E10101] bg-transparent text-2xl ">
+                <TfiMenuAlt />
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu aria-label="Dynamic Actions" className="bg-transparent">
+              {items.map((item) => (
+                <DropdownItem key={item.key} color={item.key === "delete" ? "danger" : "default"}>
+                  <Link href={item.href}>{item.label}</Link>
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
+        </NavbarItem>
         <NavbarItem>
           <ThemeSwitcher />
         </NavbarItem>
       </NavbarContent>
-      </Navbar>
-<div className="flex justify-between items-center md:hidden pr-4" >
-  <div>
-  <Link className="flex" href="/">
-          {/* <CookingPot className="text-[#E10101] text-3xl"/> */}
-          {/* <p className="font-bold text-inherit px-4 text-[#E10101] text-2xl">Recipe Hunt</p> */}
-          <Image src="/assets/navlogo.png" alt="nav logo" className="w-48 h-16" />
-        </Link>
-  </div>
-   <div>
-      <Dropdown  >
-        <DropdownTrigger>
-          <Button className="text-[#E10101] bg-transparent text-2xl ">
-            <TfiMenuAlt  />
-          </Button>
-        </DropdownTrigger>
-        <DropdownMenu aria-label="Dynamic Actions" className="bg-transparent">
-          {items.map((item) => (
-            <DropdownItem key={item.key} color={item.key === "delete" ? "danger" : "default"}>
-              <Link href={item.href}>{item.label}</Link>
-            </DropdownItem>
-          ))}
-
-        </DropdownMenu>
-      </Dropdown>
-      <ThemeSwitcher />
-      </div>
-</div>
-
-     
-</div>
-    
+    </Navbar>
   );
 }
