@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import GoogleLoginBtn from "../component/pages/shared/GoogleLoginBtn";
 import { loginUser } from "@/services/AuthServices";
-import { Input } from "@nextui-org/input";
+import { Input } from "@heroui/input";
 import { FaRegEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import React from "react";

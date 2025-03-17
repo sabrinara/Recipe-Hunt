@@ -1,5 +1,5 @@
 "use client";
-import { Image } from "@nextui-org/react";
+import { Image } from "@heroui/react";
 import { motion } from "framer-motion";
 export default function MotionRecipe() {
   return (

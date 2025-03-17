@@ -7,8 +7,8 @@ import {
   NavbarBrand,
   NavbarContent,
   NavbarItem,
-} from "@nextui-org/react";
-import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@nextui-org/dropdown";
+} from "@heroui/react";
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@heroui/dropdown";
 import Link from "next/link";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 import { TfiMenuAlt } from "react-icons/tfi";
@@ -63,42 +63,43 @@ export default function NavBar({session}: {session : Session | null} ) {
   }
   const isLoggedIn = Boolean(session?.user || (userData && userToken));
   return (
-    <Navbar maxWidth="2xl" className="flex flex-col items-center justify-between my-2">
+    <div>
+    <Navbar maxWidth="full" className="hidden md:flex flex-col items-center justify-between my-2">
       <NavbarBrand>
         <Link className="flex" href="/">
-          {/* <CookingPot className="text-red-500 text-3xl"/> */}
-          {/* <p className="font-bold text-inherit px-4 text-red-500 text-2xl">Recipe Hunt</p> */}
-          <Image src="/assets/navlogo.png" alt="nav logo" className="w-44 h-12" />
+          {/* <CookingPot className="text-[#E10101] text-3xl"/> */}
+          {/* <p className="font-bold text-inherit px-4 text-[#E10101] text-2xl">Recipe Hunt</p> */}
+          <Image src="/assets/navlogo.png" alt="nav logo" className="w-44 md:w-60 h-12 md:h-[70px] " />
         </Link>
       </NavbarBrand>
 
-      <NavbarContent className="hidden sm:flex gap-4 text-xl text-red-500 font-bold" justify="center">
+      <NavbarContent className="hidden sm:flex gap-6 text-[#E10101] font-bold" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="/allrecipies">
+          <Link color="foreground" href="/allrecipies" className="md:text-lg font-serif">
             Recipes
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link href="/about" aria-current="page">
+          <Link href="/about" aria-current="page" className="md:text-lg font-serif">
             About
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link href={routeMap.user}>Dashboard</Link>
+          <Link href={routeMap.user} className="md:text-lg font-serif">Dashboard</Link>
         </NavbarItem>
         { isLoggedIn ? (
           <NavbarItem>
-            <button onClick={() => {signOut(); handleClearStorage();}}>Logout</button>
+            <button onClick={() => {signOut(); handleClearStorage();}} className="md:text-lg font-serif">Logout</button>
           </NavbarItem>
         ) : (
           <>
            <NavbarItem>
-          <Link href="/login" aria-current="page">
+          <Link href="/login" aria-current="page" className="md:text-lg font-serif">
             Login
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link href="/register" aria-current="page">
+          <Link href="/register" aria-current="page" className="md:text-lg font-serif">
             Register
           </Link>
         </NavbarItem>
@@ -112,12 +113,19 @@ export default function NavBar({session}: {session : Session | null} ) {
           <ThemeSwitcher />
         </NavbarItem>
       </NavbarContent>
-
-<div className="flex justify-end items-center md:hidden " >
-   {/* Dropdown for mobile devices */}
+      </Navbar>
+<div className="flex justify-between items-center md:hidden pr-4" >
+  <div>
+  <Link className="flex" href="/">
+          {/* <CookingPot className="text-[#E10101] text-3xl"/> */}
+          {/* <p className="font-bold text-inherit px-4 text-[#E10101] text-2xl">Recipe Hunt</p> */}
+          <Image src="/assets/navlogo.png" alt="nav logo" className="w-48 h-16" />
+        </Link>
+  </div>
+   <div>
       <Dropdown  >
         <DropdownTrigger>
-          <Button className="text-red-500 bg-transparent text-2xl ">
+          <Button className="text-[#E10101] bg-transparent text-2xl ">
             <TfiMenuAlt  />
           </Button>
         </DropdownTrigger>
@@ -131,10 +139,11 @@ export default function NavBar({session}: {session : Session | null} ) {
         </DropdownMenu>
       </Dropdown>
       <ThemeSwitcher />
+      </div>
 </div>
 
      
-
-    </Navbar>
+</div>
+    
   );
 }

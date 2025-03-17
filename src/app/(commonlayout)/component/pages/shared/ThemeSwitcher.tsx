@@ -1,8 +1,10 @@
 "use client";
 
-import { Switch } from "@nextui-org/react";
+import { Switch } from "@heroui/react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { FaMoon, FaSun } from "react-icons/fa";
+
 
 export function ThemeSwitcher() {
   const [mounted, setMounted] = useState(false);
@@ -12,14 +14,18 @@ export function ThemeSwitcher() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return <Switch />;
+  // Prevent rendering until the component is mounted
+  if (!mounted) return null;
 
   return (
     <Switch
-      isSelected={theme === "light" ? true : false}
+      isSelected={theme === "light"}
       onValueChange={(e) => setTheme(e ? "light" : "dark")}
       color="danger"
-     
+      size="sm"
+      thumbIcon={({ isSelected, className }) =>
+        isSelected ? <FaSun className={className} /> : <FaMoon className={className} />
+      }
     />
   );
 }

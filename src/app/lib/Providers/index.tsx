@@ -1,17 +1,17 @@
 "use client";
 import * as React from "react";
 
-// 1. import `NextUIProvider` component
-import { NextUIProvider } from "@nextui-org/react";
+// 1. import `HeroUIProvider` component
+import { HeroUIProvider } from "@heroui/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 function Providers({ children }: { children: React.ReactNode }) {
-  // 2. Wrap NextUIProvider at the root of your app
+  // 2. Wrap HeroUIProvider at the root of your app
   return (
-    <NextUIProvider>
+    <HeroUIProvider>
       <NextThemesProvider attribute="class" defaultTheme="dark">
         {children}
       </NextThemesProvider>
-    </NextUIProvider>
+    </HeroUIProvider>
   );
 }
 export default Providers;

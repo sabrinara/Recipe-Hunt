@@ -12,8 +12,6 @@ const Home = () => {
    
     return (
         <div className="mx-auto container">
-     
-         
        <Banner/>
        <HomeCarosel/>
        <SomeRecipe/>

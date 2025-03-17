@@ -1,5 +1,5 @@
 // tailwind.config.js
-import { nextui } from "@nextui-org/react";
+import { heroui } from "@heroui/react";
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -7,11 +7,11 @@ module.exports = {
     // ...
     // make sure it's pointing to the ROOT node_module
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {},
   },
   darkMode: "class",
-  plugins: [nextui()],
+  plugins: [heroui()],
 };

@@ -5,11 +5,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import GoogleLoginBtn from "../component/pages/shared/GoogleLoginBtn";
-import { Input } from "@nextui-org/input";
+import { Input } from "@heroui/input";
 import { FaRegEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import React from "react";
-import { Button } from "@nextui-org/button";
+import { Button } from "@heroui/button";
 
 const RegisterPage = () => {
   const {

@@ -1,6 +1,6 @@
 "use client";
 
-import { Image, Link } from '@nextui-org/react';
+import { Image, Link } from "@heroui/react";
 import { FaFacebookF, FaTwitter, FaLinkedinIn } from 'react-icons/fa';
 
 
@@ -37,7 +37,7 @@ export default function Footer() {
                 </a>
               </div>
               {/* Social Links */}
-              <div className="flex space-x-4 text-red-800">
+              <div className="flex space-x-4 text-[#E10101]">
                 <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-white">
                   <FaFacebookF size={20} />
                 </a>

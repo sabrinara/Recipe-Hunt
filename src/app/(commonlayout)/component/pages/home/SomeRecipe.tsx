@@ -2,7 +2,7 @@
 import React from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay';
-import { Image } from '@nextui-org/react'
+import { Image } from "@heroui/react"
 
 const SomeRecipe = () => {
     const [emblaRef] = useEmblaCarousel({ loop: true }, [

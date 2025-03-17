@@ -24,7 +24,7 @@ export default async function CommonLayout({
 
   return (
     <div>
-      <Navbar session={session} />
+      <Navbar  session={session} />
       {children}
      <Footer />
     </div>
