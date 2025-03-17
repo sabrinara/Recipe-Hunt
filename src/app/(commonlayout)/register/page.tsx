@@ -83,14 +83,14 @@ const RegisterPage = () => {
   return (
     <div>
       <div
-        className="flex flex-col items-center justify-center h-screen bg-cover bg-center py-10"
+        className="flex flex-col items-center justify-center md:h-screen bg-cover bg-center py-10"
         style={{
           backgroundImage:
             "url('https://hips.hearstapps.com/hmg-prod/images/best-diets-for-women-use-an-app-1580311871.jpg?crop=0.668xw:1.00xh;0.104xw,0&resize=980:*')",
         }}
       >
 
-        <div className="w-1/2 h-auto shadow-xl bg-red-50 dark:bg-red-700 bg-opacity-80 dark:bg-opacity-80 p-8 rounded-lg text-center ">
+        <div className="w-full md:w-1/2 h-auto shadow-xl bg-red-50 dark:bg-red-700 bg-opacity-80 dark:bg-opacity-80 p-8 rounded-lg text-center ">
           <h1 className="text-center text-4xl mb-10 text-red-700 font-bold dark:text-white">
             Register Now
           </h1>

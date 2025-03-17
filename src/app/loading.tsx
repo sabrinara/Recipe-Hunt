@@ -1,4 +1,8 @@
+// "use client"
+// import Lottie from "lottie-react";
+// import ani from "../../public/assets/Animation/loading.json";
 
+// import Image from "next/image";
 
 const LoadingPage = () => {
     return (
@@ -7,10 +11,11 @@ const LoadingPage = () => {
 
                 <div className="flex md:ml-5 items-center animate-bounce">
 
-                    {/* <img src="./navlogo3.png" className="h-32 mr-2" alt="" /> */}
+                    {/* <Image src="./navlogo.png" className="w-44 h-32 mr-2" alt="" /> */}
                    
                 </div>
-                <p className="text-3xl text-red-500 font-mono">Loading...</p>
+                {/* <Lottie animationData={ani} loop={true} /> */}
+                <p className="text-3xl text-[#E10101] font-mono animate-bounce">Recipe Hunt...</p>
             </div>
 
         </div>

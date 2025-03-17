@@ -27,15 +27,8 @@ export default function NavBar({ session }: { session: Session | null }) {
   const routeMap: Record<string, string> = {
     user: "/dashboard",
     admin: "/dashboard/admin",
-    driver: "/dashboard/user",
+    recipeWriter: "/dashboard/user",
   };
-
-  // Sample items for the dropdown menu
-  const items = [
-    { key: "recipes", label: "Recipes", href: "/allrecipies" },
-    { key: "about", label: "About", href: "/about" },
-    { key: "dashboard", label: "Dashboard", href: routeMap.user },
-  ];
 
   useEffect(() => {
     if (session) {
@@ -62,9 +55,22 @@ export default function NavBar({ session }: { session: Session | null }) {
     setUserToken(null)
   }
   const isLoggedIn = Boolean(session?.user || (userData && userToken));
+  const items = isLoggedIn
+  ? [
+      { key: "recipes", label: "Recipes", href: "/allrecipies" },
+      { key: "about", label: "About", href: "/about" },
+      { key: "dashboard", label: "Dashboard", href: routeMap.user },
+      { key: "logout", label: "Logout", href: "#", action: () => { signOut(); handleClearStorage(); } }
+    ]
+  : [
+      { key: "recipes", label: "Recipes", href: "/allrecipies" },
+      { key: "about", label: "About", href: "/about" },
+      { key: "login", label: "Login", href: "/login" },
+      { key: "register", label: "Register", href: "/register" }
+    ];
   return (
 
-    <Navbar maxWidth="full" className="flex flex-col items-center justify-between my-2">
+    <Navbar maxWidth="full" className="flex flex-col items-center justify-between bg-white dark:bg-[#1b1a1a]">
       <NavbarBrand>
         <Link className="flex" href="/">
           {/* <CookingPot className="text-[#E10101] text-3xl"/> */}
@@ -117,12 +123,19 @@ export default function NavBar({ session }: { session: Session | null }) {
               </Button>
             </DropdownTrigger>
             <DropdownMenu aria-label="Dynamic Actions" className="bg-transparent">
-              {items.map((item) => (
-                <DropdownItem key={item.key} color={item.key === "delete" ? "danger" : "default"}>
-                  <Link href={item.href}>{item.label}</Link>
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
+  {items.map((item) =>
+    item.key === "logout" ? (
+      <DropdownItem key={item.key} color="danger" onClick={item.action}>
+        {item.label}
+      </DropdownItem>
+    ) : (
+      <DropdownItem key={item.key} color="default">
+        <Link href={item.href}>{item.label}</Link>
+      </DropdownItem>
+    )
+  )}
+</DropdownMenu>
+
           </Dropdown>
         </NavbarItem>
         <NavbarItem>

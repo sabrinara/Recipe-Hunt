@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`antialiased`}>
         <Providers>
-         <div className=" ">
+         <div className=" dark:bg-[#141414]">
          {children}
          </div>
         </Providers>
