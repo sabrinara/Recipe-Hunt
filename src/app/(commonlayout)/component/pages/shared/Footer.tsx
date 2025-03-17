@@ -6,20 +6,24 @@ import { FaFacebookF, FaTwitter, FaLinkedinIn } from 'react-icons/fa';
 
 export default function Footer() {
   return (
-    <div>
-      <div className="py-16"   style={{
-                                backgroundImage: `url('/assets/footer.jpg')`,
-                                backgroundSize: 'cover',
-                                backgroundPosition: 'center',
-                                backgroundRepeat: 'no-repeat',
-                                opacity: "80%"
-                            }}>
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center">
+ 
+      <div
+        className="w-full  md:px-10 relative  text-center p-6"
+      >
+        <div className="absolute inset-0 bg-black/80 backdrop-blur-lg py-16"
+          style={{
+            backgroundImage: `url('/assets/footer.jpg')`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            filter: "blur(10px)",
+          }}> </div>
+        <div className="relative z-10">
+          <div className="flex flex-col-reverse md:flex-row  items-center justify-between md:mx-14 ">
             <div className="flex flex-col items-center mb-4 md:mb-0">
               <Link href="/">
                 <div className="flex items-center">
-                  <Image src="/assets/footerlogo.png" className="h-14 md:h-28" alt="Logo" />
+                  <Image src="/assets/footerlogo.png" className="h-20 md:h-28" alt="Logo" />
                 </div>
               </Link>
               <p className="mb-2 text-sm text-white font-bold">&copy; 2024 Recipe Hunt. All rights reserved.</p>
@@ -36,8 +40,8 @@ export default function Footer() {
                   Privacy Policy
                 </a>
               </div>
-              {/* Social Links */}
-              <div className="flex space-x-4 text-[#E10101]">
+             
+              <div className="flex space-x-4  text-white md:text-[#E10101]">
                 <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-white">
                   <FaFacebookF size={20} />
                 </a>
@@ -52,6 +56,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-    </div>
+ 
   );
 }
