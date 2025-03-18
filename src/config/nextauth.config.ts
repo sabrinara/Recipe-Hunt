@@ -20,44 +20,69 @@ export const AuthOptions: NextAuthOptions = {
         }
 
         if (account.provider === "google") {
-          // Format data to match backend requirements
           const userData = {
             name: profile.name || "Unknown User",
             email: profile.email,
-            imageUrl:(profile as any).picture || null,
-            phone: "", // Default empty value
-            address: "", // Default empty value
-            role: "user", // Default role
-            password: "GoogleAuth123", // Placeholder password
+            imageUrl: (profile as any).picture || null,
+            phone: "",
+            address: "",
+            role: "user",
+            password: "GoogleAuth123",
           };
 
-          const response = await fetch(
-            `${process.env.BACKEND_URL}/api/user/signup`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(userData),
-            }
+          // Fetch all users to check if the email already exists
+          const usersResponse = await fetch(
+            "https://recipe-hunt-server.vercel.app/api/user/all"
           );
 
+          if (!usersResponse.ok) {
+            console.error("Failed to fetch users:", await usersResponse.json());
+            return false;
+          }
+
+          const usersData = await usersResponse.json();
+          console.log("Users API Response:", usersData);
+
+          const users = usersData.data?.users || []; // Extract users array
+          const existingUser = users.find((user: any) => user.email === profile.email);
+
+          let response;
+
+          if (existingUser) {
+            // User exists -> Log in instead of signing up
+            response = await fetch(
+              "https://recipe-hunt-server.vercel.app/api/user/login",
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: profile.email, password: "GoogleAuth123" }),
+              }
+            );
+          } else {
+            // User does not exist -> Sign up
+            response = await fetch(
+              "https://recipe-hunt-server.vercel.app/api/user/signup",
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(userData),
+              }
+            );
+          }
+
           if (!response.ok) {
-            // Log detailed response for debugging
-            const errorDetails = await response.json();
-            console.error("Failed to register user:", errorDetails);
+            console.error("Failed to authenticate user:", await response.json());
             return false;
           }
 
           const data = await response.json();
-          console.log("User registered successfully:", data);
+          console.log("User authenticated successfully:", data);
 
-        const token = data.data.token;
-        console.log("Token",token);
-
-        const user = data.data.user;
-        console.log(user);
-        
+          // // ✅ Save token and user info in localStorage
+          // if (typeof window !== "undefined") {
+          //   localStorage.setItem("accessToken", data.data.token); // Save token
+          //   localStorage.setItem("user", JSON.stringify(data.data.user)); // Save user info
+          // }
 
           return data.data;
         }

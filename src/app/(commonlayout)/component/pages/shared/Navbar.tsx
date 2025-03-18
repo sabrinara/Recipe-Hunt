@@ -19,7 +19,8 @@ type Session = {
     name?: string | null | undefined;
     email?: string | null | undefined;
     image?: string | null | undefined;
-  }
+  },
+  token?: string |null |undefined;
 }
 export default function NavBar({ session }: { session: Session | null }) {
   const [userData, setUserData] = useState<string | null>(null);
@@ -32,21 +33,26 @@ export default function NavBar({ session }: { session: Session | null }) {
 
   useEffect(() => {
     if (session) {
-      localStorage.setItem("user", JSON.stringify(session));
+      localStorage.setItem("user", JSON.stringify(session.user));
+      if (session?.token) {
+        localStorage.setItem("accessToken", session?.token);
+      }
     }
   }, [session]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const token = localStorage.getItem("accessToken");
+      const token = localStorage.getItem("accessToken") ;
       const user = localStorage.getItem("user");
       setUserData(user);
       setUserToken(token);
+      // console.log("token",token);
+      // console.log("user", user)
 
     }
   }, []);
-  console.log("token", userToken);
-  console.log("user", userData)
+  console.log("usertoken", userToken);
+  console.log("userData", userData);//ok for google
 
   const handleClearStorage = () => {
     localStorage.removeItem("accessToken");

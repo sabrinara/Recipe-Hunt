@@ -30,12 +30,12 @@ const LoginPage = () => {
     // console.log(data); 
     try {
       const res = await loginUser(data);
-      console.log(res);
-      if (res.accessToken ) {
+      console.log(res.data);
+      if (res.data.accessToken || res.data.token) {
         alert(res.message);
-        // localStorage.setItem("accessToken", res.accessToken);
-        // localStorage.setItem("user",res.user);
-        router.push("/"); //dedicated path for login
+        localStorage.setItem("accessToken", res.data.token);
+        localStorage.setItem("user",JSON.stringify(res.data.user));
+        router.push("/"); 
       }
 
     }  catch (error) {
