@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -10,6 +9,7 @@ import { Input } from "@heroui/input";
 import { FaRegEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 import React from "react";
+import { Button } from "@heroui/button";
 
 export type FormValues = {
   email: string;
@@ -20,6 +20,7 @@ const LoginPage = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<FormValues>();
 
@@ -34,13 +35,25 @@ const LoginPage = () => {
       if (res.data.accessToken || res.data.token) {
         alert(res.message);
         localStorage.setItem("accessToken", res.data.token);
-        localStorage.setItem("user",JSON.stringify(res.data.user));
-        router.push("/"); 
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        router.push("/");
       }
 
-    }  catch (error) {
+    } catch (error) {
       console.log(error);
       throw new Error("Failed to login");
+    }
+  };
+
+
+  // Function to autofill credentials
+  const setCredentials = (role: "user" | "admin") => {
+    if (role === "user") {
+      setValue("email", "user@example.com");
+      setValue("password", "user123");
+    } else {
+      setValue("email", "admin@gmail.com");
+      setValue("password", "admin123");
     }
   };
 
@@ -49,100 +62,82 @@ const LoginPage = () => {
   const toggleVisibility = () => setIsVisible(!isVisible);
 
   return (
-    <div className="my-10">
-      <h1 className="text-center text-4xl mb-5">
-        Login <span className="text-accent">Here</span>
-      </h1>
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <Image
-            src="https://img.freepik.com/free-vector/login-concept-illustration_114360-739.jpg?t=st=1710130697~exp=1710134297~hmac=f1b21d9c1823a0657d339c256a1c4ad8301168480e35b35aeba5106568a21010&w=740"
-            width={500}
-            height={200}
-            alt="login page"
-            className="w-full h-[85%]"
-          />
-        </div>
+    <div className="flex flex-col items-center justify-center md:h-screen bg-cover bg-center py-10"
 
-        <div className="card w-[70%] h-[80%] shadow-xl bg-base-100">
-          <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-            <div className="form-control mt-5">
-              <label className="label">
-                <span className="label-text">Email</span>
-              </label>
-              <input
-                type="email"
-                {...register("email")}
-                placeholder="Email"
-                className="input input-bordered"
-                required
-              />
-            </div>
+      style={{
+        backgroundImage:
+          "url('https://i.ibb.co.com/Z1f5YYnM/login.jpg')",
+      }}
+    >
+
+      <div className=" w-full md:w-1/2 h-auto shadow-xl bg-red-50 dark:bg-black/80 bg-opacity-80 dark:bg-opacity-80 p-8 rounded-lg">
+        <h1 className="text-center text-4xl mb-10 text-[#E10101] font-bold ">
+          Login <span className="text-accent">Now!</span>
+        </h1>
+        <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+          <div className=" mt-4 flex justify-center items-center gap-2">
+            <Button type="button" onClick={() => setCredentials("user")} className="border border-[#E10101] text-[#E10101]  font-bold rounded-sm text-sm md:text-base" variant="bordered">
+              Login as User
+            </Button>
+            <Button type="button" onClick={() => setCredentials("admin")} className="border border-[#E10101] text-[#E10101]  font-bold rounded-sm text-sm md:text-base" variant="bordered">
+              Login as Admin
+            </Button>
+          </div>
+          <div className="form-control mt-4">
+            <label className="label">
+              <span className="label-text  font-bold mb-3 text-lg">Email</span>
+            </label>
             <Input
-              {...register("password")}
-              
-              label="Password"
+              {...register("email")}
+              type="email"
+              labelPlacement="outside"
               variant="bordered"
+              placeholder="Enter your email"
+              className=" pb-2"
+              required
+            />
+          </div>
+          <div className="form-control mt-4">
+            <label className="label">
+              <span className="label-text  font-bold mb-3 text-lg">Password</span>
+            </label>
+            <Input
+              variant="bordered"
+              {...register("password")}
               placeholder="Enter your password"
               endContent={
                 <button className="focus:outline-none" type="button" onClick={toggleVisibility} aria-label="toggle password visibility">
                   {isVisible ? (
                     <FaRegEye className="text-2xl text-default-400 pointer-events-none" />
                   ) : (
-                    <FaEyeSlash  className="text-2xl text-default-400 pointer-events-none" />
+                    <FaEyeSlash className="text-2xl text-default-400 pointer-events-none" />
                   )}
                 </button>
               }
               type={isVisible ? "text" : "password"}
-              className="max-w-xs"
+              className=""
             />
-            {/* <div className="form-control">
-              <label className="label">
-                <span className="label-text">Password</span>
-              </label>
-              <input
-                {...register("password")}
-                type="password"
-                placeholder="Password"
-                className="input input-bordered"
-                required
-              />
-            </div> */}
-
-            <div className="form-control mt-6">
-              <button type="submit" className="btn btn-accent btn-outline">
-                Login
-              </button>
-            </div>
-            <p className="text-center">
-              Don&apos;t have an account?{" "}
-              <Link className="text-accent" href="/register">
-                Create an account
-              </Link>
-            </p>
-          </form>
-          <p className="text-center">Or Sign Up Using</p>
-          <div className="flex justify-center mb-10 mt-2" >
-            {/* <button className="btn btn-circle " onClick={() => signIn("google", { callbackUrl: "http://localhost:3000/dashboard" })}>
-              <Image
-                src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-webinar-optimizing-for-success-google-business-webinar-13.png"
-                width={50}
-                height={50}
-                alt="google logo"
-              />
-            </button> */}
-            <GoogleLoginBtn />
-            {/* <button className="btn btn-circle" onClick={() => signIn("github", { callbackUrl: "http://localhost:3000/dashboard" })}>
-              <Image
-                src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
-                width={35}
-                height={35}
-                alt="github logo"
-              />
-            </button> */}
           </div>
-        </div>
+
+
+          <div className="form-control mt-6 mb-2 text-center">
+            <Button type="submit" className="bg-[#E10101]  hover:bg-white text-white hover:text-[#E10101] px-4 py-4 rounded-xl w-full text-lg font-bold" >
+              Login
+            </Button>
+
+          </div>
+         <div className="flex justify-center items-center mb-2">
+         <GoogleLoginBtn />
+         </div>
+          <p className="text-center">
+            Don&apos;t have an account?{" "}
+            <Link className="text-accent underline underline-offset-2 font-bold text-[#E10101]" href="/register">
+              Create an account
+            </Link>
+          </p>
+          </form>
       </div>
+
     </div>
   );
 };

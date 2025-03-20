@@ -83,15 +83,15 @@ const RegisterPage = () => {
   return (
     <div>
       <div
-        className="flex flex-col items-center justify-center md:h-screen bg-cover bg-center py-10"
+        className="flex flex-col items-center justify-center md:h-screen bg-cover bg-center py-10 "
         style={{
           backgroundImage:
-            "url('https://hips.hearstapps.com/hmg-prod/images/best-diets-for-women-use-an-app-1580311871.jpg?crop=0.668xw:1.00xh;0.104xw,0&resize=980:*')",
+            "url('https://i.ibb.co.com/tTSVg8RC/best-diets-for-women-use-an-app-1580311871.jpg')",
         }}
       >
 
-        <div className="w-full md:w-1/2 h-auto shadow-xl bg-red-50 dark:bg-red-700 bg-opacity-80 dark:bg-opacity-80 p-8 rounded-lg text-center ">
-          <h1 className="text-center text-4xl mb-10 text-red-700 font-bold dark:text-white">
+        <div className="w-full md:w-1/2 h-auto shadow-xl bg-red-50 dark:bg-black/80 bg-opacity-80 dark:bg-opacity-80 p-8 rounded-lg text-center ">
+          <h1 className="text-center text-4xl mb-10 text-[#E10101] font-bold ">
             Register Now
           </h1>
           <form onSubmit={handleSubmit(onSubmit)} className=" py-3 font-semibold ">
@@ -166,16 +166,16 @@ const RegisterPage = () => {
                 {...register("imageUrl")}
                 label="Image"
                 variant="bordered"
-                labelPlacement="inside"
+                labelPlacement="outside"
                 type="file"
-                className="max-w-xs pb-2 "
+                className="max-w-xs pb-2 text-black"
                 required
               />
             </div>
             <div className="form-control mt-6">
               <Button
                 type="submit"
-                className="bg-red-700 dark:bg-white hover:bg-red-500 text-white dark:text-red-700 px-4 py-4 rounded-md w-full text-lg font-bold"
+                className="bg-[#E10101]  hover:bg-white text-white hover:text-[#E10101] px-4 py-4 rounded-xl w-full text-lg font-bold"
                 disabled={uploading}
               >
                 {uploading ? "Submitting..." : "Register"}
@@ -185,7 +185,7 @@ const RegisterPage = () => {
             <p className="text-center">
               Already have an account?{" "}
               <Link className="text-accent" href="/login">
-                <span className="underline text-red-700 dark:text-white">Login</span>
+                <span className="underline underline-offset-2 font-bold text-[#E10101] ">Login</span>
               </Link>
             </p>
           </form>

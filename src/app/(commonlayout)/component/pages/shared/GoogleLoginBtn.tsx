@@ -15,7 +15,7 @@ const GoogleLoginBtn = ( ) => {
       onClick={() => {
         signIn("google", { callbackUrl: redirect ? redirect : "/" });
       }}
-      className="bg-transparent hover:border-2 hover:border-red-500 hover:bg-white dark:hover:text-red-700 rounded-none mt-4 font-semibold" 
+      className="bg-transparent hover:border-2 hover:border-[#E10101] hover:bg-white dark:hover:text-[#E10101] rounded-none mt-4 font-semibold" 
     >
       <FcGoogle className="text-3xl"/>
       Log In With Google
