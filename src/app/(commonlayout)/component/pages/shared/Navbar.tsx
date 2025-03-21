@@ -65,12 +65,14 @@ export default function NavBar({ session }: { session: Session | null }) {
   ? [
       { key: "recipes", label: "Recipes", href: "/allrecipies" },
       { key: "about", label: "About", href: "/about" },
+      { key: "contact", label: "Contact", href: "/contact" },
       { key: "dashboard", label: "Dashboard", href: routeMap.user },
       { key: "logout", label: "Logout", href: "#", action: () => { signOut(); handleClearStorage(); } }
     ]
   : [
       { key: "recipes", label: "Recipes", href: "/allrecipies" },
       { key: "about", label: "About", href: "/about" },
+      { key: "contact", label: "Contact", href: "/contact" },
       { key: "login", label: "Login", href: "/login" },
       { key: "register", label: "Register", href: "/register" }
     ];
@@ -94,6 +96,11 @@ export default function NavBar({ session }: { session: Session | null }) {
         <NavbarItem>
           <Link href="/about" aria-current="page" className="md:text-lg font-serif">
             About
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link href="/contact" aria-current="page" className="md:text-lg font-serif">
+            Contact
           </Link>
         </NavbarItem>
         <NavbarItem>

@@ -4,14 +4,8 @@ import React from 'react';
 const ContactUs = () => {
     return (
         <div>
-            {/* <Image 
-                src="/assets/contactus.jpg" 
-                alt="image" 
-                width={1600} 
-                height={600} 
-            /> */}
               <div
-                            className='relative w-full h-[52vh] md:h-[80vh] rounded-md my-20'
+                            className='relative w-full h-[52vh] md:h-[80vh] rounded-md mb-10 md:mb-20'
                             style={{
                                 backgroundImage: `url('/assets/contactus.jpg')`,
                                 backgroundSize: 'cover',
