@@ -4,7 +4,7 @@ import { FormValues } from "@/app/(commonlayout)/login/page";
 import { UserData } from "@/types";
 
 export const registerUser = async (data: UserData) => {
-    const response = await fetch(`${process.env.BACKEND_URL}/api/user/signup`, {
+    const response = await fetch(`${process.env.BACKEND_URL}/user/signup`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -23,7 +23,7 @@ export const registerUser = async (data: UserData) => {
 };
 
 export const loginUser = async (data: FormValues) => {
-    const response = await fetch(`${process.env.BACKEND_URL}/api/user/login`, {
+    const response = await fetch(`${process.env.BACKEND_URL}/user/login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

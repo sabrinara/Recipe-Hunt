@@ -63,14 +63,14 @@ export default function NavBar({ session }: { session: Session | null }) {
   const isLoggedIn = Boolean(session?.user || (userData && userToken));
   const items = isLoggedIn
   ? [
-      { key: "recipes", label: "Recipes", href: "/allrecipies" },
+      { key: "recipes", label: "Recipes", href: "/recipe" },
       { key: "about", label: "About", href: "/about" },
       { key: "contact", label: "Contact", href: "/contact" },
       { key: "dashboard", label: "Dashboard", href: routeMap.user },
       { key: "logout", label: "Logout", href: "#", action: () => { signOut(); handleClearStorage(); } }
     ]
   : [
-      { key: "recipes", label: "Recipes", href: "/allrecipies" },
+      { key: "recipes", label: "Recipes", href: "/recipe" },
       { key: "about", label: "About", href: "/about" },
       { key: "contact", label: "Contact", href: "/contact" },
       { key: "login", label: "Login", href: "/login" },
@@ -89,7 +89,7 @@ export default function NavBar({ session }: { session: Session | null }) {
 
       <NavbarContent className="hidden md:flex gap-6 text-[#E10101] font-bold" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="/allrecipies" className="md:text-lg font-serif">
+          <Link color="foreground" href="/recipe" className="md:text-lg font-serif">
             Recipes
           </Link>
         </NavbarItem>
