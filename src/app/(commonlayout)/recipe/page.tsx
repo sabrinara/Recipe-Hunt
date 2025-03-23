@@ -4,12 +4,7 @@ import { getAllRecipes } from "@/services/RecipeServices";
 // import Image from "next/image";
 import { RecipeData } from "@/types";
 
-// // Type for the recipe data
-// interface Recipe {
-//     title: string;
-//     description: string;
-//     image: string;
-// }
+
 
 const RecipeList = () => {
     const [recipes, setRecipes] = useState<RecipeData[]>([]);
@@ -20,12 +15,12 @@ const RecipeList = () => {
         const fetchRecipes = async () => {
             try {
                 const data = await getAllRecipes();
-                setRecipes(data); // Update the state with fetched data
-                setLoading(false); // Set loading to false after data is fetched
+                setRecipes(data);
+                setLoading(false);
             } catch (error) {
                 console.error("Error fetching recipes:", error);
                 setError("Failed to fetch recipes");
-                setLoading(false); // Set loading to false after error occurs
+                setLoading(false);
             }
         };
 
@@ -33,11 +28,11 @@ const RecipeList = () => {
     }, []);
 
     if (loading) {
-        return <div>Loading recipes...</div>; // Display a loading message while fetching
+        return (<div>Loading recipes...</div>);
     }
 
     if (error) {
-        return <div>{error}</div>; // Display an error message if fetching fails
+        return <div>{error}</div>;
     }
 
     return (
