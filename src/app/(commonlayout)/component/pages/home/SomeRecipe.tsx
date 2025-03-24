@@ -22,7 +22,7 @@ const SomeRecipe = () => {
         const fetchData = async () => {
             try {
                 const recipeData = await getAllRecipes();
-                setRecipes(recipeData);
+                setRecipes(recipeData.slice(0,6));
 
                 setLoading(false);
             } catch (error) {
