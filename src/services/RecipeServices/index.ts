@@ -23,7 +23,22 @@ export const getAllRecipes = async (): Promise<RecipeData[]> => {
 
 
 export const getRecipeById = async (id: string) => {
-    const response = await fetch(`${process.env.BACKEND_URL}/recipe/${id}`);
-    if (!response.ok) throw new Error("Recipe not found");
-    return response.json();
+    
+    console.log("Fetching recipe with ID:", id);
+
+    const response = await fetch(`${process.env.BACKEND_URL}/recipe/${id}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        cache: "no-store",
+    });
+
+    if (!response.ok) {
+        console.error("Error fetching recipe:", response.status, response.statusText);
+        throw new Error("Recipe not found");
+    }
+
+    const data = await response.json();
+    console.log("Recipe Data:", data);
+    return data.data;
 };
+

@@ -66,7 +66,7 @@ const RecipeList = () => {
     if (error) return <div>{error}</div>;
 
     return (
-        <div className="mx-auto container">
+        <div className="mx-auto container my-10">
          {/* search by tag,name,type */}
             <div className="flex justify-center items-center">
                 <input
@@ -79,10 +79,10 @@ const RecipeList = () => {
             </div>
 
             {/* Recipes card */}
-            <div className="mx-10 md:mx-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
+            <div className="mx-6 md:mx-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-1 ">
                 {currentRecipes.length > 0 ? (
                     currentRecipes.map((recipe, index) => (
-                        <div key={index} className="p-4 rounded-lg ">
+                        <div key={index} className="md:p-4 rounded-lg ">
                             <Image
                                 src={recipe.image?.[0] || "/fallback.jpg"}
                                 alt={recipe.title}
@@ -108,7 +108,7 @@ const RecipeList = () => {
                                     </div>
                                 </div>
 
-  <h3 className="text-2xl font-semibold text-[#E10101]"   onClick={() => router.push(`/recipe/${recipe.id}`)}>{recipe.name}</h3>   
+  <h3 className="text-2xl font-semibold text-[#E10101]"   onClick={() => router.push(`/recipe/${recipe._id}`)}>{recipe.name}</h3>   
                                 <div className="flex justify-between items-center gap-2">
                                     <div>
                                       
