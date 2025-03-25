@@ -15,8 +15,15 @@ export const getAllRecipes = async (): Promise<RecipeData[]> => {
         throw new Error("Failed to fetch recipes");
     }
 
-    const data = await response.json(); 
-    const recipes: RecipeData[] = data.data.recipes; 
-    console.log("RecipeData",recipes);
+    const data = await response.json();
+    const recipes: RecipeData[] = data.data.recipes;
+    console.log("RecipeData", recipes);
     return recipes;
+};
+
+
+export const getRecipeById = async (id: string) => {
+    const response = await fetch(`${process.env.BACKEND_URL}/recipe/${id}`);
+    if (!response.ok) throw new Error("Recipe not found");
+    return response.json();
 };

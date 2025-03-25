@@ -4,9 +4,10 @@ import { getAllRecipes } from "@/services/RecipeServices";
 import { RecipeData } from "@/types";
 import { Avatar, Image } from "@heroui/react";
 import { FaRegStar } from "react-icons/fa";
-import { PiCookingPot, PiTagSimple } from "react-icons/pi";
+import { PiCookingPot } from "react-icons/pi";
 import { BiSolidTag } from "react-icons/bi";
 import { MdOutlineAccessTime } from "react-icons/md";
+import { useRouter } from "next/navigation";
 
 const RecipeList = () => {
     const [recipes, setRecipes] = useState<RecipeData[]>([]);
@@ -16,6 +17,8 @@ const RecipeList = () => {
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [currentPage, setCurrentPage] = useState<number>(1);
     const recipesPerPage = 6;
+
+    const router = useRouter();
 
     useEffect(() => {
         const fetchRecipes = async () => {
@@ -105,7 +108,7 @@ const RecipeList = () => {
                                     </div>
                                 </div>
 
-  <h3 className="text-2xl font-semibold text-[#E10101]">{recipe.name}</h3>
+  <h3 className="text-2xl font-semibold text-[#E10101]"   onClick={() => router.push(`/recipe/${recipe.id}`)}>{recipe.name}</h3>   
                                 <div className="flex justify-between items-center gap-2">
                                     <div>
                                       
@@ -117,7 +120,7 @@ const RecipeList = () => {
                                     <div className="flex flex-warp items-end gap-2 flex-col  py-2 rounded-md font-medium">
 
                                         {recipe.tags?.map((tag, index) => (
-                                            <div className="flex items-center gap-1">
+                                            <div className="flex items-center gap-1" key={index}>
 
                                                 <div>
                                                     <h1

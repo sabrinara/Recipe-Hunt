@@ -22,7 +22,7 @@ const SomeRecipe = () => {
         const fetchData = async () => {
             try {
                 const recipeData = await getAllRecipes();
-                setRecipes(recipeData.slice(0,6));
+                setRecipes(recipeData.slice(0, 6));
 
                 setLoading(false);
             } catch (error) {
@@ -59,7 +59,7 @@ const SomeRecipe = () => {
 
     return (
         <div className="embla relative my-10">
-            <div className="embla__viewport mt-12 h-80 md:h-[70vh] w-full rounded-t-xl" ref={emblaRef}>
+            <div className="embla__viewport mt-12 h-[60vh] md:h-[70vh] w-full rounded-t-xl" ref={emblaRef}>
                 <div className="embla__container flex h-full">
                     {recipeChunks.map((chunk, index) => (
                         <div className="embla__slide flex w-full items-center justify-around rounded-xl gap-3" key={index}>
@@ -68,7 +68,7 @@ const SomeRecipe = () => {
                                 return (
                                     <div
                                         key={recipeIndex}
-                                        className="relative w-1/3 h-[80vh] md:h-[70vh] rounded-xl overflow-hidden group shadow-lg"
+                                        className="relative w-1/3 h-[60vh] md:h-[70vh] rounded-xl overflow-hidden group shadow-lg"
                                         style={{
                                             backgroundImage: `url(${recipe.image[0]})`,
                                             backgroundSize: "cover",
@@ -76,9 +76,10 @@ const SomeRecipe = () => {
                                             backgroundRepeat: "no-repeat",
                                         }}
                                     >
-                                        <div className="absolute bottom-[10px] mx-4 left-0  bg-white/80 text-black px-5 py-4 transition-all duration-500 h-[90px] group-hover:h-[250px] group-hover:bg-white">
-                                            <div className="flex justify-between items-center uppercase text-lg font-semibold">
-                                                <div className="flex items-center gap-1">
+                                        <div className="absolute bottom-[10px] md:bottom-[10px] mx-4 left-0 bg-white/80 text-black px-5 py-2 md:py-4 transition-all duration-500 h-[90px] md:h-[90px] group-hover:h-[300px] group-hover:bg-white  
+md:group-hover:h-[250px]">
+                                            <div className="flex justify-between items-center uppercase text-md md:text-lg font-semibold">
+                                                <div className="flex items-center gap-1 ">
                                                     <MdOutlineAccessTime />
                                                     {recipe.cookingTime < 60
                                                         ? <>{recipe.cookingTime} Minutes</>
@@ -93,7 +94,7 @@ const SomeRecipe = () => {
                                                 </div>
                                             </div>
 
-                                            <h3 className="text-2xl font-semibold">{recipe.name}</h3>
+                                            <h3 className="text-xl md:text-2xl font-semibold">{recipe.name}</h3>
                                             <p className="mt-1 text-sm opacity-0 invisible transition-opacity duration-500 group-hover:opacity-100 group-hover:visible">
                                                 {recipe.description.slice(0, 200)}...
                                             </p>
@@ -109,7 +110,7 @@ const SomeRecipe = () => {
                                                             size="lg"
                                                             src={recipe.user?.imageUrl}
                                                         />
-                                                      
+
                                                     </div>
 
                                                     <div className="flex flex-col justify-between font-medium font-serif">
