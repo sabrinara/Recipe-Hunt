@@ -8,11 +8,14 @@ import { MdOutlineAccessTime } from "react-icons/md";
 import { PiCookingPot } from "react-icons/pi";
 import { FaRegStar } from "react-icons/fa";
 import { Avatar } from "@heroui/react";
+import { useRouter } from "next/navigation";
+
 
 const SomeRecipe = () => {
     const [recipes, setRecipes] = useState<RecipeData[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const router = useRouter();
 
     const [emblaRef] = useEmblaCarousel({ loop: true }, [
         Autoplay({ delay: 5000 }),
@@ -67,6 +70,7 @@ const SomeRecipe = () => {
 
                                 return (
                                     <div
+                                    onClick={() => router.push("/recipe")}
                                         key={recipeIndex}
                                         className="relative w-1/3 h-[60vh] md:h-[70vh] rounded-xl overflow-hidden group shadow-lg"
                                         style={{
@@ -75,8 +79,11 @@ const SomeRecipe = () => {
                                             backgroundPosition: "center",
                                             backgroundRepeat: "no-repeat",
                                         }}
+                                        title="Explore More Recipe"
+
+                                        
                                     >
-                                        <div className="absolute bottom-[10px] md:bottom-[10px] mx-4 left-0 bg-white/80 text-black px-5 py-2 md:py-4 transition-all duration-500 h-[90px] md:h-[90px] group-hover:h-[300px] group-hover:bg-white  
+                                        <div className="absolute bottom-[10px] md:bottom-[10px] mx-4 left-0 bg-white/80 text-black px-5 py-2 md:py-4 transition-all duration-500 h-[90px] md:h-[90px] group-hover:h-[310px] group-hover:bg-white  
 md:group-hover:h-[250px]">
                                             <div className="flex justify-between items-center uppercase text-md md:text-lg font-semibold">
                                                 <div className="flex items-center gap-1 ">

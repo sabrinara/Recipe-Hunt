@@ -90,6 +90,7 @@ const RecipeList = () => {
                                 height={400}
                                 className="w-full h-40 object-cover mt-2 rounded-md"
                                 isZoomed
+                                onClick={() => router.push(`/recipe/${recipe._id}`)}
                             />
                             <div className="p-4">
                                 <div className="flex justify-between items-center uppercase text-lg font-semibold mt-2">
