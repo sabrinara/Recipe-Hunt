@@ -3,6 +3,7 @@ import Banner from "./component/pages/home/Banner";
 import ContactUs from "./component/pages/home/ContactUs";
 // import HomeCarosel from "./component/pages/home/HomeCarosel";
 import HomeCategory from "./component/pages/home/HomeCategory";
+import IconSection from "./component/pages/home/IconSection";
 import SomeRecipe from "./component/pages/home/SomeRecipe";
 import Sponser from "./component/pages/home/Sponser";
 import StaticHomeSection from "./component/pages/home/StaticHomeSection";
@@ -12,10 +13,12 @@ const Home = () => {
         <div className="mx-auto container">
        <Banner/>
        {/* <HomeCarosel/> */}
-
-       <HomeCategory/>
+       <IconSection/>
        <AnotherStatic/>
+       <HomeCategory/>
+      
        <SomeRecipe/>
+    
        <StaticHomeSection/>
        <Sponser/>
        <ContactUs/>
