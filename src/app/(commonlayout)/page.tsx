@@ -4,6 +4,7 @@ import ContactUs from "./component/pages/home/ContactUs";
 // import HomeCarosel from "./component/pages/home/HomeCarosel";
 import HomeCategory from "./component/pages/home/HomeCategory";
 import SomeRecipe from "./component/pages/home/SomeRecipe";
+import Sponser from "./component/pages/home/Sponser";
 import StaticHomeSection from "./component/pages/home/StaticHomeSection";
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
        <AnotherStatic/>
        <SomeRecipe/>
        <StaticHomeSection/>
+       <Sponser/>
        <ContactUs/>
     </div>
     );
