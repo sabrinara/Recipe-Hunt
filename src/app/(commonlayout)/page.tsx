@@ -1,3 +1,4 @@
+import AnotherStatic from "./component/pages/home/AnotherStatic";
 import Banner from "./component/pages/home/Banner";
 import ContactUs from "./component/pages/home/ContactUs";
 // import HomeCarosel from "./component/pages/home/HomeCarosel";
@@ -9,7 +10,9 @@ const Home = () => {
         <div className="mx-auto container">
        <Banner/>
        {/* <HomeCarosel/> */}
+
        <HomeCategory/>
+       <AnotherStatic/>
        <SomeRecipe/>
        <ContactUs/>
     </div>
