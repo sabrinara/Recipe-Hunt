@@ -8,6 +8,7 @@ import { PiCookingPot } from "react-icons/pi";
 import { BiSolidTag } from "react-icons/bi";
 import { MdOutlineAccessTime } from "react-icons/md";
 import { useRouter } from "next/navigation";
+import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 
 const RecipeList = () => {
     const [recipes, setRecipes] = useState<RecipeData[]>([]);
@@ -67,7 +68,7 @@ const RecipeList = () => {
 
     return (
         <div className="mx-auto container my-10">
-         {/* search by tag,name,type */}
+            {/* search by tag,name,type */}
             <div className="flex justify-center items-center">
                 <input
                     type="text"
@@ -88,14 +89,15 @@ const RecipeList = () => {
                                 alt={recipe.title}
                                 width={600}
                                 height={400}
-                                className="w-full h-40 object-cover mt-2 rounded-md"
+                                className="w-full h-40  mt-2 rounded-md"
                                 isZoomed
                                 onClick={() => router.push(`/recipe/${recipe._id}`)}
                             />
+
                             <div className="p-4">
                                 <div className="flex justify-between items-center uppercase text-lg font-semibold mt-2">
                                     <div className="flex items-center gap-1 ">
-                                        <MdOutlineAccessTime className="text-[#E10101] text-xl"/>
+                                        <MdOutlineAccessTime className="text-[#E10101] text-xl font-extrabold" />
                                         {recipe.cookingTime < 60
                                             ? <>{recipe.cookingTime} Minutes</>
                                             : <>
@@ -105,14 +107,20 @@ const RecipeList = () => {
                                         }
                                     </div>
                                     <div className="flex items-center gap-1 ">
-                                        <PiCookingPot className="text-[#E10101] text-xl"/> {recipe.difficulty}
+                                        <PiCookingPot className="text-[#E10101] text-xl" /> {recipe.difficulty}
+                                    </div>
+                                </div>
+                                <div className="flex justify-between items-center" onClick={() => router.push(`/recipe/${recipe._id}`)}>
+                                    <h3 className="text-2xl font-semibold text-[#E10101]" >{recipe.name}</h3>
+                                    <div className="items-center justify-center gap-1  text-[#E10101]" title="View Recipe Details" >
+                                        <FaArrowUpRightFromSquare />
                                     </div>
                                 </div>
 
-  <h3 className="text-2xl font-semibold text-[#E10101]"   onClick={() => router.push(`/recipe/${recipe._id}`)}>{recipe.name}</h3>   
+
                                 <div className="flex justify-between items-center gap-2">
                                     <div>
-                                      
+
 
                                         <p className=" text-sm font-medium">
                                             {recipe?.description.slice(0, 150)}...
@@ -175,7 +183,7 @@ const RecipeList = () => {
 
             {/* Pagination */}
             <div className="flex justify-center mt-4 space-x-2">
-            <button
+                <button
                     className="px-4 py-2 text-[#E10101] hover:border hover:border-[#E10101] rounded "
                     disabled={currentPage === 1}
                     onClick={() => setCurrentPage(currentPage - 1)}
