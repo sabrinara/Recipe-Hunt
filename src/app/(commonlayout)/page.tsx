@@ -5,6 +5,7 @@ import EasyMeal from "./component/pages/home/EasyMeal";
 // import HomeCarosel from "./component/pages/home/HomeCarosel";
 import HomeCategory from "./component/pages/home/HomeCategory";
 import IconSection from "./component/pages/home/IconSection";
+import MoreImage from "./component/pages/home/MoreImage";
 import SomeRecipe from "./component/pages/home/SomeRecipe";
 import Sponser from "./component/pages/home/Sponser";
 import StaticHomeSection from "./component/pages/home/StaticHomeSection";
@@ -22,6 +23,7 @@ const Home = () => {
             <StaticHomeSection />
             <Sponser />
             <ContactUs />
+            <MoreImage/>
         </div>
     );
 };
