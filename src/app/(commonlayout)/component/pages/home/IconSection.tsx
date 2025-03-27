@@ -12,7 +12,7 @@ const IconSection = () => {
 ];
 
     return (
-        <div className="flex justify-center md:py-14">
+        <div className="grid grid-cols-2 md:grid-cols-4 px-2  py-14">
 
         {data.map((item) => (
           <div
@@ -28,8 +28,8 @@ const IconSection = () => {
                 className="rounded-md"
               />
             </div>
-            <h1 className="mt-2 font-serif font-bold text-lg ">{item.name}</h1>
-            <p className="mt-2  text-md text-center">{item.des}</p>
+            <h1 className="mt-2 font-serif font-bold text-md md:text-lg text-center ">{item.name}</h1>
+            <p className="mt-2  text-sm md:text-md text-center">{item.des}</p>
             
           </div>
         ))}
