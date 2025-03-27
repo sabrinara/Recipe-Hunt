@@ -17,8 +17,8 @@ const MoreImage = () => {
       ]
     return (
         <div className="my-20">
-            <h1 className="text-center font-serif text-2xl md:text-5xl ">Share Your Meals on <span className="underline underline-offset-2 bg-gradient-to-l from-[#E10101] to-[#790d0d] bg-clip-text text-transparent font-semibold ">  Recipe Hunt</span> </h1>
-              <div className="flex justify-center items-center my-10">
+            <h1 className="text-center font-serif text-xl md:text-5xl ">Share Your Meals on <span className="underline underline-offset-2 bg-gradient-to-l from-[#E10101] to-[#790d0d] bg-clip-text text-transparent font-semibold ">  Recipe Hunt</span> </h1>
+              <div className="flex justify-center items-center my-4 md:my-10">
                {data.map((item) => (
                       <div
                         key={item.id}
