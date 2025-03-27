@@ -33,10 +33,10 @@ const RecipeWriter = () => {
     if (error) return <div>{error}</div>;
 
     return (
-        <div className="mt-20 p-6 flex justify-center">
+        <div className="mt-40 flex justify-center">
             <div className="relative border border-gray-300 rounded-md p-6 w-full md:w-96 text-center shadow-md">
                 {/* About Me Title with Border */}
-                <div className="absolute bottom-[282px] left-32 right-32 z-10 bg-white dark:bg-[#141414]">
+                <div className="absolute bottom-[312px] left-32 right-32 z-10 bg-white dark:bg-[#141414]">
                     <h1 className="text-md  uppercase font-semibold  px-2 tracking-widest">
                         About Me
                     </h1>
@@ -48,18 +48,19 @@ const RecipeWriter = () => {
                     <Avatar
                         src={recipe?.user.imageUrl}
                         alt="User"
-                        className="w-28 h-28 rounded-full border border-gray-300"
+                        className="w-32 h-32 rounded-full border border-gray-300"
                     />
                 </div>
-
-                {/* Description */}
-                <p className="text-gray-600 dark:text-gray-300 mt-4 text-sm">
+                <p className=" dark:text-gray-300 mt-4 text-sm">
                     I create simple, delicious recipes that require 10 ingredients or less, 
-                    one bowl, or 30 minutes or less to prepare.
+                    one bowl, or {(recipe?.cookingTime ?? 0) > 30 ? "30 minutes or more" : "30 minutes or less "}
+                    to prepare.
                 </p>
+                {/* Description */}
+                
 
                 {/* Signature */}
-                <p className="mt-4 italic text-gray-800 dark:text-gray-500 font-signature">
+                <p className="mt-4 text-4xl italianno  dark:text-gray-500 font-signature">
                     by {recipe?.user.name}
                 </p>
             </div>
