@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { RecipeData } from "@/types";
 import { getRecipeById } from "@/services/RecipeServices";
-import { Image } from "@heroui/react";
+import { Avatar, Image } from "@heroui/react";
 
 const ARecipe = () => {
     const { recipeId } = useParams();
@@ -36,7 +36,7 @@ const ARecipe = () => {
     console.log("Recipe ID:", recipeId);
     console.log("Recipe Data:", recipe);
 
-    
+
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>{error}</div>;
@@ -45,6 +45,18 @@ const ARecipe = () => {
         <div className=" p-6">
             <button onClick={() => router.push("/")} className="text-blue-500 underline mb-4">⬅ Back to Recipes</button>
             <h1 className="text-5xl font-bold">{recipe?.title}</h1>
+            <div className="flex justify-start items-start gap-4 my-6">
+                <Avatar
+                    radius="full"
+                    size="lg"
+                    src={recipe?.user?.imageUrl}
+                />
+                <div className="flex flex-col justify-center items-start">
+                    <h4> {recipe?.user?.name}</h4>
+                    <p className="text-sm">{new Date(recipe?.createdAt?).toLocaleDateString("en-GB", { day: "2-digit", month: "long", year: "numeric" })}</p>
+                    {/* <p>{recipe?.user?.email}</p> */}
+                </div>
+            </div>
             <p className="text-gray-600 mt-2">{recipe?.description}</p>
             <Image
                 src={recipe?.image?.[0] || "/fallback.jpg"}
