@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import {  useParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { RecipeData } from "@/types";
 import { getRecipeById } from "@/services/RecipeServices";
 import { Avatar, Image } from "@heroui/react";
@@ -37,14 +37,14 @@ const ARecipe = () => {
 
     return (
         <div className="p-6">
-           
+
             <h1 className="text-5xl font-bold">{recipe?.title}</h1>
 
             <div className="flex justify-start items-start gap-4 my-6">
-                <Avatar radius="full" size="lg" src={recipe?.user?.imageUrl || "/fallback-avatar.jpg"} />
-                <div className="flex flex-col justify-center items-start text-md">
-                    <h4>{recipe?.user?.name}</h4>
-                    <p className="text-sm">
+                <Avatar radius="full" className="w-16 h-16" src={recipe?.user?.imageUrl || "/fallback-avatar.jpg"} />
+                <div className="flex flex-col justify-center items-start  mt-2">
+                    <h4 className="text-lg font-semibold">{recipe?.user?.name}</h4>
+                    <p className="text-sm ">
                         {recipe?.createdAt ? new Date(recipe.createdAt).toLocaleDateString("en-GB", {
                             day: "2-digit",
                             month: "long",
@@ -53,17 +53,16 @@ const ARecipe = () => {
                     </p>
                 </div>
             </div>
-
-            <p className="text-gray-600 mt-2">{recipe?.description || "No description available."}</p>
-
             <Image
                 src={recipe?.image?.[0] || "/fallback.jpg"}
                 alt={recipe?.title || "Recipe Image"}
-                width={600}
-                height={400}
-                className="w-full h-40 object-cover mt-2 rounded-md"
+                
+                className="w-[200vh] h-[100vh] object-cover mt-2"
                 isZoomed
             />
+            <p className="text-gray-600 mt-2">{recipe?.description || "No description available."}</p>
+
+
 
             <h2 className="text-2xl font-semibold mt-4">Tags</h2>
             <div className="flex flex-wrap gap-2">
