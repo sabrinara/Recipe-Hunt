@@ -42,9 +42,9 @@ const ARecipe = () => {
 
             <div className="flex justify-start items-start gap-4 my-6">
                 <Avatar radius="full" className="w-16 h-16" src={recipe?.user?.imageUrl || "/fallback-avatar.jpg"} />
-                <div className="flex flex-col justify-center items-start  mt-2">
-                    <h4 className="text-lg font-semibold">{recipe?.user?.name}</h4>
-                    <p className="text-sm ">
+                <div className="flex flex-col justify-center items-start  mt-1">
+                    <h4 className="text-xl font-semibold">{recipe?.user?.name}</h4>
+                    <p className="text-md ">
                         {recipe?.createdAt ? new Date(recipe.createdAt).toLocaleDateString("en-GB", {
                             day: "2-digit",
                             month: "long",
@@ -60,7 +60,7 @@ const ARecipe = () => {
                 className="w-[200vh] h-[100vh] object-cover mt-2"
                 isZoomed
             />
-            <p className="text-gray-600 mt-2">{recipe?.description || "No description available."}</p>
+            <p className="text-gray-600 mt-2 text-lg font-medium">{recipe?.description || "No description available."}</p>
 
 
 
