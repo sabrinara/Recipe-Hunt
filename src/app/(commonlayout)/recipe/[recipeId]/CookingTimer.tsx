@@ -4,6 +4,9 @@ import { useParams } from "next/navigation";
 import { RecipeData } from "@/types";
 import { getRecipeById } from "@/services/RecipeServices";
 import { FaStop } from "react-icons/fa";
+import { CgPlayPause } from "react-icons/cg";
+import { BsFillPlayFill } from "react-icons/bs";
+
 
 const CookingTimer = () => {
     const { recipeId } = useParams();
@@ -38,7 +41,7 @@ const CookingTimer = () => {
     }, [recipeId]);
 
     useEffect(() => {
-        let timer: NodeJS.Timeout | null = null;  // Initialize the timer here
+        let timer: NodeJS.Timeout | null = null; 
         if (isRunning && timeLeft > 0) {
             timer = setInterval(() => {
                 setTimeLeft((prev) => prev - 1);
@@ -77,34 +80,37 @@ const CookingTimer = () => {
 
 <div className="relative border border-gray-300 rounded-md p-6 w-full md:w-96 text-center shadow-md">
                 {/* About Me Title with Border */}
-                <div className="absolute bottom-[320px] left-20 right-20 z-10 bg-white dark:bg-[#141414]">
+                <div className="absolute bottom-[300px] left-20 right-20 z-10 bg-white dark:bg-[#141414]">
                     <h1 className="text-md  uppercase font-semibold  px-2 tracking-widest">
-                        Start Cooking
+                        Track Cooking Time
                     </h1>
                     
                 </div>
-              <div className="flex flex-col justify-center items-center mt-10">
-              <div className="flex justify-center items-center w-48 h-48 rounded-full border-4 border-gray-300 p-4">
-                    <div className="flex justify-center items-center w-full h-full text-4xl font-mono">
+              <div className="flex flex-col justify-center items-center mt-6">
+              <div className="flex justify-center items-center w-48 h-48 rounded-full border-4 border-gray-300 dark:border-gray-600  p-4">
+                    <div className="flex justify-center items-center w-full h-full text-4xl font-mono dark:text-gray-400">
                         {formatTime(timeLeft)}
                     </div>
                 </div>
-                <div className="flex gap-4 mt-4">
+                <div className="flex gap-3 mt-4">
                     <button
                         onClick={handleStart}
-                        className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+                        className="text-green-600"
+                        title="Start Timer"
                     >
-                        Start
+                       <BsFillPlayFill className="text-2xl"/>
                     </button>
                     <button
                         onClick={handlePause}
-                        className="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600"
+                        className="text-blue-500 "
+                          title="Pause Timer"
                     >
-                        Pause
+                        <CgPlayPause className="text-3xl" />
                     </button>
                     <button
                         onClick={handleStop}
                         className="text-[#E10101]"
+                          title="Stop Timer"
                     >
                         <FaStop />
                     </button>
