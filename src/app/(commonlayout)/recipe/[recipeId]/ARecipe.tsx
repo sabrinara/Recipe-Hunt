@@ -4,6 +4,11 @@ import { useParams } from "next/navigation";
 import { RecipeData } from "@/types";
 import { getRecipeById } from "@/services/RecipeServices";
 import { Avatar, Image } from "@heroui/react";
+import LoadingPage from "../../component/pages/shared/LoadingPage";
+import { MdOutlineAccessTime } from "react-icons/md";
+import { PiCookingPot } from "react-icons/pi";
+import { AiOutlineTags } from "react-icons/ai";
+import { IoMdStar } from "react-icons/io";
 
 const ARecipe = () => {
     const { recipeId } = useParams();
@@ -32,7 +37,8 @@ const ARecipe = () => {
         fetchRecipe();
     }, [recipeIdData]);
 
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <div className="md:mb-80 md:ml-96"><LoadingPage /></div>;
+
     if (error) return <div>{error}</div>;
 
     return (
@@ -56,26 +62,78 @@ const ARecipe = () => {
             <Image
                 src={recipe?.image?.[0] || "/fallback.jpg"}
                 alt={recipe?.title || "Recipe Image"}
-                
+
                 className="w-[200vh] h-[100vh] object-cover mt-2"
                 isZoomed
             />
-            <p className="text-gray-600 mt-2 text-lg font-medium">{recipe?.description || "No description available."}</p>
 
 
-
-            <h2 className="text-2xl font-semibold mt-4">Tags</h2>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex justify-center items-center gap-4 uppercase text-md font-semibold mt-6">
+                {/* Cooking Time Section */}
+                <div className="flex items-center gap-1">
+                    <MdOutlineAccessTime className="text-[#E10101] text-xl font-extrabold" />
+                    {recipe?.cookingTime !== undefined && recipe?.cookingTime !== null ? (
+                        recipe.cookingTime < 60 ? (
+                            <>{recipe.cookingTime} Minutes</>
+                        ) : (
+                            <>
+                                {Math.floor(recipe.cookingTime / 60)} Hour
+                                {Math.floor(recipe.cookingTime / 60) > 1 ? "s" : ""}{" "}
+                                {recipe.cookingTime % 60 > 0 ? `${recipe.cookingTime % 60} Minutes` : ""}
+                            </>
+                        )
+                    ) : (
+                        <span>Not Available</span>
+                    )}
+                </div>
+                <div className="flex items-center gap-1 " title="Difficulty">
+                    <PiCookingPot className="text-[#E10101] text-xl" /> {recipe?.difficulty}
+                </div>
+                <div className="flex flex-wrap gap-2">
                 {recipe?.tags?.length ? (
                     recipe.tags.map((tag, index) => (
-                        <span key={index} className="px-3 py-1 bg-gray-200 rounded-full text-sm">
-                            #{tag}
+                        <span
+                            key={index}
+                            title="Tags"
+                            className="flex justify-center items-center gap-1 px-3 py-1 uppercase font-semibold  text-md"
+                        >
+                            <AiOutlineTags className="text-[#E10101] text-lg mt-1" /> {tag}
                         </span>
                     ))
                 ) : (
                     <p className="text-gray-500">No tags available.</p>
                 )}
             </div>
+
+            </div>
+            <p className="text-gray-600 mt-2 text-lg font-medium">{recipe?.description || "No description available."}</p>
+            <div className="flex items-center gap-1 mt-2">
+                {recipe?.ratings?.length ? (
+                    (() => {
+                        const avgRating =
+                            recipe.ratings.reduce((acc, rating) => acc + rating, 0) /
+                            recipe.ratings.length;
+                        const roundedRating = Math.round(avgRating); 
+
+                        return (
+                            <>
+                                {[...Array(roundedRating)].map((_, index) => (
+                                    <IoMdStar key={index} className="text-[#E10101] text-2xl my-2 mx-1" />
+                                ))}
+                                <span className="text-lg font-medium font-serif"> {avgRating} from {avgRating+1} Reviews.</span>
+                            </>
+                        );
+                    })()
+                ) : (
+                    <p className="text-gray-500">No ratings available.</p>
+                )}
+            </div>
+
+
+
+            <h2 className="text-2xl font-semibold mt-4">Tags</h2>
+        
+
         </div>
     );
 };

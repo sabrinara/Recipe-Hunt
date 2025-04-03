@@ -9,6 +9,7 @@ import { BiSolidTag } from "react-icons/bi";
 import { MdOutlineAccessTime } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
+import LoadingPage from "../component/pages/shared/LoadingPage";
 
 const RecipeList = () => {
     const [recipes, setRecipes] = useState<RecipeData[]>([]);
@@ -57,11 +58,7 @@ const RecipeList = () => {
     if (loading)
         return (
             <div>
-                <div className='min-h-screen flex flex-col justify-center items-center'>
-                    <div>
-                        <p className="text-3xl text-[#E10101] font-mono animate-bounce">Recipe Hunt...</p>
-                    </div>
-                </div>
+                <LoadingPage/>
             </div>
         )
     if (error) return <div>{error}</div>;
