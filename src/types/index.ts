@@ -1,4 +1,9 @@
-
+export type Ingredient = {
+  _id: string;
+  name: string;
+  quantity: string;
+  isChecked: boolean;
+}
 
 
 export type RecipeData = {
@@ -6,7 +11,7 @@ export type RecipeData = {
   name: string;
   title: string;
   description: string;
-  ingredients: { name: string; quantity: string }[];
+  ingredients: Ingredient[];
   image: string[];
   cookingTime: number;
   tags: string[];
