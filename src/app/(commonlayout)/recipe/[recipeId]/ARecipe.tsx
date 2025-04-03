@@ -77,7 +77,7 @@ const ARecipe = () => {
                 src={recipe?.image?.[0] || "/fallback.jpg"}
                 alt={recipe?.title || "Recipe Image"}
 
-                className="w-full md:w-[200vh] h-[60vh] md:h-[100vh] object-cover mt-2"
+                className="w-[200vh] h-[60vh] md:h-[100vh] object-cover mt-2"
                 isZoomed
             />
 
