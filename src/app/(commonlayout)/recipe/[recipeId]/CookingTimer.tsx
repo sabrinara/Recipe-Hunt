@@ -76,7 +76,7 @@ const CookingTimer = () => {
     if (error) return <div>{error}</div>;
 
     return (
-        <div className="flex justify-center  my-20">
+        <div className="flex justify-center my-4 mx-2 md:mx-0  md:my-20">
 
 <div className="relative border border-gray-300 rounded-md p-6 w-full md:w-96 text-center shadow-md">
                 {/* About Me Title with Border */}

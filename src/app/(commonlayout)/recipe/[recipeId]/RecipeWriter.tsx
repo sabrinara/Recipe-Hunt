@@ -33,7 +33,7 @@ const RecipeWriter = () => {
     if (error) return <div>{error}</div>;
 
     return (
-        <div className="mt-40 flex justify-center">
+        <div className="mx-2 md:mx-0 my-10 md:mt-40 flex justify-center">
             <div className="relative border border-gray-300 rounded-md p-6 w-full md:w-96 text-center shadow-md">
                 {/* About Me Title with Border */}
                 <div className="absolute bottom-[312px] left-32 right-32 z-10 bg-white dark:bg-[#141414]">

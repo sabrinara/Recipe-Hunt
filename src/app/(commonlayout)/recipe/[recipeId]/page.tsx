@@ -5,11 +5,11 @@ import CookingTimer from './CookingTimer';
 
 const SingleRecipe = () => {
     return (
-        <div className='mx-auto container flex'>
-            <div className='w-4/6 mb-10'>
+        <div className='mx-auto container flex flex-col md:flex-row'>
+            <div className='w-full md:w-4/6 mb-10'>
                 <ARecipe />
             </div>
-            <div className='w-2/6 flex flex-col '>
+            <div className='w-full md:w-2/6 flex flex-col-reverse md:flex-col '>
 
                 <RecipeWriter />
                 <CookingTimer />
