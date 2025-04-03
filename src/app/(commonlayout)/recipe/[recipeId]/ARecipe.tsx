@@ -58,7 +58,7 @@ const ARecipe = () => {
     return (
         <div className="p-6">
 
-            <h1 className="text-5xl font-bold">{recipe?.title}</h1>
+            <h1 className="text-3xl md:text-5xl font-bold">{recipe?.title}</h1>
 
             <div className="flex justify-start items-start gap-4 my-6">
                 <Avatar radius="full" className="w-16 h-16" src={recipe?.user?.imageUrl || "/fallback-avatar.jpg"} />
@@ -77,12 +77,12 @@ const ARecipe = () => {
                 src={recipe?.image?.[0] || "/fallback.jpg"}
                 alt={recipe?.title || "Recipe Image"}
 
-                className="w-[200vh] h-[100vh] object-cover mt-2"
+                className="w-full md:w-[200vh] h-[60vh] md:h-[100vh] object-cover mt-2"
                 isZoomed
             />
 
 
-            <div className="flex justify-center items-center gap-4 uppercase text-md font-semibold mt-6">
+            <div className="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-4 uppercase text-md font-semibold mt-6">
                 {/* Cooking Time Section */}
                 <div className="flex items-center gap-1">
                     <MdOutlineAccessTime className="text-[#E10101] text-xl font-extrabold" />
