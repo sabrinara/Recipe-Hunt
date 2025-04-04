@@ -76,18 +76,18 @@ const CookingTimer = () => {
     if (error) return <div>{error}</div>;
 
     return (
-        <div className="flex justify-center my-4 mx-2 md:mx-0  md:my-20">
+        <div className="flex justify-center my-4 mx-2 md:mx-0 md:my-10">
 
-<div className="relative border border-gray-300 rounded-md p-6 w-full md:w-96 text-center shadow-md">
+<div className="relative border border-gray-300 rounded-md p-6 w-full md:w-[420px] text-center shadow-md">
                 {/* About Me Title with Border */}
-                <div className="absolute bottom-[300px] left-20 right-20 z-10 bg-white dark:bg-[#141414]">
+                <div className="absolute bottom-[277px] left-20 right-20 z-10 bg-white dark:bg-[#141414]">
                     <h1 className="text-md  uppercase font-semibold  px-2 tracking-widest">
                         Track Cooking Time
                     </h1>
                     
                 </div>
-              <div className="flex flex-col justify-center items-center mt-6">
-              <div className="flex justify-center items-center w-48 h-48 rounded-full border-4 border-gray-300 dark:border-gray-600  p-4">
+              <div className="flex flex-col justify-center items-center">
+              <div className="flex justify-center items-center w-48 h-48 rounded-full border-4 border-gray-400 dark:border-gray-600  p-4">
                     <div className="flex justify-center items-center w-full h-full text-4xl font-mono dark:text-gray-400">
                         {formatTime(timeLeft)}
                     </div>
