@@ -20,7 +20,7 @@ type Session = {
     email?: string | null | undefined;
     image?: string | null | undefined;
   },
-  token?: string |null |undefined;
+  token?: string | null | undefined;
 }
 export default function NavBar({ session }: { session: Session | null }) {
   const [userData, setUserData] = useState<string | null>(null);
@@ -42,7 +42,7 @@ export default function NavBar({ session }: { session: Session | null }) {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const token = localStorage.getItem("accessToken") ;
+      const token = localStorage.getItem("accessToken");
       const user = localStorage.getItem("user");
       setUserData(user);
       setUserToken(token);
@@ -62,7 +62,7 @@ export default function NavBar({ session }: { session: Session | null }) {
   }
   const isLoggedIn = Boolean(session?.user || (userData && userToken));
   const items = isLoggedIn
-  ? [
+    ? [
       { key: "home", label: "Home", href: "/" },
       { key: "recipes", label: "Recipes", href: "/recipe" },
       { key: "about", label: "About", href: "/about" },
@@ -70,7 +70,7 @@ export default function NavBar({ session }: { session: Session | null }) {
       { key: "dashboard", label: "Dashboard", href: routeMap.user },
       { key: "logout", label: "Logout", href: "#", action: () => { signOut(); handleClearStorage(); } }
     ]
-  : [
+    : [
       { key: "home", label: "Home", href: "/" },
       { key: "recipes", label: "Recipes", href: "/recipe" },
       { key: "about", label: "About", href: "/about" },
@@ -110,13 +110,17 @@ export default function NavBar({ session }: { session: Session | null }) {
             Contact
           </Link>
         </NavbarItem>
-        <NavbarItem>
-          <Link href={routeMap.user} className="md:text-lg font-serif">Dashboard</Link>
-        </NavbarItem>
+
         {isLoggedIn ? (
-          <NavbarItem>
-            <button onClick={() => { signOut(); handleClearStorage(); }} className="md:text-lg font-serif">Logout</button>
-          </NavbarItem>
+          <>
+            <NavbarItem>
+              <Link href={routeMap.user} className="md:text-lg font-serif">Dashboard</Link>
+            </NavbarItem>
+            <NavbarItem>
+              <button onClick={() => { signOut(); handleClearStorage(); }} className="md:text-lg font-serif">Logout</button>
+            </NavbarItem>
+          </>
+
         ) : (
           <>
             <NavbarItem>
@@ -143,18 +147,18 @@ export default function NavBar({ session }: { session: Session | null }) {
               </Button>
             </DropdownTrigger>
             <DropdownMenu aria-label="Dynamic Actions" className="bg-transparent">
-  {items.map((item) =>
-    item.key === "logout" ? (
-      <DropdownItem key={item.key} color="danger" onClick={item.action}>
-        {item.label}
-      </DropdownItem>
-    ) : (
-      <DropdownItem key={item.key} color="default">
-        <Link href={item.href}>{item.label}</Link>
-      </DropdownItem>
-    )
-  )}
-</DropdownMenu>
+              {items.map((item) =>
+                item.key === "logout" ? (
+                  <DropdownItem key={item.key} color="danger" onClick={item.action}>
+                    {item.label}
+                  </DropdownItem>
+                ) : (
+                  <DropdownItem key={item.key} color="default">
+                    <Link href={item.href}>{item.label}</Link>
+                  </DropdownItem>
+                )
+              )}
+            </DropdownMenu>
 
           </Dropdown>
         </NavbarItem>
