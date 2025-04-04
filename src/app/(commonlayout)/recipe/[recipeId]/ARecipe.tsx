@@ -82,8 +82,8 @@ const ARecipe = () => {
             />
 
 
-            <div className="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-4 uppercase text-md font-semibold mt-6">
-                {/* Cooking Time Section */}
+            <div className="flex justify-center items-center gap-2 md:gap-4 uppercase text-md font-semibold mt-6">
+                {/* Cooking */}
                 <div className="flex items-center gap-1">
                     <MdOutlineAccessTime className="text-[#E10101] text-xl font-extrabold" />
                     {recipe?.cookingTime !== undefined && recipe?.cookingTime !== null ? (
@@ -100,10 +100,12 @@ const ARecipe = () => {
                         <span>Not Available</span>
                     )}
                 </div>
+                {/* {difficulty} */}
                 <div className="flex items-center gap-1 " title="Difficulty">
                     <PiCookingPot className="text-[#E10101] text-xl" /> {recipe?.difficulty}
                 </div>
-                <div className="flex flex-wrap gap-2">
+                {/* tags  */}
+                <div className="hidden md:flex flex-wrap gap-2">
                     {recipe?.tags?.length ? (
                         recipe.tags.map((tag, index) => (
                             <span
@@ -120,7 +122,24 @@ const ARecipe = () => {
                 </div>
 
             </div>
+            
             <p className="text-gray-600 mt-2 text-lg font-medium">{recipe?.description || "No description available."}</p>
+            <div className="flex md:hidden flex-wrap mt-4 justify-center items-center gap-2">
+                    {recipe?.tags?.length ? (
+                        recipe.tags.map((tag, index) => (
+                            <span
+                                key={index}
+                                title="Tags"
+                                className="flex justify-center items-center gap-1 px-3 py-1 uppercase font-semibold  text-md"
+                            >
+                                <AiOutlineTags className="text-[#E10101] text-lg mt-1" /> {tag}
+                            </span>
+                        ))
+                    ) : (
+                        <p className="text-gray-500">No tags available.</p>
+                    )}
+                </div>
+           
             <div className="flex items-center gap-1 mt-2">
                 {recipe?.ratings?.length ? (
                     (() => {
