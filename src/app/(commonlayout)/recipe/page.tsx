@@ -58,22 +58,37 @@ const RecipeList = () => {
     if (loading)
         return (
             <div>
-                <LoadingPage/>
+                <LoadingPage />
             </div>
         )
     if (error) return <div>{error}</div>;
 
     return (
-        <div className="mx-auto container my-10">
-            <div className="flex justify-center items-center">
-                <input
-                    type="text"
-                    placeholder="Search by title, name, or tags..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-[70%] md:w-[40%] border border-[#E10101] p-2  rounded-md my-4"
-                />
+        <div className="mx-auto container mb-10">
+
+            {/* search  */}
+            <div
+                className='relative w-full h-[40vh] md:h-[60vh] mb-10 rounded-md '
+                style={{
+                    backgroundImage: `url('/assets/home/landing2.jpg')`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                }}
+            >
+                <div className="absolute top-1/2 left-0 md:left-40 right-0 md:right-40 transform -translate-y-1/2 flex flex-col items-center justify-center py-10  bg-[#E10101]/50">
+                <h1 className=" text-center p-1 rounded-md text-white text-4xl md:text-7xl font-semibold italianno">Check Out All Recipes</h1>
+                    <input
+                        type="text"
+                        placeholder="Search recipe..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="w-[70%] md:w-[40%]  p-2 md:p-3  rounded-md "
+                    />
+
+                </div>
             </div>
+
 
             {/* Recipes  */}
             <div className="mx-6 md:mx-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-1 ">
