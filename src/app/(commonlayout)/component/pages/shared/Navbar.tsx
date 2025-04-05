@@ -19,6 +19,7 @@ type Session = {
     name?: string | null | undefined;
     email?: string | null | undefined;
     image?: string | null | undefined;
+    role?: string | null | undefined;
   },
   token?: string | null | undefined;
 }
@@ -27,8 +28,7 @@ export default function NavBar({ session }: { session: Session | null }) {
   const [userToken, setUserToken] = useState<string | null>(null);
   const routeMap: Record<string, string> = {
     user: "/dashboard",
-    admin: "/dashboard/admin",
-    recipeWriter: "/dashboard/user",
+    admin: "/dashboard/admin"
   };
 
   useEffect(() => {
@@ -59,7 +59,11 @@ export default function NavBar({ session }: { session: Session | null }) {
     localStorage.removeItem("user");
     setUserData(null);
     setUserToken(null)
-  }
+  };
+  
+  const parsedUser = userData ? JSON.parse(userData) : null;
+const userRole = session?.user?.role || parsedUser?.role || "user";
+
   const isLoggedIn = Boolean(session?.user || (userData && userToken));
   const items = isLoggedIn
     ? [
@@ -67,7 +71,11 @@ export default function NavBar({ session }: { session: Session | null }) {
       { key: "recipes", label: "Recipes", href: "/recipe" },
       { key: "about", label: "About", href: "/about" },
       { key: "contact", label: "Contact", href: "/contact" },
-      { key: "dashboard", label: "Dashboard", href: routeMap.user },
+      {
+        key: "dashboard",
+        label: "Dashboard",
+        href: routeMap[session?.user?.role || (userData ? JSON.parse(userData)?.role : "user")],
+      },
       { key: "logout", label: "Logout", href: "#", action: () => { signOut(); handleClearStorage(); } }
     ]
     : [
@@ -114,7 +122,8 @@ export default function NavBar({ session }: { session: Session | null }) {
         {isLoggedIn ? (
           <>
             <NavbarItem>
-              <Link href={routeMap.user} className="md:text-lg font-serif">Dashboard</Link>
+            <Link href={routeMap[userRole]} className="md:text-lg font-serif">Dashboard</Link>
+
             </NavbarItem>
             <NavbarItem>
               <button onClick={() => { signOut(); handleClearStorage(); }} className="md:text-lg font-serif">Logout</button>

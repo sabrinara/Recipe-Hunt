@@ -32,7 +32,7 @@ export const AuthOptions: NextAuthOptions = {
 
           // Fetch all users to check if the email already exists
           const usersResponse = await fetch(
-            "https://recipe-hunt-server.vercel.app/api/user/all"
+             `${process.env.BACKEND_URL}/user/all`
           );
 
           if (!usersResponse.ok) {
@@ -43,7 +43,7 @@ export const AuthOptions: NextAuthOptions = {
           const usersData = await usersResponse.json();
           console.log("Users API Response:", usersData);
 
-          const users = usersData.data?.users || []; // Extract users array
+          const users = usersData.data?.users || []; 
           const existingUser = users.find((user: any) => user.email === profile.email);
 
           let response;
@@ -51,7 +51,7 @@ export const AuthOptions: NextAuthOptions = {
           if (existingUser) {
             // User exists -> Log in instead of signing up
             response = await fetch(
-              "https://recipe-hunt-server.vercel.app/api/user/login",
+              `${process.env.BACKEND_URL}/user/login`,
               {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -61,7 +61,7 @@ export const AuthOptions: NextAuthOptions = {
           } else {
             // User does not exist -> Sign up
             response = await fetch(
-              "https://recipe-hunt-server.vercel.app/api/user/signup",
+              `${process.env.BACKEND_URL}/user/signup`,
               {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
