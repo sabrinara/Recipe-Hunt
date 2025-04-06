@@ -1,19 +1,15 @@
-// app/dashboard/page.tsx
-import { AuthOptions } from "@/config/nextauth.config";
-import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
+"use client"
 
-export default async function DashboardPage() {
-  const session = await getServerSession(AuthOptions);
 
-  if (!session) {
-    redirect("/login");
-  }
-
+const DashboardPage = () => {
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
   return (
+
     <div>
-      <h1 className="text-2xl">Welcome, {session.user?.name}</h1>
-      <p>Email: {session.user?.email}</p>
+      <h1 className="text-2xl">Welcome, {user.name}</h1>
+      <p>Email: {user.email}</p>
     </div>
   );
-}
+};
+
+export default DashboardPage;

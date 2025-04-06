@@ -1,103 +1,175 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+// /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { NextAuthOptions } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+// import { NextAuthOptions } from "next-auth";
+// import GoogleProvider from "next-auth/providers/google";
 
-export const AuthOptions: NextAuthOptions = {
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    }),
-  ],
+// export const AuthOptions: NextAuthOptions = {
+//   providers: [
+//     GoogleProvider({
+//       clientId: process.env.GOOGLE_CLIENT_ID as string,
+//       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+//     }),
+//   ],
 
-  callbacks: {
-    async signIn({ profile, account }) {
-      try {
-        if (!profile || !account) {
-          console.error("Missing profile or account information");
-          return false;
-        }
+//   callbacks: {
+//     async signIn({ profile, account }) {
+//       try {
+//         if (!profile || !account) {
+//           console.error("Missing profile or account information");
+//           return false;
+//         }
 
-        if (account.provider === "google") {
-          const userData = {
-            name: profile.name || "Unknown User",
-            email: profile.email,
-            imageUrl: (profile as any).picture || null,
-            phone: "",
-            address: "",
-            role: "user",
-            password: "GoogleAuth123",
-          };
+//         if (account.provider === "google") {
+//           const userData = {
+//             name: profile.name || "Unknown User",
+//             email: profile.email,
+//             imageUrl: (profile as any).picture || null,
+//             phone: "",
+//             address: "",
+//             role: "user",
+//             password: "GoogleAuth123",
+//           };
 
-          // Fetch all users to check if the email already exists
-          const usersResponse = await fetch(
-             `${process.env.BACKEND_URL}/user/all`
-          );
+//           // Fetch all users to check if the email already exists
+//           const usersResponse = await fetch(
+//              `${process.env.BACKEND_URL}/user/all`
+//           );
 
-          if (!usersResponse.ok) {
-            console.error("Failed to fetch users:", await usersResponse.json());
-            return false;
-          }
+//           if (!usersResponse.ok) {
+//             console.error("Failed to fetch users:", await usersResponse.json());
+//             return false;
+//           }
 
-          const usersData = await usersResponse.json();
-          console.log("Users API Response:", usersData);
+//           const usersData = await usersResponse.json();
+//           console.log("Users API Response:", usersData);
 
-          const users = usersData.data?.users || []; 
-          const existingUser = users.find((user: any) => user.email === profile.email);
+//           const users = usersData.data?.users || []; 
+//           const existingUser = users.find((user: any) => user.email === profile.email);
 
-          let response;
+//           let response;
 
-          if (existingUser) {
-            // User exists -> Log in instead of signing up
-            response = await fetch(
-              `${process.env.BACKEND_URL}/user/login`,
-              {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email: profile.email, password: "GoogleAuth123" }),
-              }
-            );
-          } else {
-            // User does not exist -> Sign up
-            response = await fetch(
-              `${process.env.BACKEND_URL}/user/signup`,
-              {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(userData),
-              }
-            );
-          }
+//           if (existingUser) {
+//             // User exists -> Log in instead of signing up
+//             response = await fetch(
+//               `${process.env.BACKEND_URL}/user/login`,
+//               {
+//                 method: "POST",
+//                 headers: { "Content-Type": "application/json" },
+//                 body: JSON.stringify({ email: profile.email, password: "GoogleAuth123" }),
+//               }
+//             );
+//           } else {
+//             // User does not exist -> Sign up
+//             response = await fetch(
+//               `${process.env.BACKEND_URL}/user/signup`,
+//               {
+//                 method: "POST",
+//                 headers: { "Content-Type": "application/json" },
+//                 body: JSON.stringify(userData),
+//               }
+//             );
+//           }
 
-          if (!response.ok) {
-            console.error("Failed to authenticate user:", await response.json());
-            return false;
-          }
+//           if (!response.ok) {
+//             console.error("Failed to authenticate user:", await response.json());
+//             return false;
+//           }
 
-          const data = await response.json();
-          console.log("User authenticated successfully:", data);
+//           const data = await response.json();
+//           console.log("User authenticated successfully:", data);
 
-          // // ✅ Save token and user info in localStorage
-          // if (typeof window !== "undefined") {
-          //   localStorage.setItem("accessToken", data.data.token); // Save token
-          //   localStorage.setItem("user", JSON.stringify(data.data.user)); // Save user info
-          // }
+//           // // ✅ Save token and user info in localStorage
+//           // if (typeof window !== "undefined") {
+//           //   localStorage.setItem("accessToken", data.data.token); // Save token
+//           //   localStorage.setItem("user", JSON.stringify(data.data.user)); // Save user info
+//           // }
 
-          return data.data;
-        }
+//           return data.data;
+//         }
 
-        return false;
-      } catch (error) {
-        console.error("Error during sign-in:", error);
-        return false;
-      }
-    },
-  },
+//         return false;
+//       } catch (error) {
+//         console.error("Error during sign-in:", error);
+//         return false;
+//       }
+//     },
+//   },
 
-  pages: {
-    signIn: "/login",
-  },
+//   pages: {
+//     signIn: "/login",
+//   },
 
-  secret: process.env.NEXTAUTH_SECRET as string,
-};
+//   secret: process.env.NEXTAUTH_SECRET as string,
+// };
+
+// // import CredentialsProvider from "next-auth/providers/credentials";
+// // import GoogleProvider from "next-auth/providers/google";
+// // import { NextAuthOptions } from "next-auth";
+
+// // export const AuthOptions: NextAuthOptions = {
+// //   providers: [
+// //     GoogleProvider({
+// //       clientId: process.env.GOOGLE_CLIENT_ID!,
+// //       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+// //     }),
+
+// //     CredentialsProvider({
+// //       name: "Credentials",
+// //       credentials: {
+// //         email: { label: "Email", type: "text" },
+// //         password: { label: "Password", type: "password" },
+// //       },
+
+// //       async authorize(credentials) {
+// //         const res = await fetch(`${process.env.BACKEND_URL}/user/login`, {
+// //           method: "POST",
+// //           headers: { "Content-Type": "application/json" },
+// //           body: JSON.stringify({
+// //             email: credentials?.email,
+// //             password: credentials?.password,
+// //           }),
+// //         });
+
+// //         const data = await res.json();
+
+// //         if (!res.ok || !data?.data?.user) {
+// //           throw new Error(data.message || "Invalid credentials");
+// //         }
+
+// //         return {
+// //           id: data.data.user._id,
+// //           name: data.data.user.name,
+// //           email: data.data.user.email,
+// //           image: data.data.user.imageUrl,
+// //           role: data.data.user.role,
+// //           token: data.data.token,
+// //         };
+// //       },
+// //     }),
+// //   ],
+
+// //   callbacks: {
+// //     async jwt({ token, user }) {
+// //       if (user) {
+// //         token.role = user.role;
+// //         token.token = user.token;
+// //       }
+// //       return token;
+// //     },
+
+// //     async session({ session, token }) {
+// //       if (token) {
+// //         session.user.role = token.role;
+// //         session.token = token.token;
+// //       }
+// //       return session;
+// //     },
+// //   },
+
+// //   pages: {
+// //     signIn: "/login",
+// //   },
+
+// //   secret: process.env.NEXTAUTH_SECRET!,
+// // };
+

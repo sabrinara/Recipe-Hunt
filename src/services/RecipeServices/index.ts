@@ -38,7 +38,7 @@ export const getRecipeById = async (id: string) => {
     }
 
     const data = await response.json();
-    console.log("Recipe Data:", data);
+    // console.log("Recipe Data:", data);
     return data.data;
 };
 

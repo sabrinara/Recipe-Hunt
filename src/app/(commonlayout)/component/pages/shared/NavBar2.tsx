@@ -14,31 +14,16 @@ import { ThemeSwitcher } from "./ThemeSwitcher";
 import { TfiMenuAlt } from "react-icons/tfi";
 import { signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
-type Session = {
-  user?: {
-    name?: string | null | undefined;
-    email?: string | null | undefined;
-    image?: string | null | undefined;
-    role?: string | null | undefined ;
-  },
-  token?: string | null | undefined;
-}
-export default function NavBar({ session }: { session: Session | null }) {
+
+export default function NavBar2() {
   const [userData, setUserData] = useState<string | null>(null);
   const [userToken, setUserToken] = useState<string | null>(null);
-  // const routeMap: Record<string, string> = {
-  //   user: "/dashboard",
-  //   admin: "/dashboard/admin"
-  // };
+  const routeMap: Record<string, string> = {
+    user: "/dashboard",
+    admin: "/dashboard/admin"
+  };
 
-  useEffect(() => {
-    if (session) {
-      localStorage.setItem("user", JSON.stringify(session.user));
-      if (session?.token) {
-        localStorage.setItem("accessToken", session?.token);
-      }
-    }
-  }, [session]);
+
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -60,22 +45,11 @@ export default function NavBar({ session }: { session: Session | null }) {
     setUserData(null);
     setUserToken(null)
   };
-
+  
   const parsedUser = userData ? JSON.parse(userData) : null;
-  const userRole = session?.user?.role || parsedUser?.role || "user";
-  console.log("Role", userRole)
+const userRole = parsedUser?.role || "user";
 
-  const isLoggedIn = Boolean(session?.user || (userData && userToken));
-
-  if (isLoggedIn == true) {
-
-    if (userRole == "user") {
-      //dashboard route will be /dashboard
-
-    }
-  }
-
-
+  const isLoggedIn = Boolean( (userData && userToken));
   const items = isLoggedIn
     ? [
       { key: "home", label: "Home", href: "/" },
@@ -85,7 +59,7 @@ export default function NavBar({ session }: { session: Session | null }) {
       {
         key: "dashboard",
         label: "Dashboard",
-        href: userRole === "user" ? "/dashboard" : "/dashboard/admin",
+        href: routeMap[ (userData ? JSON.parse(userData)?.role : "user")],
       },
       { key: "logout", label: "Logout", href: "#", action: () => { signOut(); handleClearStorage(); } }
     ]
@@ -129,23 +103,13 @@ export default function NavBar({ session }: { session: Session | null }) {
             Contact
           </Link>
         </NavbarItem>
-        {userRole &&
-           <NavbarItem>
-           {/* <Link href={routeMap[userRole]} className="md:text-lg font-serif">Dashboard</Link> */}
-           <Link
-             href={userRole === "user" ? "/dashboard" : "/dashboard/admin"}
-             className="md:text-lg font-serif"
-           >
-             Dashboard
-           </Link>
-
-         </NavbarItem>
-        }
 
         {isLoggedIn ? (
           <>
-            {/* <h1>{userRole}</h1> */}
-           
+            <NavbarItem>
+            <Link href={routeMap[userRole]} className="md:text-lg font-serif">Dashboard</Link>
+
+            </NavbarItem>
             <NavbarItem>
               <button onClick={() => { signOut(); handleClearStorage(); }} className="md:text-lg font-serif">Logout</button>
             </NavbarItem>

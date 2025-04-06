@@ -1,9 +1,10 @@
 // "use client";
-import { AuthOptions } from "@/config/nextauth.config";
+// import { AuthOptions } from "@/config/nextauth.config";
 import type { Metadata } from "next";
 import Footer from "./component/pages/shared/Footer";
-import Navbar from "./component/pages/shared/Navbar";
-import { getServerSession } from "next-auth";
+// import Navbar from "./component/pages/shared/Navbar";
+// import { getServerSession } from "next-auth";
+import NavBar2 from "./component/pages/shared/NavBar2";
 
 export const metadata: Metadata = {
   title: "Recipe Hunt",
@@ -16,15 +17,16 @@ export default async function CommonLayout({
   children: React.ReactNode;
 }>) {
 
-  const session = await getServerSession(AuthOptions);
-  console.log("user",session);
+  // const session = await getServerSession(AuthOptions);
+  // console.log("user",session);
 
   
  
 
   return (
     <div>
-      <Navbar  session={session} />
+      {/* <Navbar  session={session} /> */}
+      <NavBar2/>
       {children}
      <Footer />
     </div>

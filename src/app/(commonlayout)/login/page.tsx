@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import GoogleLoginBtn from "../component/pages/shared/GoogleLoginBtn";
+// import GoogleLoginBtn from "../component/pages/shared/GoogleLoginBtn";
 import { loginUser } from "@/services/AuthServices";
 import { Input } from "@heroui/input";
 import { FaRegEye, FaEyeSlash } from "react-icons/fa";
@@ -112,7 +112,7 @@ const LoginPage = () => {
               placeholder="Enter your email"
               className="pb-2"
               required
-              value={watch("email")} // ✅ Keeps field value persistent
+              value={watch("email")} 
             />
           </div>
 
@@ -152,9 +152,9 @@ const LoginPage = () => {
             </Button>
           </div>
 
-          <div className="flex justify-center items-center mb-2">
+          {/* <div className="flex justify-center items-center mb-2">
             <GoogleLoginBtn />
-          </div>
+          </div> */}
 
           <p className="text-center">
             Don&apos;t have an account?{" "}

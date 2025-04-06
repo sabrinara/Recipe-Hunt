@@ -4,7 +4,7 @@ import { UserData } from "@/types";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import GoogleLoginBtn from "../component/pages/shared/GoogleLoginBtn";
+// import GoogleLoginBtn from "../component/pages/shared/GoogleLoginBtn";
 import { Input } from "@heroui/input";
 import { FaRegEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
@@ -181,7 +181,7 @@ const RegisterPage = () => {
                 {uploading ? "Submitting..." : "Register"}
               </Button>
             </div>
-            <GoogleLoginBtn />
+            {/* <GoogleLoginBtn /> */}
             <p className="text-center">
               Already have an account?{" "}
               <Link className="text-accent" href="/login">
