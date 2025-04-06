@@ -20,7 +20,7 @@ export default function NavBar2() {
   const [userToken, setUserToken] = useState<string | null>(null);
   const routeMap: Record<string, string> = {
     user: "/dashboard",
-    admin: "/dashboard/admin"
+    admin: "/admin"
   };
 
 

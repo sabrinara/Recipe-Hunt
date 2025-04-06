@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import UserLayout from "./layout/UserLayout";
+import AdminLayout from "./layout/AdminLayout";
 
 export const metadata: Metadata = {
-  title: "Recipe Hunt",
-  description: "A recipe sharing website, where users can share their recipes.",
-};
+    title: "Recipe Hunt",
+    description: "A recipe sharing website, where users can share their recipes.",
+  };
 
 export default function RootLayout({
   children,
@@ -13,7 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <div>
-      <UserLayout>{children}</UserLayout>
+      <AdminLayout>{children}</AdminLayout>
     </div>
   );
 }
