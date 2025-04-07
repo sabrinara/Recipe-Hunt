@@ -39,3 +39,23 @@ export const loginUser = async (data: FormValues) => {
     const userInfo = await response.json();
     return userInfo;
 };
+
+export const getUserById = async (id: string) => {
+    
+    console.log("Fetching user with ID:", id);
+
+    const response = await fetch(`${process.env.BACKEND_URL}/user/${id}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        cache: "no-store",
+    });
+
+    if (!response.ok) {
+        console.error("Error fetching user:", response.status, response.statusText);
+        throw new Error("User not found");
+    }
+
+    const data = await response.json();
+    console.log("User Data:", data);
+    return data.data;
+};

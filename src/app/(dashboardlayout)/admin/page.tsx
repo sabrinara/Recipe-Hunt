@@ -1,13 +1,24 @@
-"use client"
+"use client";
+
+import { useEffect, useState } from "react";
 
 const AdminDashboard = () => {
-    const user = JSON.parse(localStorage.getItem("user") || "{}");
-    return (
-        <div>
-        <h1 className="text-2xl">Welcome, {user.name}</h1>
-        <p>Email: {user.email}</p>
-      </div>
-    );
+  const [user, setUser] = useState<{ name?: string; email?: string }>({});
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  return (
+    <div>
+      bhjdfskfh
+      <h1 className="text-2xl">Welcome, {user.name || "Guest"}</h1>
+      <p>Email: {user.email || "Not available"}</p>
+    </div>
+  );
 };
 
 export default AdminDashboard;

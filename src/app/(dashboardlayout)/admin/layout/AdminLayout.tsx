@@ -1,21 +1,20 @@
 "use client";
-import React from "react";
-// import AdminSidebarWrapper from "../../components/sidebar/AdminSidebar";
-// import DashboardNavbar from "../../components/dashboardNavbar/DashboardNavbar";
 import DashboardLayout from "../../layout/dashboardLayout";
-// import { SearchProvider } from "../../components/searchContext/search-context";
+// import { SearchProvider } from "../../components/search/searchContext";
+import AdminSidebar from "../../components/sidebars/AdminSidebar";
+import DashboardNavbar from "../../components/dashboardNavbar/DashboardNavbar";
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <DashboardLayout>
-        {children}
-      {/* <div className="flex">
-        <SearchProvider>
-          <AdminSidebarWrapper />
-
-          <DashboardNavbar>{children}</DashboardNavbar>
-        </SearchProvider>
-      </div> */}
+    <DashboardLayout >
+      <div className="flex ">
+      {/* <SearchProvider> */}
+        <AdminSidebar />
+        <DashboardNavbar >
+          {children}
+        </DashboardNavbar>
+      {/* </SearchProvider> */}
+      </div>
     </DashboardLayout>
   );
 };
