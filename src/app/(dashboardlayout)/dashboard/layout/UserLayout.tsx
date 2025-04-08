@@ -2,19 +2,15 @@
 
 import React from "react";
 import DashboardLayout from "../../layout/dashboardLayout";
-// import UserSidebar from "../../components/sidebar/UserSidebar";
-// import DashboardNavbar from "../../components/dashboardNavbar/DashboardNavbar";
-// import { SearchProvider } from "../../components/searchContext/search-context";
+import DashboardNavbar from "../../components/dashboardNavbar/DashboardNavbar";
+import UserSidebar from "../../components/sidebars/UserSidebar";
 
 const UserLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <DashboardLayout>{children}
-
+    <DashboardLayout>
       <div className="flex">
-      {/* <SearchProvider>
-        <UserSidebar />
-        <DashboardNavbar>{children}</DashboardNavbar> */}
-        {/* </SearchProvider> */}
+        <UserSidebar/>
+        <DashboardNavbar>{children}</DashboardNavbar> 
       </div>
     </DashboardLayout>
   );

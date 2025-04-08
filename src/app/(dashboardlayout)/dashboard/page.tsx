@@ -1,15 +1,24 @@
-"use client"
+"use client";
 
+import { useEffect, useState } from "react";
 
-const DashboardPage = () => {
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
+const UserDashboard = () => {
+  const [user, setUser] = useState<{ name?: string; email?: string }>({});
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
   return (
-
     <div>
-      <h1 className="text-2xl">Welcome, {user.name}</h1>
-      <p>Email: {user.email}</p>
+      bhjdfskfh
+      <h1 className="text-2xl">Welcome, {user.name || "Guest"}</h1>
+      <p>Email: {user.email || "Not available"}</p>
     </div>
   );
 };
 
-export default DashboardPage;
+export default UserDashboard;

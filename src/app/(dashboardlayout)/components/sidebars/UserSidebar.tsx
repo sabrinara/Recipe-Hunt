@@ -4,11 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSidebarContext } from "../../layout/layout-context";
 import { Image } from "@heroui/react";
-import {  House, User, UserCircle2Icon, Utensils } from "lucide-react";
+import {  House, ListCheck,Utensils } from "lucide-react";
 import SidebarMenu from "./SidebarMenu";
 import SidebarItem from "./SidbarItems";
+import { MdHomeWork } from "react-icons/md";
 
-const AdminSidebar = () => {
+const UserSidebar = () => {
   const pathname = usePathname();
   const { collapsed } = useSidebarContext();
 
@@ -35,41 +36,39 @@ const AdminSidebar = () => {
           <SidebarItem
             title="Home"
             icon={<House />}
-            isActive={pathname === "/admin"}
-            href="/admin"
+            isActive={pathname === "/dasboard"}
+            href="/dasboard"
           />
 
           <SidebarMenu title="More menu">
             <SidebarItem
-              isActive={pathname === "/admin/recipe-management"}
-              title="Recipe Manage"
+              isActive={pathname === "/dasboard/create-recipe"}
+              title="Create Recipe"
               icon={<Utensils size={18} />}
-              href="/admin/recipe-management"
+              href="/dasboard/create-recipe"
             />
             <SidebarItem
-              isActive={pathname === "/admin/users-management"}
-              title="Users Manage"
-              icon={<User size={18} />}
-              href="/admin/users-management"
+              isActive={pathname === "/dasboard/my-recipes"}
+              title="My Recipes"
+              icon={<ListCheck size={18} />}
+              href="/dasboard/my-recipes"
             />
-            <SidebarItem
-              isActive={pathname === "/admin/make-admin"}
-              title="Make Admin"
-              icon={<UserCircle2Icon size={18} />}
-              href="/admin/make-admin"
-            />
+         
           </SidebarMenu>
         </nav>
 
-        {/* Optional Footer */}
-        <div className="mt-auto text-sm text-center text-gray-500 dark:text-gray-400">
-          Admin Panel © 2025
+        
+        <div className="mt-auto  text-center text-gray-500 dark:text-gray-400">
+        <Link href="/" className="flex items-center justify-center text-lg" title="Back to home page">
+            <MdHomeWork
+            />
+          </Link>
+        <h1 className="text-sm">  User Panel © 2025</h1>
         </div>
       </div>
     </div>
     </div>
-  
   );
 };
 
-export default AdminSidebar;
+export default UserSidebar;

@@ -10,6 +10,11 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@heroui/react";
+import { BiHome } from "react-icons/bi";
+import { CgProfile } from "react-icons/cg";
+import { MdFastfood } from "react-icons/md";
+import { LuClipboardPenLine } from "react-icons/lu";
+import { RiLogoutBoxRLine } from "react-icons/ri";
 
 const UserNavbar = () => {
   const router = useRouter();
@@ -52,22 +57,72 @@ const UserNavbar = () => {
           <p className="font-semibold truncate text-lg">{user?.name || "No Name"}</p>
           <p className="font-semibold truncate">{user?.email || "No Email"}</p>
         </DropdownItem>
+        {user?.role === "admin" ? <>
+          <DropdownItem key="home" href="/admin" className="flex md:hidden ">
+            <div className="flex justify-start items-center gap-1">
+              <BiHome className="text-md text-[#E10101]" />
+              <h1 className="font-medium"> Home</h1>
+            </div>
+          </DropdownItem>
+          <DropdownItem key="settings" href="/admin/profile">
+            <div className="flex justify-start gap-1">
+              <CgProfile className="text-lg text-[#E10101]" />
+              <h1 className="font-medium">My Profile</h1>
+            </div>
+          </DropdownItem>
+          <DropdownItem key="manage-recipe" href="/admin/manage-recipe" className="flex md:hidden ">
+            <div className="flex justify-start gap-1">
+              <MdFastfood className="text-lg text-[#E10101]" />
+              <h1 className="font-medium">Manage Recipe</h1>
+            </div>
+          </DropdownItem>
 
-        <DropdownItem key="home" href="/admin" className="flex md:hidden ">
-          Home
-        </DropdownItem>
-        <DropdownItem key="settings" href="/admin/profile">
-          My Profile
-        </DropdownItem>
-        <DropdownItem key="manage-recipe" href="/admin/manage-recipe" className="flex md:hidden ">
-          Manage Recipe
-        </DropdownItem>
-        <DropdownItem key="manage-users" href="/admin/users" className="flex md:hidden ">
-          Manage Users
-        </DropdownItem>
+          <DropdownItem key="manage-users" href="/admin/users" className="flex md:hidden ">
+          <div className="flex justify-start gap-1">
+                <BiHome className="text-lg text-[#E10101]" />
+                <h1 className="font-medium">Manage Users</h1>
+              </div>
+          </DropdownItem>
+        </>
+          : <>
+            <DropdownItem key="home" href="/dashboard" className="flex md:hidden ">
+              <div className="flex justify-start gap-1">
+                <BiHome className="text-lg text-[#E10101]" />
+                <h1 className="font-medium">Home</h1>
+              </div>
+            </DropdownItem>
+            <DropdownItem key="settings" href="/dashboard/profile">
+              <div className="flex justify-start gap-1">
+                <CgProfile className="text-lg text-[#E10101]" />
+                <h1 className="font-medium">My Profile</h1>
+              </div>
 
-        <DropdownItem key="logout" color="danger" onClick={handleLogout}>
-          Log Out
+            </DropdownItem>
+            <DropdownItem key="create-recipe" href="/dashboard/create-recipe" className="flex md:hidden ">
+              <div className="flex justify-start gap-1">
+                <LuClipboardPenLine className="text-lg text-[#E10101]" />
+                <h1 className="font-medium">Create Recipe</h1>
+              </div>
+            </DropdownItem>
+            <DropdownItem key="my-recipe" href="/dashboard/my-recipes" className="flex md:hidden ">
+              <div className="flex justify-start gap-1">
+                <MdFastfood className="text-lg text-[#E10101]" />
+                <h1 className="font-medium">My Recipes</h1>
+              </div>
+
+            </DropdownItem>
+          </>
+
+        }
+
+
+
+        <DropdownItem key="logout" onClick={handleLogout}>
+        <div className="flex justify-start gap-1">
+                <RiLogoutBoxRLine  className="text-lg text-[#E10101]" />
+                <h1 className="font-medium">Log Out</h1>
+              </div>
+          
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>
