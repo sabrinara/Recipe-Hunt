@@ -14,7 +14,7 @@ const UserSidebar = () => {
   const { collapsed } = useSidebarContext();
 
   return (
-    <div className="hidden md:flex">
+    <div className="hidden md:flex h-screen z-[20] sticky top-0">
         <div
       className={`relative top-0 left-0 z-30 h-screen  shadow-lg transition-transform duration-300 ease-in-out bg-white dark:bg-[#1b1a1a]
       ${collapsed ? "-translate-x-full md:translate-x-0" : "translate-x-0"} w-64`}

@@ -1,22 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+import RecipeCard from "../components/recipeCard/RecipeCard";
 
 const UserDashboard = () => {
-  const [user, setUser] = useState<{ name?: string; email?: string }>({});
+  // const [user, setUser] = useState<{ name?: string; email?: string }>({});
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem("user");
+  //   if (storedUser) {
+  //     setUser(JSON.parse(storedUser));
+  //   }
+  // }, []);
 
   return (
-    <div>
-      bhjdfskfh
-      <h1 className="text-2xl">Welcome, {user.name || "Guest"}</h1>
-      <p>Email: {user.email || "Not available"}</p>
+    <div className="">
+    <RecipeCard/>
     </div>
   );
 };

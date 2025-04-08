@@ -8,7 +8,7 @@ import UserSidebar from "../../components/sidebars/UserSidebar";
 const UserLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <DashboardLayout>
-      <div className="flex">
+      <div className="flex ">
         <UserSidebar/>
         <DashboardNavbar>{children}</DashboardNavbar> 
       </div>
