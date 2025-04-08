@@ -7,6 +7,7 @@ import { Image } from "@heroui/react";
 import {  House, User, UserCircle2Icon, Utensils } from "lucide-react";
 import SidebarMenu from "./SidebarMenu";
 import SidebarItem from "./SidbarItems";
+import { MdHomeWork } from "react-icons/md";
 
 const AdminSidebar = () => {
   const pathname = usePathname();
@@ -62,7 +63,11 @@ const AdminSidebar = () => {
         </nav>
 
         {/* Optional Footer */}
-        <div className="mt-auto text-sm text-center text-gray-500 dark:text-gray-400">
+        <div className="mt-auto text-sm text-center text-gray-600 dark:text-gray-400">
+           <Link href="/" className="flex items-center justify-center text-lg" title="Back to home page">
+                      <MdHomeWork
+                      />
+                    </Link>
           Admin Panel © 2025
         </div>
       </div>
