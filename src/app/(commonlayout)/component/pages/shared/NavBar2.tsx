@@ -62,7 +62,7 @@ export default function NavBar2() {
       { key: "recipes", label: "Recipes", href: "/recipe" },
       { key: "about", label: "About", href: "/about" },
       { key: "contact", label: "Contact", href: "/contact" },
-      { key: "profile", label: "Profile", href: "/profile" },
+      { key: "profile", label: "My Profile", href: "/profile" },
       {
         key: "dashboard",
         label: "Dashboard",
@@ -129,11 +129,11 @@ export default function NavBar2() {
 
         {isLoggedIn ? (
           <>
-            <NavbarItem>
+            {/* <NavbarItem>
               <Link href="/profile" className="md:text-lg font-serif">
                 Profile
               </Link>
-            </NavbarItem>
+            </NavbarItem> */}
             <NavbarItem>
               <Link
                 href={routeMap[userRole]}
@@ -169,7 +169,7 @@ export default function NavBar2() {
                   src={user?.imageUrl || "/default-avatar.png"}
                   name={user?.name || "User"}
                   title={user?.name || "User"}
-                  size="md"
+                  size="sm"
                   isBordered
                 />
               </button>
@@ -211,13 +211,13 @@ export default function NavBar2() {
                 </button>
               </DropdownTrigger>
               <DropdownMenu aria-label="User Menu" className="bg-transparent">
-                <DropdownItem key="profile" className="h-14 gap-2">
+                <DropdownItem key="profile" className="ml-2 h-14 gap-2">
                   {/* <p className="font-semibold">Signed in as</p> */}
                   <p className="font-semibold truncate text-lg">{user?.name || "No Name"}</p>
                   <p className="font-semibold truncate">{user?.email || "No Email"}</p>
                 </DropdownItem>
                 <DropdownItem key={""}>
-                  <Link href="/profile" className=" p-2">Profile</Link>
+                  <Link href="/profile" className=" p-2">My Profile</Link>
                 </DropdownItem>
                 <DropdownItem key={""}>
                   <button

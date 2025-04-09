@@ -3,6 +3,9 @@ import { Button } from "@heroui/button";
 import { useRouter } from "next/navigation";
 import CountUp from "react-countup";
 import React from "react";
+import { FaUserFriends } from "react-icons/fa";
+import { TbBowlSpoonFilled } from "react-icons/tb";
+import { RiCameraAiFill } from "react-icons/ri";
 
 const EasyMeal = () => {
     const router = useRouter();
@@ -14,7 +17,7 @@ const EasyMeal = () => {
     return (
         <div className="py-10 md:py-20">
             <div
-                className="relative h-[16vh] md:h-[40vh] rounded-md"
+                className="relative h-[24vh] md:h-[40vh] rounded-md"
                 style={{
                     backgroundImage: `url('/assets/home/easymeals.png')`,
                     backgroundSize: "cover",
@@ -22,18 +25,18 @@ const EasyMeal = () => {
                     backgroundRepeat: "no-repeat",
                 }}
             >
-                <div className="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 flex flex-col items-center justify-center gap-2 md:py-10">
-                    <h1 className="text-3xl md:text-5xl md:my-1 font-serif md:animate-bounce">
-                        Recipe Hunt <span className="underline underline-offset-2 bg-gradient-to-l from-[#E10101] to-[#790d0d] bg-clip-text text-transparent font-semibold "> Forum</span>
+                <div className="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 flex flex-col items-center justify-center gap-2 md:py-10 font-semibold">
+                    <h1 className="text-2xl md:text-5xl md:my-1 font-serif ">
+                        Recipe Hunt <span className="underline underline-offset-2 text-[#E10101] "> Forum</span>
                     </h1>
 
                     <p className="text-md md:text-lg flex gap-4">
-                        <span>👤 <CountUp end={userCount} duration={50} /> Users+</span>
-                        <span>🍽️ <CountUp end={recipeCount} duration={50} /> Recipes+</span>
-                        <span>📸 <CountUp end={imageCount} duration={50} /> Images+</span>
+                        <span className="flex justify-center items-center gap-[2px] md:gap-2 "><FaUserFriends  className="text-[#E10101] text-lg md:text-4xl"/><CountUp end={userCount} duration={50} /> Users+</span>
+                        <span className="flex justify-center items-center gap-[2px] md:gap-2 "><TbBowlSpoonFilled className="text-[#E10101] text-lg md:text-4xl"/> <CountUp end={recipeCount} duration={50} /> Recipes+</span>
+                        <span className="flex justify-center items-center gap-[2px] md:gap-2 "><RiCameraAiFill className="text-[#E10101] text-lg md:text-4xl"/><CountUp end={imageCount} duration={50} /> Images+</span>
                     </p>
                     <Button
-                        className="bg-gradient-to-l from-[#E10101] to-[#790d0d] text-white font-bold hover:bg-gradient-to-r hover:from-[#790d0d] hover:to-[#E10101] rounded-sm text-sm md:text-lg"
+                        className="bg-[#E10101] md:mt-4 text-white font-bold hover:bg-gradient-to-r hover:from-[#790d0d] hover:to-[#E10101] rounded-sm text-sm md:text-lg md:animate-bounce"
                         onClick={() => router.push("/login")}
                     >
                         Join Now

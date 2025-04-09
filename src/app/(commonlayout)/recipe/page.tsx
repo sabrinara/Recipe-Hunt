@@ -68,7 +68,7 @@ const RecipeList = () => {
 
             {/* search  */}
             <div
-                className='relative w-full h-[40vh] md:h-[60vh] mb-10 rounded-md '
+                className='relative w-full h-[40vh] md:h-[50vh] mb-10 rounded-md '
                 style={{
                     backgroundImage: `url('/assets/home/landing2.jpg')`,
                     backgroundSize: 'cover',
@@ -76,14 +76,14 @@ const RecipeList = () => {
                     backgroundRepeat: 'no-repeat',
                 }}
             >
-                <div className="absolute top-1/2 left-0 md:left-40 right-0 md:right-40 transform -translate-y-1/2 flex flex-col items-center justify-center py-10  bg-[#E10101]/50">
-                <h1 className=" text-center p-1 rounded-md text-white text-4xl md:text-7xl font-semibold italianno">Check Out All Recipes</h1>
+                <div className="absolute top-1/2 left-0 md:left-40 right-0 md:right-40 transform -translate-y-1/2 flex flex-col items-center justify-center py-10 ">
+                {/* <h1 className=" text-center p-1 rounded-md text-white text-4xl md:text-5xl font-semibold">Check Out All Recipes</h1> */}
                     <input
                         type="text"
                         placeholder="Search recipe..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-[70%] md:w-[40%]  p-2 md:p-3  rounded-md "
+                        className="w-[70%] md:w-[60%]  p-2 md:p-3  rounded-md "
                     />
 
                 </div>
@@ -91,10 +91,10 @@ const RecipeList = () => {
 
 
             {/* Recipes  */}
-            <div className="mx-6 md:mx-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-1 ">
+            <div className="mx-6 md:mx-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 ">
                 {currentRecipes.length > 0 ? (
                     currentRecipes.map((recipe, index) => (
-                        <div key={index} className="md:p-4 rounded-lg ">
+                        <div key={index} className=" rounded-lg ">
                             <Image
                                 src={recipe.image?.[0] || "/fallback.jpg"}
                                 alt={recipe.title}

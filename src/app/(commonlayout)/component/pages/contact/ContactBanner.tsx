@@ -19,7 +19,7 @@ const ContactBanner = () => {
      
                  {/* Content */}
                  <div className="relative z-10  p-10 md:p-32 text-white">
-                   <h1 className="font-semibold mb-2  italic text-3xl md:text-6xl drop-shadow-lg">
+                   <h1 className="font-semibold mb-2 text-3xl md:text-6xl drop-shadow-lg">
                     Choose from <br /> thousands of <br /> recipes 
                    </h1>
                    <h4 className="text-xl my-4 drop-shadow-md">

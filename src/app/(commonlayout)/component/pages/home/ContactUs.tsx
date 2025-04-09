@@ -5,7 +5,7 @@ const ContactUs = () => {
     return (
         <div>
               <div
-                            className='relative w-full h-[52vh] md:h-[80vh] rounded-md mb-10 md:mb-20'
+                            className='relative w-full h-[64vh] md:h-[80vh] rounded-md mb-10 md:mb-20'
                             style={{
                                 backgroundImage: `url('/assets/contactus.jpg')`,
                                 backgroundSize: 'cover',
@@ -16,9 +16,9 @@ const ContactUs = () => {
                         >
                             <div className="absolute top-1/2 left-20 md:left-10 md:right-[80vh] transform -translate-y-1/2 flex flex-col items-center justify-center  my-4">
                                <div>
-                                   <h1 className='text-3xl md:text-5xl font-bold  mb-2 md:mb-4 text-center md:text-start text-white italic '>Contact <span className='text-red-700'>Us</span></h1>
-                                   <p className='font-thin text-white  mb-2 md:mb-6 italic text-center md:text-start'>Share Food & Spend Happiness</p>
-                                   <form action="" className=''>
+                                   <h1 className='text-2xl md:text-5xl font-bold  mb-2 md:mb-4 text-center md:text-start text-white'>Contact <span className='text-red-700'>Us</span></h1>
+                                   <p className='text-sm md:text-md font-thin text-white  mb-2 md:mb-6 italic text-center md:text-start'>Share Food & Spend Happiness</p>
+                                   <form action="" className='text-sm md:text-md'>
                                        <div className="flex flex-col md:flex-row gap-4">
                                        <div className="form-control w-full max-w-xs">
                                            <label className="label">

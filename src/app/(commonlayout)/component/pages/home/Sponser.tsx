@@ -16,9 +16,9 @@ const Sponser = () => {
         { id: 6,   image:  i5}
       ]
     return (
-        <div className="py-10 md:px-60">
+        <div className="py-10 md:px-40">
 
-      <Marquee gradient={false} speed={100}>
+      <Marquee gradient={false} speed={50}>
         {data.map((item) => (
           <div
             key={item.id}
