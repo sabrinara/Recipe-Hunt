@@ -16,8 +16,16 @@ import {
 } from "@heroui/dropdown";
 import Link from "next/link";
 import { ThemeSwitcher } from "./ThemeSwitcher";
-import { signOut } from "next-auth/react";
+// import { signOut } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { FaHome } from "react-icons/fa";
+import { IoFastFoodSharp } from "react-icons/io5";
+import { FaBookBookmark, FaSquarePhone } from "react-icons/fa6";
+import { TbLogin, TbLogin2 } from "react-icons/tb";
+import { IoMdContact } from "react-icons/io";
+import { RiDashboardFill } from "react-icons/ri";
+import { GrContactInfo } from "react-icons/gr";
+import { FiAlignRight } from "react-icons/fi";
 
 export default function NavBar2() {
   const [userData, setUserData] = useState<string | null>(null);
@@ -28,14 +36,31 @@ export default function NavBar2() {
     admin: "/admin",
   };
 
-  useEffect(() => {
+  const updateUserData = () => {
     if (typeof window !== "undefined") {
       const token = localStorage.getItem("accessToken");
       const user = localStorage.getItem("user");
       setUserData(user);
       setUserToken(token);
     }
+  };
+
+  useEffect(() => {
+    updateUserData();
   }, []);
+
+  useEffect(() => {
+    const storageListener = () => {
+      updateUserData();
+    };
+
+    window.addEventListener("storage", storageListener);
+
+    return () => {
+      window.removeEventListener("storage", storageListener);
+    };
+  }, []);
+
 
   const handleClearStorage = () => {
     localStorage.removeItem("accessToken");
@@ -58,33 +83,34 @@ export default function NavBar2() {
 
   const items = isLoggedIn
     ? [
-      { key: "home", label: "Home", href: "/" },
-      { key: "recipes", label: "Recipes", href: "/recipe" },
-      { key: "about", label: "About", href: "/about" },
-      { key: "contact", label: "Contact", href: "/contact" },
-      { key: "profile", label: "My Profile", href: "/profile" },
+      { key: "home", icon: <FaHome />, label: "Home", href: "/" },
+      { key: "recipes", icon: <IoFastFoodSharp />, label: "Recipes", href: "/recipe" },
+      { key: "about", icon: <FaBookBookmark />, label: "About", href: "/about" },
+      { key: "contact", icon: <FaSquarePhone />, label: "Contact", href: "/contact" },
+      { key: "profile", icon: <IoMdContact />, label: "My Profile", href: "/profile" },
       {
         key: "dashboard",
+        icon: <RiDashboardFill />,
         label: "Dashboard",
         href: routeMap[userRole],
       },
       {
         key: "logout",
         label: "Logout",
+        icon: <TbLogin />,
         href: "#",
         action: () => {
-          signOut();
           handleClearStorage();
         },
       },
     ]
     : [
-      { key: "home", label: "Home", href: "/" },
-      { key: "recipes", label: "Recipes", href: "/recipe" },
-      { key: "about", label: "About", href: "/about" },
-      { key: "contact", label: "Contact", href: "/contact" },
-      { key: "login", label: "Login", href: "/login" },
-      { key: "register", label: "Register", href: "/register" },
+      { key: "home", icon: <FaHome />, label: "Home", href: "/" },
+      { key: "recipes", icon: <IoFastFoodSharp />, label: "Recipes", href: "/recipe" },
+      { key: "about", icon: <FaBookBookmark />, label: "About", href: "/about" },
+      { key: "contact", icon: <FaSquarePhone />, label: "Contact", href: "/contact" },
+      { key: "login", icon: <TbLogin2 />, label: "Login", href: "/login" },
+      { key: "register", icon: <GrContactInfo />, label: "Register", href: "/register" },
     ];
 
   return (
@@ -161,44 +187,55 @@ export default function NavBar2() {
 
       <NavbarContent justify="end" className="flex items-center gap-4">
         {/* Small Device Dropdown */}
-        <NavbarItem className="flex md:hidden">
-          <Dropdown>
-            <DropdownTrigger>
-              <button className="focus:outline-none">
-                <Avatar
-                  src={user?.imageUrl || "/default-avatar.png"}
-                  name={user?.name || "User"}
-                  title={user?.name || "User"}
-                  size="sm"
-                  isBordered
-                />
-              </button>
-            </DropdownTrigger>
-            <DropdownMenu aria-label="User Menu" className="bg-transparent">
-              
-              {items.map((item) =>
-                item.key === "logout" ? (
-                  <DropdownItem key={item.key} color="danger" onClick={item.action}>
-                    {item.label}
-                  </DropdownItem>
-                ) : (
-                  <DropdownItem key={item.key}>
-                    <Link href={item.href}>{item.label}</Link>
-                  </DropdownItem>
-                )
-              )}
-            </DropdownMenu>
-          </Dropdown>
-        </NavbarItem>
-
         <NavbarItem>
           <ThemeSwitcher />
         </NavbarItem>
 
-        {/* Desktop Avatar with dropdown for logged-in user */}
+        <NavbarItem className="flex md:hidden">
+          <Dropdown placement="bottom-end" className="bg-white dark:bg-[#1b1a1a]">
+            <DropdownTrigger>
+             <DropdownTrigger>
+                    {user ? <button className="focus:outline-none">
+                      <Avatar
+                        src={user?.imageUrl || "/default-avatar.png"}
+                        name={user?.name || "User"}
+                        title={user?.name || "User"}
+                        size="md"
+                        isBordered
+                      />
+                    </button> :
+                      <button className="text-lg font-semibold text-[#E10101]">
+                        <FiAlignRight className="text-xl" />
+                      </button>
+                    }
+                  </DropdownTrigger>
+            </DropdownTrigger>
+            <DropdownMenu aria-label="User Menu" className="bg-transparent">
+              {items.map((item) =>
+                item.key === "logout" ? (
+                  <DropdownItem key={item.key} onClick={item.action}>
+                    <div className="flex justify-start items-center gap-1">
+                      {item.icon && <span className="text-lg text-[#E10101]">{item.icon}</span>} 
+                      {item.label}
+                    </div>
+                  </DropdownItem>
+                ) : (
+                  <DropdownItem key={item.key}>
+                    <div className="flex justify-start items-center gap-1">
+                      {item.icon && <span className="text-lg text-[#E10101]">{item.icon}</span>} 
+                      <Link href={item.href}>{item.label}</Link>
+                    </div>
+                  </DropdownItem>
+                )
+              )}
+            </DropdownMenu>
+
+          </Dropdown>
+        </NavbarItem>
+
         {isLoggedIn && (
           <NavbarItem className="hidden md:flex">
-            <Dropdown>
+            <Dropdown className="mr-0" >
               <DropdownTrigger>
                 <button className="focus:outline-none">
                   <Avatar
@@ -210,9 +247,8 @@ export default function NavBar2() {
                   />
                 </button>
               </DropdownTrigger>
-              <DropdownMenu aria-label="User Menu" className="bg-transparent">
+              <DropdownMenu aria-label="User Menu" className="bg-transparent ">
                 <DropdownItem key="profile" className="ml-2 h-14 gap-2">
-                  {/* <p className="font-semibold">Signed in as</p> */}
                   <p className="font-semibold truncate text-lg">{user?.name || "No Name"}</p>
                   <p className="font-semibold truncate">{user?.email || "No Email"}</p>
                 </DropdownItem>
@@ -222,7 +258,6 @@ export default function NavBar2() {
                 <DropdownItem key={""}>
                   <button
                     onClick={() => {
-                      signOut();
                       handleClearStorage();
                     }}
                     className="hover:bg-[#E10101] hover:rounded-md w-full text-left p-2"

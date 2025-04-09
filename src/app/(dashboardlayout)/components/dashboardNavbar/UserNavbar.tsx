@@ -15,6 +15,7 @@ import { CgProfile } from "react-icons/cg";
 import { MdFastfood } from "react-icons/md";
 import { LuClipboardPenLine } from "react-icons/lu";
 import { RiLogoutBoxRLine } from "react-icons/ri";
+import { FiAlignRight } from "react-icons/fi";
 
 const UserNavbar = () => {
   const router = useRouter();
@@ -40,7 +41,7 @@ const UserNavbar = () => {
   return (
     <Dropdown placement="bottom-end" className="bg-white dark:bg-[#1b1a1a]">
       <DropdownTrigger>
-        <button className="focus:outline-none">
+        {user ? <button className="focus:outline-none">
           <Avatar
             src={user?.imageUrl || "/default-avatar.png"}
             name={user?.name || "User"}
@@ -48,7 +49,12 @@ const UserNavbar = () => {
             size="md"
             isBordered
           />
-        </button>
+        </button> :
+          <button>
+
+            <FiAlignRight />
+          </button>
+        }
       </DropdownTrigger>
 
       <DropdownMenu aria-label="Profile Actions" variant="flat">
@@ -78,10 +84,10 @@ const UserNavbar = () => {
           </DropdownItem>
 
           <DropdownItem key="manage-users" href="/admin/users" className="flex md:hidden ">
-          <div className="flex justify-start gap-1">
-                <BiHome className="text-lg text-[#E10101]" />
-                <h1 className="font-medium">Manage Users</h1>
-              </div>
+            <div className="flex justify-start gap-1">
+              <BiHome className="text-lg text-[#E10101]" />
+              <h1 className="font-medium">Manage Users</h1>
+            </div>
           </DropdownItem>
         </>
           : <>
@@ -118,11 +124,11 @@ const UserNavbar = () => {
 
 
         <DropdownItem key="logout" onClick={handleLogout}>
-        <div className="flex justify-start gap-1">
-                <RiLogoutBoxRLine  className="text-lg text-[#E10101]" />
-                <h1 className="font-medium">Log Out</h1>
-              </div>
-          
+          <div className="flex justify-start gap-1">
+            <RiLogoutBoxRLine className="text-lg text-[#E10101]" />
+            <h1 className="font-medium">Log Out</h1>
+          </div>
+
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>
