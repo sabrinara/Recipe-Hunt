@@ -23,7 +23,7 @@ export const getAllRecipes = async (): Promise<RecipeData[]> => {
 
 
 export const getRecipeById = async (id: string) => {
-    
+
     console.log("Fetching recipe with ID:", id);
 
     const response = await fetch(`${process.env.BACKEND_URL}/recipe/${id}`, {
@@ -45,28 +45,50 @@ export const getRecipeById = async (id: string) => {
 
 export const createRecipe = async (data: CreateRecipePayload, token: string) => {
     if (!token) {
-      throw new Error("No access token found. User might not be authenticated.");
+        throw new Error("No access token found. User might not be authenticated.");
     }
-  
+
     const response = await fetch(`${process.env.BACKEND_URL}/recipe`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(data),
-      cache: "no-store",
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data),
+        cache: "no-store",
     });
-  
+
     if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Recipe creation failed:", errorData);
-      throw new Error("Failed to create Recipe");
+        const errorData = await response.json();
+        console.error("Recipe creation failed:", errorData);
+        throw new Error("Failed to create Recipe");
     }
-  
+
     const recipeInfo = await response.json();
     console.log("Recipe created:", recipeInfo);
     return recipeInfo;
-  };
-  
-  
+};
+
+
+export const myRecipe = async (token: string) => {
+   
+        const response = await fetch(`${process.env.BACKEND_URL}/recipe/user/my-recipes`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+            cache: "no-store",
+        });
+
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        console.error("My Recipe fetch failed:", errorData);
+        throw new Error("My Recipe fetch failed");
+    }
+
+    const myRecipe = await response.json();
+    console.log("My All Recipe:", myRecipe.data.recipes);
+    return myRecipe.data.recipes;
+};

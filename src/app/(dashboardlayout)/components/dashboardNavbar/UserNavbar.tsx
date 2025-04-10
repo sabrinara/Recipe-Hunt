@@ -110,7 +110,7 @@ const UserNavbar = () => {
                 <h1 className="font-medium">Create Recipe</h1>
               </div>
             </DropdownItem>
-            <DropdownItem key="my-recipe" href="/dashboard/my-recipes" className="flex md:hidden ">
+            <DropdownItem key="my-recipes" href="/dashboard/my-recipes" className="flex md:hidden ">
               <div className="flex justify-start gap-1">
                 <MdFastfood className="text-lg text-[#E10101]" />
                 <h1 className="font-medium">My Recipes</h1>
