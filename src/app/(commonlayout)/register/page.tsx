@@ -21,11 +21,11 @@ const RegisterPage = () => {
   console.log(errors);
   const router = useRouter();
   const [isVisible, setIsVisible] = React.useState(false);
-  const [uploading, setUploading] = React.useState(false); // For upload state
+  const [uploading, setUploading] = React.useState(false); 
 
   const toggleVisibility = () => setIsVisible(!isVisible);
 
-  // ImgBB API Key (replace with your actual key)
+  
   const imgbbApiKey = process.env.NEXT_PUBLIC_IMGBB_API_KEY as string;
 
   const onSubmit = async (data: UserData) => {

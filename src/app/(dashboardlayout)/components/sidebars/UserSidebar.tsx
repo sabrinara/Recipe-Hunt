@@ -36,22 +36,22 @@ const UserSidebar = () => {
           <SidebarItem
             title="Home"
             icon={<House />}
-            isActive={pathname === "/dasboard"}
-            href="/dasboard"
+            isActive={pathname === "/dashboard"}
+            href="/dashboard"
           />
 
           <SidebarMenu title="More menu">
             <SidebarItem
-              isActive={pathname === "/dasboard/create-recipe"}
+              isActive={pathname === "/dashboard/create-recipe"}
               title="Create Recipe"
               icon={<Utensils size={18} />}
-              href="/dasboard/create-recipe"
+              href="/dashboard/create-recipe"
             />
             <SidebarItem
-              isActive={pathname === "/dasboard/my-recipes"}
+              isActive={pathname === "/dashboard/my-recipes"}
               title="My Recipes"
               icon={<ListCheck size={18} />}
-              href="/dasboard/my-recipes"
+              href="/dashboard/my-recipes"
             />
          
           </SidebarMenu>

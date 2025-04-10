@@ -5,6 +5,23 @@ export type Ingredient = {
   isChecked: boolean;
 }
 
+export type CreateRecipePayload = {
+  name: string;
+  title: string;
+  description: string;
+  ingredients: {
+    name: string;
+    quantity: string;
+  }[];
+  image: string[];
+  cookingTime: number;
+  tags: string[];
+  difficulty: "easy" | "medium" | "hard";
+  isPublished: boolean;
+  isPremium: boolean;
+  user: string; 
+};
+
 
 export type RecipeData = {
   _id: string;
