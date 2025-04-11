@@ -93,7 +93,7 @@ const RecipeCard = () => {
           currentRecipes.map((recipe, index) => (
             <div
               key={index}
-              className="relative h-[65vh] rounded-xl overflow-hidden group shadow-lg"
+              className="relative h-[60vh] rounded-xl overflow-hidden group shadow-lg"
               style={{
                 backgroundImage: `url(${recipe.image[0]})`,
                 backgroundSize: "cover",

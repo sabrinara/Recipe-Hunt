@@ -71,7 +71,7 @@ const UserNavbar = () => {
               <h1 className="font-medium"> Home</h1>
             </div>
           </DropdownItem>
-          <DropdownItem key="settings" href="/admin/profile">
+          <DropdownItem key="settings" href="/profile">
             <div className="flex justify-start gap-1">
               <CgProfile className="text-lg text-[#E10101]" />
               <h1 className="font-medium">My Profile</h1>
@@ -84,10 +84,16 @@ const UserNavbar = () => {
             </div>
           </DropdownItem>
 
-          <DropdownItem key="manage-users" href="/admin/users" className="flex md:hidden ">
+          <DropdownItem key="manage-users" href="/admin/users-manage" className="flex md:hidden ">
             <div className="flex justify-start gap-1">
               <BiHome className="text-lg text-[#E10101]" />
               <h1 className="font-medium">Manage Users</h1>
+            </div>
+          </DropdownItem>
+          <DropdownItem key="make-admin" href="/admin/make-admin" className="flex md:hidden ">
+            <div className="flex justify-start gap-1">
+              <BiHome className="text-lg text-[#E10101]" />
+              <h1 className="font-medium">Make Admin</h1>
             </div>
           </DropdownItem>
         </>
@@ -98,7 +104,7 @@ const UserNavbar = () => {
                 <h1 className="font-medium">Home</h1>
               </div>
             </DropdownItem>
-            <DropdownItem key="settings" href="/dashboard/profile">
+            <DropdownItem key="settings" href="/profile">
               <div className="flex justify-start gap-1">
                 <CgProfile className="text-lg text-[#E10101]" />
                 <h1 className="font-medium">My Profile</h1>

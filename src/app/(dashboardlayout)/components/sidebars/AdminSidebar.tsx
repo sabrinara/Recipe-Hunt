@@ -42,16 +42,16 @@ const AdminSidebar = () => {
 
           <SidebarMenu title="More menu">
             <SidebarItem
-              isActive={pathname === "/admin/recipe-management"}
+              isActive={pathname === "/admin/recipe-manage"}
               title="Recipe Manage"
               icon={<Utensils size={18} />}
-              href="/admin/recipe-management"
+              href="/admin/recipe-manage"
             />
             <SidebarItem
-              isActive={pathname === "/admin/users-management"}
+              isActive={pathname === "/admin/users-manage"}
               title="Users Manage"
               icon={<User size={18} />}
-              href="/admin/users-management"
+              href="/admin/users-manage"
             />
             <SidebarItem
               isActive={pathname === "/admin/make-admin"}

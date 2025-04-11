@@ -3,12 +3,12 @@ import Link from "next/link";
 const  NotFoundPage =() =>{
     return (
         <div
-            className="flex justify-center items-center relative "
+            className="flex justify-center items-center relative h-screen"
             style={{
                 backgroundImage: `url('https://i.ibb.co.com/D9xZW9f/not.png')`,
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "center",
-                height: "80vh",
+                height: "100vh",
                 width: "90vw",
             }}
         >

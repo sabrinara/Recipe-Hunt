@@ -1,4 +1,4 @@
-// import { Spinner } from "@heroui/react";
+
 
 
 const loading = () => {
@@ -7,7 +7,6 @@ const loading = () => {
             <div>
             <p className="text-3xl text-[#E10101] font-serif animate-bounce">Recipe Hunt...</p>
             </div>
-           {/* <Spinner classNames={{label: "text-foreground mt-4"}} label="Recipe Hunt Loading" color="secondary" variant="wave" /> */}
           
         </div>
     );
