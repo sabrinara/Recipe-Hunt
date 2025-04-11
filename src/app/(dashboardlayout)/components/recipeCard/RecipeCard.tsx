@@ -64,7 +64,7 @@ const RecipeCard = () => {
     <div className="mx-auto container mb-10">
       {/* Search Section */}
       <div
-        className="relative w-full h-[40vh] mb-6 rounded-md overflow-hidden"
+        className="relative w-full h-[20vh] mb-6 rounded-md overflow-hidden"
       >
         <div
           className="absolute inset-0"
@@ -82,7 +82,7 @@ const RecipeCard = () => {
             placeholder="Search recipe..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full max-w-xl p-3 rounded-md bg-white/80 backdrop-blur text-black"
+            className="w-full max-w-2xl p-3 rounded-md backdrop-blur text-black"
           />
         </div>
       </div>

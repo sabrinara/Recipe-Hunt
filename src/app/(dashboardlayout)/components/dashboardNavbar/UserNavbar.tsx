@@ -32,10 +32,11 @@ const UserNavbar = () => {
   }, []);
 
   const handleLogout = () => {
+    router.push("/");
     localStorage.removeItem("user");
     localStorage.removeItem("accessToken");
     setIsLoading(true);
-    router.push("/");
+    
   };
 
   return (

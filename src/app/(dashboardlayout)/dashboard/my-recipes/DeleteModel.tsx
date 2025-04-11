@@ -40,7 +40,7 @@ const DeleteModel = ({ recipe, isOpen, onClose, onDeleted }: DeleteModelProps) =
   return (
     <Modal isOpen={isOpen} onOpenChange={onClose}>
       <ModalContent>
-        <ModalHeader className="flex flex-col gap-1 font-bold text-3xl text-[#E10101]">
+        <ModalHeader className="flex flex-col gap-1 font-bold text-3xl text-[#E10101] text-center">
           Confirm Delete
         </ModalHeader>
         <ModalBody>

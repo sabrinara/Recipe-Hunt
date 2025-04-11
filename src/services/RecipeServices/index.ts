@@ -122,5 +122,31 @@ export const deleteRecipeById = async (_id: string, token: string) => {
 };
 
 
+export const updateRecipeById = async (_id: string, updatedData: Partial<RecipeData>, token: string) => {
+    const response = await fetch(`${process.env.BACKEND_URL}/recipe/${_id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(updatedData),
+        cache: "no-store",
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Recipe update failed:", errorData);
+        throw new Error("Failed to update recipe");
+    }
+
+    const data = await response.json();
+
+    console.log(data)
+    return data.data;
+};
+
+
+
+
 
 

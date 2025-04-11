@@ -66,28 +66,30 @@ const RecipeList = () => {
     return (
         <div className="mx-auto container mb-10">
 
-            {/* search  */}
             <div
-                className='relative w-full h-[40vh] md:h-[50vh] mb-10 rounded-md '
-                style={{
-                    backgroundImage: `url('/assets/home/landing2.jpg')`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                }}
+                className="relative w-full h-[20vh] mb-6 rounded-md overflow-hidden"
             >
-                <div className="absolute top-1/2 left-0 md:left-40 right-0 md:right-40 transform -translate-y-1/2 flex flex-col items-center justify-center py-10 ">
-                {/* <h1 className=" text-center p-1 rounded-md text-white text-4xl md:text-5xl font-semibold">Check Out All Recipes</h1> */}
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        backgroundImage: `url('/assets/home/landing2.jpg')`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        backgroundRepeat: "no-repeat",
+                        filter: "blur(6px)",
+                    }}
+                ></div>
+                <div className="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 flex justify-center px-4">
                     <input
                         type="text"
                         placeholder="Search recipe..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-[70%] md:w-[60%]  p-2 md:p-3  rounded-md "
+                        className="w-full max-w-2xl p-3 rounded-md backdrop-blur text-black"
                     />
-
                 </div>
             </div>
+
 
 
             {/* Recipes  */}

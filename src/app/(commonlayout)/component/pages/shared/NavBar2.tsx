@@ -26,8 +26,10 @@ import { IoMdContact } from "react-icons/io";
 import { RiDashboardFill } from "react-icons/ri";
 import { GrContactInfo } from "react-icons/gr";
 import { FiAlignRight } from "react-icons/fi";
+import { useRouter } from "next/navigation";
 
 export default function NavBar2() {
+  const route = useRouter();
   const [userData, setUserData] = useState<string | null>(null);
   const [userToken, setUserToken] = useState<string | null>(null);
 
@@ -46,18 +48,16 @@ export default function NavBar2() {
   };
 
   useEffect(() => {
-    updateUserData();
-  }, []);
-
-  useEffect(() => {
-    const storageListener = () => {
+    const handleAuthChange = () => {
       updateUserData();
     };
 
-    window.addEventListener("storage", storageListener);
+    window.addEventListener("authChange", handleAuthChange);
+
+    updateUserData();
 
     return () => {
-      window.removeEventListener("storage", storageListener);
+      window.removeEventListener("authChange", handleAuthChange);
     };
   }, []);
 
@@ -67,6 +67,8 @@ export default function NavBar2() {
     localStorage.removeItem("user");
     setUserData(null);
     setUserToken(null);
+    window.dispatchEvent(new Event("authChange"));
+    route.push("/")
   };
 
   let parsedUser = null;
