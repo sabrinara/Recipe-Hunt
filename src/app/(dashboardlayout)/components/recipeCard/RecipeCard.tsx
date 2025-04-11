@@ -101,10 +101,11 @@ const RecipeCard = () => {
                 backgroundRepeat: "no-repeat",
               }}
               title="Explore More Recipe"
+              onClick={() => router.push(`/recipe/${recipe._id}`)}
             >
               <div
                 className="absolute flex items-center justify-center gap-1 top-4 right-4 text-xl text-[#E10101] cursor-pointer"
-                onClick={() => router.push("/recipe")}
+                onClick={() => router.push(`/recipe/${recipe._id}`)}
               >
                 <FaArrowUpRightFromSquare />
               </div>
@@ -136,7 +137,7 @@ const RecipeCard = () => {
                 </h3>
 
                 <p className="mt-1 text-sm opacity-0 invisible transition-opacity duration-500 group-hover:opacity-100 group-hover:visible">
-                  {recipe.description.slice(0, 200)}...
+                  {recipe.description.slice(0, 180)}...
                 </p>
 
                 <div className="flex justify-between items-center my-2">
