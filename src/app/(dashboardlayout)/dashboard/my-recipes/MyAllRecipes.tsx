@@ -88,7 +88,7 @@ const MyAllRecipes = () => {
                 </thead>
                 <tbody>
                     {currentRecipes.map((recipe) => (
-                        <tr key={recipe._id} className="border-t border-gray-300 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900">
+                        <tr key={recipe._id} className="border-t border-gray-300 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900">
                             <td className="px-2 py-2">
                                 <Image src={recipe.image[0]} alt={recipe.name} className="w-16 h-16 object-cover rounded" />
                             </td>

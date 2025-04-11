@@ -7,16 +7,16 @@ import { ThemeSwitcher } from "@/app/(commonlayout)/component/pages/shared/Theme
 
 const DashboardNavbar = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden z-10 ">
+    <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden z-10">
       <Navbar
-        className="w-full bg-white dark:bg-[#1b1a1a]"
+        className="w-full  shadow-lg bg-white dark:bg-[#1b1a1a]"
         classNames={{
           wrapper: "w-full max-w-full",
         }}
       >
         {/* Right-aligned navbar content */}
         <NavbarContent>
-          <div className="flex justify-end items-center w-full gap-3 ">
+          <div className="flex justify-end items-center w-full gap-3 " >
             <ThemeSwitcher />
             <UserNavbar />
           </div>

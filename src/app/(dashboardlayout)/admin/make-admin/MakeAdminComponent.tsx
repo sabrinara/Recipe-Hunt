@@ -4,6 +4,7 @@
 import { makeAdmin } from "@/services/AdminServics";
 import { Button } from "@heroui/button";
 import { useState } from "react";
+import { toast } from "sonner";
 
 type Props = {
   userId: string;
@@ -28,6 +29,7 @@ const MakeAdminComponent = ({ userId, currentRole }: Props) => {
     setLoading(true);
     try {
       await makeAdmin(userId, token, payload);
+      toast("Role Updated as Admin successfully!")
     } catch (err) {
       console.error("Make admin failed", err);
     } finally {
@@ -35,7 +37,7 @@ const MakeAdminComponent = ({ userId, currentRole }: Props) => {
     }
   };
 
-  if (currentRole === "admin") return <span className="text-[#E10101] text-sm">Already Admin</span>;
+  if (currentRole === "admin") return <span className="text-[#E10101] font-semibold text-sm">Already Admin</span>;
 
   return (
     <Button
