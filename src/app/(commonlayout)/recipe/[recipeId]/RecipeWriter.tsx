@@ -61,7 +61,7 @@ const RecipeWriter = () => {
 
                 {/* Signature */}
                 <p className="mt-4 text-4xl italianno  dark:text-gray-500 font-signature">
-                ———— {recipe?.user.name}
+                —— {recipe?.user.name}
                 </p>
             </div>
         </div>

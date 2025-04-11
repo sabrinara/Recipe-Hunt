@@ -1,9 +1,10 @@
-import React from 'react';
+
+import TableRoleChange from './TableRoleChange';
 
 const MakeAdmin = () => {
     return (
         <div>
-            <h1>Make Admin</h1>
+           <TableRoleChange/>
         </div>
     );
 };

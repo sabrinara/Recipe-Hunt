@@ -59,3 +59,10 @@ export type UserData = {
 
 };
 
+
+// types/index.ts
+export type AdminUpdateData = {
+  role: string;
+};
+
+
