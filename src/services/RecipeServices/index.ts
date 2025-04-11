@@ -92,3 +92,35 @@ export const myRecipe = async (token: string) => {
     console.log("My All Recipe:", myRecipe.data.recipes);
     return myRecipe.data.recipes;
 };
+
+
+export const deleteRecipeById = async (_id: string, token: string) => {
+    const response = await fetch(`${process.env.BACKEND_URL}/recipe/${_id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+        },
+        cache: "no-store",
+    });
+
+    if (!response.ok) {
+        try {
+          if (response.status !== 204) {
+            const errorData = await response.json();
+            console.error("Recipe delete failed:", errorData);
+          }
+        } catch {
+          console.error("Recipe delete failed with no error body.");
+        }
+        throw new Error("Failed to delete recipe");
+      }
+      
+
+  
+    return true;
+};
+
+
+
+

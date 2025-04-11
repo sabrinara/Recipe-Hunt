@@ -3,34 +3,38 @@
 import LoadingPage from '@/app/(commonlayout)/component/pages/shared/LoadingPage';
 import { myRecipe } from '@/services/RecipeServices';
 import { RecipeData } from '@/types';
-import { Image } from '@heroui/react';
+import { Button, Image } from '@heroui/react';
 import React, { useEffect, useState } from 'react';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa'; // Import icons for edit and delete
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import EditModel from './EditModel'; 
+import DeleteModel from './DeleteModel';
 
 const MyAllRecipes = () => {
   const [recipes, setRecipes] = useState<RecipeData[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null); // Error state to handle failed fetch
-  const [currentPage, setCurrentPage] = useState(1); // Track current page
-  const [recipesPerPage] = useState(6); // Set the number of recipes per page
+  const [error, setError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recipesPerPage] = useState(5);
 
-  // Fetch recipes from API
+  // State to hold the recipe to be edited
+  const [editRecipe, setEditRecipe] = useState<RecipeData | null>(null);
+const [deleteRecipe, setDeleteRecipe] = useState<RecipeData | null>(null);
+
   const fetchRecipes = async () => {
     try {
-      const token = localStorage.getItem('accessToken'); // Get token from localStorage
-  
+      const token = localStorage.getItem('accessToken');
+
       if (!token) {
         console.error('No token found');
         setLoading(false);
         setError('No token found');
         return;
       }
-  
-      const data = await myRecipe(token); 
-      console.log("Fetched Data:", data); 
-  
+
+      const data = await myRecipe(token);
+
       if (data) {
-        setRecipes(data); 
+        setRecipes(data);
       } else {
         setError('No recipes found or wrong data format.');
       }
@@ -43,14 +47,14 @@ const MyAllRecipes = () => {
   };
 
   useEffect(() => {
-    fetchRecipes(); 
+    fetchRecipes();
   }, []);
 
-  if (loading) return <p className="text-center py-10"><LoadingPage /></p>;
+  if (loading) return <div className="text-center py-10"><LoadingPage /></div>;
 
-  if (error) return <p className="text-center py-10 text-red-500">{error}</p>;
+  if (error) return <div className="text-center py-10 text-[#E10101]">{error}</div>;
 
-  if (recipes.length === 0) return <p className="text-center py-10">No recipes found.</p>;
+  if (recipes.length === 0) return <div className="text-center py-10 text-xl font-bold">No recipes found.</div>;
 
   // Pagination logic
   const indexOfLastRecipe = currentPage * recipesPerPage;
@@ -63,18 +67,13 @@ const MyAllRecipes = () => {
 
   const totalPages = Math.ceil(recipes.length / recipesPerPage);
 
-  const handleEdit = (id: string) => {
-    console.log("Edit recipe with id:", id); // Add logic for editing a recipe
-  };
-
-  const handleDelete = (id: string) => {
-    console.log("Delete recipe with id:", id); // Add logic for deleting a recipe
-  };
+  const handleEdit = (recipe: RecipeData) => setEditRecipe(recipe);
+  const handleDelete = (recipe: RecipeData) => setDeleteRecipe(recipe);
 
   return (
     <div className="overflow-x-auto p-4">
-      <table className="min-w-full border border-gray-300 text-sm">
-        <thead className="bg-gray-100">
+      <table className="min-w-full border border-gray-300 dark:border-gray-800 text-sm">
+        <thead className="">
           <tr>
             <th className="px-4 py-2 text-left">Image</th>
             <th className="px-4 py-2 text-left">Name</th>
@@ -89,7 +88,7 @@ const MyAllRecipes = () => {
         </thead>
         <tbody>
           {currentRecipes.map((recipe) => (
-            <tr key={recipe._id} className="border-t border-gray-200 hover:bg-gray-50">
+            <tr key={recipe._id} className="border-t border-gray-300 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-900">
               <td className="px-4 py-2">
                 <Image src={recipe.image[0]} alt={recipe.name} className="w-16 h-16 object-cover rounded" />
               </td>
@@ -105,15 +104,15 @@ const MyAllRecipes = () => {
               <td className="px-4 py-2">{recipe.cookingTime} min</td>
               <td className="px-4 py-2 capitalize">{recipe.difficulty}</td>
               <td className="px-4 py-2">{recipe.ratings[0] ?? 'N/A'}</td>
-              <td className="px-4 py-2 ">
-                <button onClick={() => handleEdit(recipe._id)} className="text-blue-500 hover:text-blue-700">
+              <td className="px-1 py-1 ">
+                <Button onPress={() => handleEdit(recipe)} className="text-blue-500 hover:text-blue-700">
                   <FaEdit />
-                </button>
-                </td>
-                <td className="px-4 py-2">
-                <button onClick={() => handleDelete(recipe._id)} className="text-red-500 hover:text-red-700">
+                </Button>
+              </td>
+              <td className="px-4 py-2">
+                <Button onPress={() => handleDelete(recipe)} className="text-red-500 hover:text-red-700">
                   <FaTrashAlt />
-                </button>
+                </Button>
               </td>
             </tr>
           ))}
@@ -125,7 +124,7 @@ const MyAllRecipes = () => {
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-4 py-2 bg-gray-300 rounded-l-md"
+          className=""
         >
           Previous
         </button>
@@ -133,7 +132,7 @@ const MyAllRecipes = () => {
           <button
             key={index + 1}
             onClick={() => handlePageChange(index + 1)}
-            className={`px-4 py-2 ${currentPage === index + 1 ? 'bg-[#E10101] text-white' : 'bg-gray-200'} rounded-md mx-1`}
+            className={`px-2 py-1 mx-5 ${currentPage === index + 1 ? 'bg-[#E10101] text-white' : 'bg-gray-200'} rounded-md mx-1`}
           >
             {index + 1}
           </button>
@@ -141,11 +140,34 @@ const MyAllRecipes = () => {
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-4 py-2 bg-gray-300 rounded-r-md"
+          className=""
         >
           Next
         </button>
       </div>
+
+      {/* Open the Edit Modal when a recipe is selected */}
+      {editRecipe && (
+  <EditModel
+    recipe={editRecipe}
+    isOpen={true}
+    onClose={() => setEditRecipe(null)}
+  />
+)}
+
+{deleteRecipe && (
+  <DeleteModel
+    recipe={deleteRecipe}
+    isOpen={true}
+    onClose={() => setDeleteRecipe(null)}
+    onDeleted={(id) => {
+      console.log("Deleted recipe ID:", id);
+      setDeleteRecipe(null);
+      fetchRecipes(); // Refresh list after deletion if needed
+    }}
+  />
+)}
+
     </div>
   );
 };

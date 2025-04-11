@@ -3,12 +3,13 @@
 "use client"
 import { createRecipe } from "@/services/RecipeServices";
 import { CreateRecipePayload } from "@/types";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 
 const CreateRecipeForm = () => {
-
+const router  = useRouter();
     const [user, setUser] = useState<any>(null);
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
@@ -114,11 +115,12 @@ const CreateRecipeForm = () => {
         image: imageUrls,
         cookingTime: Number(formData.cookingTime),
         tags: formData.tags.filter(Boolean),
-        user: user?._id || "", // Ensure user is set
+        user: user?._id || "", 
       };
   
-      await createRecipe(payload, token); // ✅ Pass token as arg
+      await createRecipe(payload, token); 
       toast.success("Recipe created successfully!");
+      router.push("/dashboard/my-recipes");
     } catch (err) {
       toast.error("Failed to create recipe.");
       console.error(err);
