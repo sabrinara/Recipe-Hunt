@@ -10,6 +10,7 @@ import {
 } from "@heroui/react";
 import { deleteRecipeById } from "@/services/RecipeServices";
 import { useState } from "react";
+import { toast } from "sonner";
 
 interface DeleteModelProps {
   recipe: RecipeData;
@@ -30,6 +31,7 @@ const DeleteModel = ({ recipe, isOpen, onClose, onDeleted }: DeleteModelProps) =
       await deleteRecipeById(recipe._id, token); 
       onDeleted(recipe._id);
       onClose();
+      toast("Recipe Deleted!")
     } catch (error) {
       console.error("Failed to delete recipe:", error);
     } finally {

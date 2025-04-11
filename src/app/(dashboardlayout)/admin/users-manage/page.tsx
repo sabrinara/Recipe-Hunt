@@ -1,9 +1,10 @@
 import React from 'react';
+import AllUsers from './AllUsers';
 
 const UsersManager = () => {
     return (
         <div>
-            <h1>users manager</h1>
+            <AllUsers/>
         </div>
     );
 };

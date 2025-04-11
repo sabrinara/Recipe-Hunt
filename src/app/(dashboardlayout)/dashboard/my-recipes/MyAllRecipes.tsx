@@ -14,7 +14,7 @@ const MyAllRecipes = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState(1);
-    const [recipesPerPage] = useState(5);
+    const [recipesPerPage] = useState(10);
 
     // State to hold the recipe to be edited
     const [editRecipe, setEditRecipe] = useState<RecipeData | null>(null);
