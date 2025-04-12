@@ -1,9 +1,10 @@
 import React from 'react';
+import RecipeManger from './RecipeManager';
 
 const RecipeManager = () => {
     return (
         <div>
-            <h1>RecipeManager</h1>
+         <RecipeManger/>
         </div>
     );
 };

@@ -50,4 +50,31 @@ export const deleteAUser = async (userId: string, token: string) => {
   
     return true;
   };
+
+
+  export const deleteRecipeAdmin = async (recipeId: string, token: string) => {
+    const response = await fetch(`${process.env.BACKEND_URL}/recipe/admin/${recipeId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      cache: "no-store",
+    });
+  
+    if (!response.ok) {
+      try {
+        if (response.status !== 204) {
+          const errorData = await response.json();
+          console.error("Recipe delete failed:", errorData);
+        }
+      } catch {
+        console.error("Recipe delete failed with no error body.");
+      }
+      throw new Error("Failed to delete recipe");
+    }
+  
+    return true;
+  };
+  
   

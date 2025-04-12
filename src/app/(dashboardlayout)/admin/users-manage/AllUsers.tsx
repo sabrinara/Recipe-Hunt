@@ -98,7 +98,7 @@ const AllUsers = () => {
                         )}
                     </tbody>
                 </table>
-                {/* Pagination Controls */}
+                {/* Pagination */}
                 <div className="flex justify-center gap-4 mt-4">
                     <button
                         className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50"
