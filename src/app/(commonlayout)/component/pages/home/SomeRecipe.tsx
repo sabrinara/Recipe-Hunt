@@ -25,9 +25,9 @@ const SomeRecipe = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const recipeData = await getAllRecipes();
+                const data = await getAllRecipes();
+                const recipeData = data.filter((recipe: RecipeData) => recipe.isPublished === true);               
                 setRecipes(recipeData.slice(0, 6));
-
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -88,7 +88,7 @@ const SomeRecipe = () => {
                                             <FaArrowUpRightFromSquare />
                                         </div>
                                         <div className="absolute bottom-[10px] md:bottom-[10px] mx-1 md:mx-4 left-0 right-0 bg-white/50 text-black px-3 py-2 md:py-4 transition-all duration-500 h-[90px] md:h-[90px] group-hover:h-[200px] group-hover:bg-white  md:group-hover:h-[250px] rounded-xl">
-                                            <div className="hidden md:flex justify-between items-center uppercase text-sm md:text-lg font-semibold">
+                                            <div className="hidden md:flex justify-between items-center uppercase text-sm md:text-lg font-semibold mx-2">
                                                 <div className="flex items-center gap-1 ">
                                                     <MdOutlineAccessTime className="text-[#E10101] text-sm md:text-xl font-extrabold" />
                                                     {recipe.cookingTime < 60

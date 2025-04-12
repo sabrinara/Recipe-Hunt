@@ -18,3 +18,5 @@ export const getAllUsers = async () => {
     console.log("All User Data:", data.data.users);
     return data.data.users;
 };
+
+

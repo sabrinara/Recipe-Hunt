@@ -26,8 +26,9 @@ const RecipeList = () => {
         const fetchRecipes = async () => {
             try {
                 const data = await getAllRecipes();
-                setRecipes(data);
-                setFilteredRecipes(data);
+                const publishedRecipes = data.filter((recipe: RecipeData) => recipe.isPublished === true);
+                setRecipes(publishedRecipes);
+                setFilteredRecipes(publishedRecipes);
             } catch (error) {
                 console.error("Error fetching recipes:", error);
                 setError("Failed to fetch recipes");
@@ -85,7 +86,7 @@ const RecipeList = () => {
                         placeholder="Search recipe..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full max-w-2xl p-3 rounded-md backdrop-blur text-black"
+                        className="w-full max-w-2xl p-3 rounded-md backdrop-blur text-black dark:text-white"
                     />
                 </div>
             </div>

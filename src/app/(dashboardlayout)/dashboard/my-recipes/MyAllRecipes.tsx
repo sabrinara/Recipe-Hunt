@@ -96,9 +96,9 @@ const MyAllRecipes = () => {
                             <td className="px-4 py-2">{recipe.title}</td>
                             <td className="px-4 py-2">
                                 {recipe.tags.map((tag) => (
-                                    <span key={tag} className="inline-block bg-green-100 text-green-700 text-xs px-2 py-1 rounded mr-1">
-                                        {tag}
-                                    </span>
+                                    <span key={tag} className="inline-block bg-green-100 dark:bg-[#E10101]/30 text-green-700 dark:text-white text-xs px-2 py-1 rounded mr-1 mb-1">
+                                    {tag}
+                                </span>
                                 ))}
                             </td>
                             <td className="px-4 py-2">{recipe.cookingTime} min</td>

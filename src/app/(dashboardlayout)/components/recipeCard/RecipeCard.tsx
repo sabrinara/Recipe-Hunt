@@ -25,8 +25,9 @@ const RecipeCard = () => {
     const fetchRecipes = async () => {
       try {
         const data = await getAllRecipes();
-        setRecipes(data);
-        setFilteredRecipes(data);
+        const publishedRecipes = data.filter((recipe: RecipeData) => recipe.isPublished === true);
+        setRecipes(publishedRecipes);
+        setFilteredRecipes(publishedRecipes);
       } catch (error) {
         console.error("Error fetching recipes:", error);
         setError("Failed to fetch recipes");
@@ -100,7 +101,7 @@ const RecipeCard = () => {
                 backgroundPosition: "center",
                 backgroundRepeat: "no-repeat",
               }}
-              title="Explore More Recipe"
+              title="Explore Recipe Details"
               onClick={() => router.push(`/recipe/${recipe._id}`)}
             >
               <div

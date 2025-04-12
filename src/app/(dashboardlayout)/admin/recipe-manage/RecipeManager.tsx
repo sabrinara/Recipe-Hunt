@@ -9,13 +9,15 @@ import { FaTrashAlt } from 'react-icons/fa';
 import RecipeDeleteAdmin from './RecipeDeleteAdmin';
 import { recipePublished, recipeUnpublished } from '@/services/AdminServics';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 const RecipeManger = () => {
     const [recipes, setRecipes] = useState<RecipeData[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState(1);
-    const [recipesPerPage] = useState(10);
+    const [recipesPerPage] = useState(8);
+    const router = useRouter();
 
 
 
@@ -115,8 +117,9 @@ const RecipeManger = () => {
                 <tbody>
                     {currentRecipes.map((recipe) => (
                         <tr key={recipe._id} className="border-t border-gray-300 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900">
-                            <td className="px-2 py-2">
-                                <Image src={recipe.image[0]} alt={recipe.name} className="w-16 h-16 object-cover rounded" />
+                            <td className="px-2 py-2" >
+                                <Image src={recipe.image[0]} alt={recipe.name} className="w-16 h-16 object-cover rounded"  title="Explore Recipe Details"
+              onClick={() => router.push(`/recipe/${recipe._id}`)} />
                             </td>
                             <td className="px-2 py-2">{recipe.name}</td>
                             <td className="px-4 py-2">{recipe.title}</td>

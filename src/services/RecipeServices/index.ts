@@ -17,7 +17,6 @@ export const getAllRecipes = async (): Promise<RecipeData[]> => {
 
     const data = await response.json();
     const recipes: RecipeData[] = data.data.recipes;
-    // console.log("RecipeData", recipes);
     return recipes;
 };
 
