@@ -5,8 +5,9 @@ import { getAllRecipes } from '@/services/RecipeServices';
 import { RecipeData } from '@/types';
 import { Button, Image } from '@heroui/react';
 import React, { useEffect, useState } from 'react';
-import {  FaTrashAlt } from 'react-icons/fa';
+import { FaTrashAlt } from 'react-icons/fa';
 import RecipeDeleteAdmin from './RecipeDeleteAdmin';
+import { recipePublished, recipeUnpublished } from '@/services/AdminServics';
 
 const RecipeManger = () => {
     const [recipes, setRecipes] = useState<RecipeData[]>([]);
@@ -15,8 +16,8 @@ const RecipeManger = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [recipesPerPage] = useState(10);
 
-  
-   
+
+
     const [deleteRecipe, setDeleteRecipe] = useState<RecipeData | null>(null);
 
     const fetchRecipes = async () => {
@@ -55,7 +56,7 @@ const RecipeManger = () => {
 
     if (recipes.length === 0) return <div className="text-center py-10 text-xl font-bold">No recipes found.</div>;
 
-  
+
     const indexOfLastRecipe = currentPage * recipesPerPage;
     const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
     const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
@@ -66,8 +67,31 @@ const RecipeManger = () => {
 
     const totalPages = Math.ceil(recipes.length / recipesPerPage);
 
- 
+
     const handleDelete = (recipe: RecipeData) => setDeleteRecipe(recipe);
+
+    const handlePublish = async (id: string) => {
+        const token = localStorage.getItem('accessToken');
+        if (!token) return alert('No token found');
+        try {
+            await recipePublished(id, token);
+            fetchRecipes();
+        } catch (err) {
+            console.error("Publish failed", err);
+        }
+    };
+
+    const handleUnpublish = async (id: string) => {
+        const token = localStorage.getItem('accessToken');
+        if (!token) return alert('No token found');
+        try {
+            await recipeUnpublished(id, token);
+            fetchRecipes();
+        } catch (err) {
+            console.error("Unpublish failed", err);
+        }
+    };
+
 
     return (
         <div className="overflow-x-auto p-4">
@@ -81,7 +105,7 @@ const RecipeManger = () => {
                         <th className="px-4 py-2 text-left">Time</th>
                         <th className="px-4 py-2 text-left">Difficulty</th>
                         <th className="px-4 py-2 text-left">Rating</th>
-                      
+                        <th className="px-4 py-2 text-left">Publish/Unpublish</th>
                         <th className="px-4 py-2 text-left">Delete</th>
                     </tr>
                 </thead>
@@ -95,7 +119,7 @@ const RecipeManger = () => {
                             <td className="px-4 py-2">{recipe.title}</td>
                             <td className="px-4 py-2">
                                 {recipe.tags.map((tag) => (
-                                    <span key={tag} className="inline-block bg-green-100 text-green-700 text-xs px-2 py-1 rounded mr-1">
+                                    <span key={tag} className="inline-block bg-green-100 dark:bg-[#E10101]/30 text-green-700 dark:text-white text-xs px-2 py-1 rounded mr-1 mb-1">
                                         {tag}
                                     </span>
                                 ))}
@@ -103,9 +127,21 @@ const RecipeManger = () => {
                             <td className="px-4 py-2">{recipe.cookingTime} min</td>
                             <td className="px-4 py-2 capitalize">{recipe.difficulty}</td>
                             <td className="px-4 py-2">{recipe.ratings[0] ?? 'N/A'}</td>
-                    
+
+
                             <td className="px-4 py-2">
-                                <Button onPress={() => handleDelete(recipe)}  className="bg-[#E10101] text-white ">
+                                {recipe.isPublished ? (
+                                    <Button onPress={() => handleUnpublish(recipe._id)} className="bg-yellow-500 text-white">
+                                        Unpublish
+                                    </Button>
+                                ) : (
+                                    <Button onPress={() => handlePublish(recipe._id)} className="bg-green-600 text-white">
+                                        Publish
+                                    </Button>
+                                )}
+                            </td>
+                            <td className="px-4 py-2">
+                                <Button onPress={() => handleDelete(recipe)} className="bg-[#E10101] text-white ">
                                     <FaTrashAlt />
                                 </Button>
                             </td>
@@ -151,7 +187,7 @@ const RecipeManger = () => {
                     onDeleted={(id) => {
                         console.log("Deleted recipe ID:", id);
                         setDeleteRecipe(null);
-                        fetchRecipes(); 
+                        fetchRecipes();
                     }}
                 />
             )}
