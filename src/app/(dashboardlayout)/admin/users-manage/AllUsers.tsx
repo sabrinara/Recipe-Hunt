@@ -8,13 +8,13 @@ import { Button, Image } from "@heroui/react";
 import { FaTrashAlt } from "react-icons/fa";
 import DeleteModalUser from "./DeleteModalUser";
 import { toast } from "sonner";
-
+const USERS_PER_PAGE = 5;
 const AllUsers = () => {
     const [users, setUsers] = useState<UserData[]>([]);
     const [loading, setLoading] = useState(true);
     const [deleteUser, setDeleteUser] = useState<UserData | null>(null);
+    const [currentPage, setCurrentPage] = useState(1);
 
-    // ✅ Move fetchUsers outside so it can be reused
     const fetchUsers = async () => {
         try {
             const data = await getAllUsers();
@@ -34,6 +34,15 @@ const AllUsers = () => {
     const handleDelete = (user: UserData) => {
         setDeleteUser(user);
     };
+    const totalPages = Math.ceil(users.length / USERS_PER_PAGE);
+    const startIndex = (currentPage - 1) * USERS_PER_PAGE;
+    const currentUsers = users.slice(startIndex, startIndex + USERS_PER_PAGE);
+
+    const handlePageChange = (newPage: number) => {
+        if (newPage >= 1 && newPage <= totalPages) {
+            setCurrentPage(newPage);
+        }
+    };
 
     if (loading) return <LoadingPage />;
 
@@ -50,18 +59,18 @@ const AllUsers = () => {
                             <th className="py-2 px-4">Name</th>
                             <th className="py-2 px-4">Email</th>
                             <th className="py-2 px-4">Current Role</th>
-                            <th className="py-2 px-4">Action</th>
+                            <th className="py-2 px-4">Delete User</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {users.length === 0 ? (
+                        {currentUsers.length === 0 ? (
                             <tr>
                                 <td colSpan={5} className="text-center py-4 text-gray-500">
                                     No users found
                                 </td>
                             </tr>
                         ) : (
-                            users.map((u) => (
+                            currentUsers.map((u) => (
                                 <tr
                                     key={u._id}
                                     className="border-t border-gray-300 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 text-center"
@@ -75,11 +84,11 @@ const AllUsers = () => {
                                     </td>
                                     <td className="py-2 px-4">{u.name}</td>
                                     <td className="py-2 px-4">{u.email}</td>
-                                    <td className="py-2 px-4">{u.role}</td>
+                                    <td className="py-2 px-4 uppercase font-medium">{u.role}</td>
                                     <td className="py-2 px-4">
                                         <Button
                                             onPress={() => handleDelete(u)}
-                                            className="text-red-500 hover:text-red-700"
+                                            className="bg-[#E10101] text-white "
                                         >
                                             <FaTrashAlt />
                                         </Button>
@@ -89,6 +98,35 @@ const AllUsers = () => {
                         )}
                     </tbody>
                 </table>
+                {/* Pagination Controls */}
+                <div className="flex justify-center gap-4 mt-4">
+                    <button
+                        className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50"
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                    >
+                        Previous
+                    </button>
+                    {Array.from({ length: totalPages }, (_, i) => (
+                        <button
+                            key={i + 1}
+                            className={`px-3 py-1 rounded ${currentPage === i + 1
+                                    ? "bg-[#E10101] text-white"
+                                    : "bg-gray-200 hover:bg-gray-300"
+                                }`}
+                            onClick={() => handlePageChange(i + 1)}
+                        >
+                            {i + 1}
+                        </button>
+                    ))}
+                    <button
+                        className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 disabled:opacity-50"
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                    >
+                        Next
+                    </button>
+                </div>
             </div>
             {deleteUser && (
                 <DeleteModalUser

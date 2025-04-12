@@ -9,9 +9,10 @@ import { toast } from "sonner";
 type Props = {
   userId: string;
   currentRole: string;
+  onRoleChange: () => void;
 };
 
-const MakeAdminComponent = ({ userId, currentRole }: Props) => {
+const MakeAdminComponent = ({ userId, currentRole , onRoleChange}: Props) => {
   const [loading, setLoading] = useState(false);
 
   const handleMakeAdmin = async () => {
@@ -29,7 +30,8 @@ const MakeAdminComponent = ({ userId, currentRole }: Props) => {
     setLoading(true);
     try {
       await makeAdmin(userId, token, payload);
-      toast("Role Updated as Admin successfully!")
+      toast("Role Updated as Admin successfully!");
+      onRoleChange();
     } catch (err) {
       console.error("Make admin failed", err);
     } finally {

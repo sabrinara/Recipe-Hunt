@@ -56,7 +56,10 @@ const DeleteModalUser = ({ user, isOpen, onClose, onDeleted
                             alt={user.name}
                             className="w-16 h-16 object-cover rounded"
                         />
-                        <p className="font-semibold">{user.name}</p>
+                      <div className="flex flex-col justify-start items-start">
+                      <p className="font-semibold uppercase">{user.name}</p>
+                      <p className=" text-sm">{user.email}</p>
+                      </div>
                     </div>
                 </ModalBody>
                 <ModalFooter>
@@ -64,7 +67,7 @@ const DeleteModalUser = ({ user, isOpen, onClose, onDeleted
                         Cancel
                     </Button>
                     <Button
-                        className="bg-[#E10101]"
+                        className="bg-[#E10101] text-white "
                         isLoading={isDeleting}
                         onPress={handleDelete}
                     >
