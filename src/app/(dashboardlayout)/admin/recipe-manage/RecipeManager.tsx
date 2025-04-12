@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { FaTrashAlt } from 'react-icons/fa';
 import RecipeDeleteAdmin from './RecipeDeleteAdmin';
 import { recipePublished, recipeUnpublished } from '@/services/AdminServics';
+import { toast } from 'sonner';
 
 const RecipeManger = () => {
     const [recipes, setRecipes] = useState<RecipeData[]>([]);
@@ -75,6 +76,7 @@ const RecipeManger = () => {
         if (!token) return alert('No token found');
         try {
             await recipePublished(id, token);
+            toast("Recipe Published!")
             fetchRecipes();
         } catch (err) {
             console.error("Publish failed", err);
@@ -86,6 +88,7 @@ const RecipeManger = () => {
         if (!token) return alert('No token found');
         try {
             await recipeUnpublished(id, token);
+            toast("Recipe unpublished!")
             fetchRecipes();
         } catch (err) {
             console.error("Unpublish failed", err);
@@ -126,7 +129,18 @@ const RecipeManger = () => {
                             </td>
                             <td className="px-4 py-2">{recipe.cookingTime} min</td>
                             <td className="px-4 py-2 capitalize">{recipe.difficulty}</td>
-                            <td className="px-4 py-2">{recipe.ratings[0] ?? 'N/A'}</td>
+                            <td className="px-4 py-2">
+                                {recipe?.ratings?.length ? (
+                                    (() => {
+                                        const avgRating =
+                                            recipe.ratings.reduce((acc, rating) => acc + rating, 0) / recipe.ratings.length;
+                                        return <span className="text-base font-medium">{avgRating.toFixed(1)}</span>;
+                                    })()
+                                ) : (
+                                    <span className="text-gray-500">No ratings</span>
+                                )}
+                            </td>
+
 
 
                             <td className="px-4 py-2">
@@ -163,7 +177,7 @@ const RecipeManger = () => {
                     <button
                         key={index + 1}
                         onClick={() => handlePageChange(index + 1)}
-                        className={`px-2 py-1 mx-5 ${currentPage === index + 1 ? 'bg-[#E10101] text-white' : 'bg-gray-200'} rounded-md mx-1`}
+                        className={`px-2 py-1 mx-1 ${currentPage === index + 1 ? 'bg-[#E10101] text-white' : ''} rounded-md`}
                     >
                         {index + 1}
                     </button>
