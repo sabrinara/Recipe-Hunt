@@ -4,6 +4,7 @@
 import { getUserById } from '@/services/AuthServices';
 import { Image } from '@heroui/react';
 import React, { useEffect, useState } from 'react';
+import LoadingPage from '../component/pages/shared/LoadingPage';
 
 const MyProfile = () => {
     const [user, setUser] = useState<any>(null);
@@ -41,8 +42,12 @@ const MyProfile = () => {
         fetchUser();
     }, []);
 
-    if (loading) return <p className="text-center text-gray-600">Loading...</p>;
-    if (error) return <p className="text-center text-red-500">{error}</p>;
+    if (loading) return(
+        <div>
+            <LoadingPage/>
+        </div>
+    );
+    if (error) return <div className="text-center text-red-500">{error}</div>;
 
     return (
         <div className="max-w-md mx-auto mt-10  shadow-lg rounded-lg p-6">
@@ -55,7 +60,7 @@ const MyProfile = () => {
             <p><strong>Name: </strong> {user?.name}</p>
             <p><strong>Email: </strong> {user?.email}</p>
             <p><strong>Joined: </strong> {new Date(user?.createdAt).toLocaleDateString()}</p>
-            {/* Add more fields as needed */}
+          
         </div>
     );
 };
