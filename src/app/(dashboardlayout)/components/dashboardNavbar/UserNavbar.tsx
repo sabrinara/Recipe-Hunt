@@ -16,6 +16,8 @@ import { MdFastfood } from "react-icons/md";
 import { LuClipboardPenLine } from "react-icons/lu";
 import { RiLogoutBoxRLine } from "react-icons/ri";
 import { FiAlignRight } from "react-icons/fi";
+import { MdPeople } from "react-icons/md";
+import { MdOutlineAdminPanelSettings } from "react-icons/md";
 
 const UserNavbar = () => {
   const router = useRouter();
@@ -31,6 +33,9 @@ const UserNavbar = () => {
     }
   }, []);
 
+  const handleProfile = () => {
+    router.push("/profile");  
+  };
   const handleLogout = () => {
     router.push("/");
     localStorage.removeItem("user");
@@ -60,18 +65,17 @@ const UserNavbar = () => {
 
       <DropdownMenu aria-label="Profile Actions" variant="flat">
         <DropdownItem key="profile" className="h-14 gap-2">
-          {/* <p className="font-semibold">Signed in as</p> */}
           <p className="font-semibold truncate text-lg">{user?.name || "No Name"}</p>
           <p className="font-semibold truncate">{user?.email || "No Email"}</p>
         </DropdownItem>
         {user?.role === "admin" ? <>
           <DropdownItem key="home" href="/admin" className="flex md:hidden ">
             <div className="flex justify-start items-center gap-1">
-              <BiHome className="text-md text-[#E10101]" />
+              <BiHome className="text-lg text-[#E10101]" />
               <h1 className="font-medium"> Home</h1>
             </div>
           </DropdownItem>
-          <DropdownItem key="settings" href="/profile">
+          <DropdownItem key="profile"  onPress={handleProfile}>
             <div className="flex justify-start gap-1">
               <CgProfile className="text-lg text-[#E10101]" />
               <h1 className="font-medium">My Profile</h1>
@@ -80,19 +84,19 @@ const UserNavbar = () => {
           <DropdownItem key="manage-recipe" href="/admin/manage-recipe" className="flex md:hidden ">
             <div className="flex justify-start gap-1">
               <MdFastfood className="text-lg text-[#E10101]" />
-              <h1 className="font-medium">Manage Recipe</h1>
+              <h1 className="font-medium">Recipe Manage </h1>
             </div>
           </DropdownItem>
 
           <DropdownItem key="manage-users" href="/admin/users-manage" className="flex md:hidden ">
             <div className="flex justify-start gap-1">
-              <BiHome className="text-lg text-[#E10101]" />
+              <MdPeople className="text-lg text-[#E10101]" />
               <h1 className="font-medium">Manage Users</h1>
             </div>
           </DropdownItem>
           <DropdownItem key="make-admin" href="/admin/make-admin" className="flex md:hidden ">
             <div className="flex justify-start gap-1">
-              <BiHome className="text-lg text-[#E10101]" />
+              <MdOutlineAdminPanelSettings className="text-lg text-[#E10101]" />
               <h1 className="font-medium">Make Admin</h1>
             </div>
           </DropdownItem>
@@ -104,7 +108,7 @@ const UserNavbar = () => {
                 <h1 className="font-medium">Home</h1>
               </div>
             </DropdownItem>
-            <DropdownItem key="settings" href="/profile">
+            <DropdownItem key="profile"  onPress={handleProfile}>
               <div className="flex justify-start gap-1">
                 <CgProfile className="text-lg text-[#E10101]" />
                 <h1 className="font-medium">My Profile</h1>
@@ -130,7 +134,7 @@ const UserNavbar = () => {
 
 
 
-        <DropdownItem key="logout" onClick={handleLogout}>
+        <DropdownItem key="logout" onPress={handleLogout}>
           <div className="flex justify-start gap-1">
             <RiLogoutBoxRLine className="text-lg text-[#E10101]" />
             <h1 className="font-medium">Log Out</h1>

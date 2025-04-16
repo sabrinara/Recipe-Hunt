@@ -49,7 +49,7 @@ const AdminSidebar = () => {
             />
             <SidebarItem
               isActive={pathname === "/admin/users-manage"}
-              title="Users Manage"
+              title="Manage Users"
               icon={<User size={18} />}
               href="/admin/users-manage"
             />

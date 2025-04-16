@@ -23,7 +23,7 @@ import { IoFastFoodSharp } from "react-icons/io5";
 import { FaBookBookmark, FaSquarePhone } from "react-icons/fa6";
 import { TbLogin, TbLogin2 } from "react-icons/tb";
 import { IoMdContact } from "react-icons/io";
-import { RiDashboardFill } from "react-icons/ri";
+import { RiDashboardFill} from "react-icons/ri";
 import { GrContactInfo } from "react-icons/gr";
 import { FiAlignRight } from "react-icons/fi";
 import { useRouter } from "next/navigation";
@@ -202,7 +202,7 @@ export default function NavBar2() {
                         src={user?.imageUrl || "/default-avatar.png"}
                         name={user?.name || "User"}
                         title={user?.name || "User"}
-                        size="md"
+                        size="sm"
                         isBordered
                       />
                     </button> :
@@ -250,21 +250,28 @@ export default function NavBar2() {
                 </button>
               </DropdownTrigger>
               <DropdownMenu aria-label="User Menu" className="bg-transparent ">
-                <DropdownItem key="profile" className="ml-2 h-14 gap-2">
+                <DropdownItem key="profile" className="p-4 h-14 gap-2">
                   <p className="font-semibold truncate text-lg">{user?.name || "No Name"}</p>
                   <p className="font-semibold truncate">{user?.email || "No Email"}</p>
                 </DropdownItem>
                 <DropdownItem key={""}>
-                  <Link href="/profile" className=" p-2">My Profile</Link>
+                  <Link href="/profile" className="flex gap-2 px-2">
+               
+                  <IoMdContact className="text-lg text-[#E10101]" />
+                  <h1 className="font-medium">My Profile</h1>
+              
+                  
+                  </Link>
                 </DropdownItem>
                 <DropdownItem key={""}>
                   <button
                     onClick={() => {
                       handleClearStorage();
                     }}
-                    className="hover:bg-[#E10101] hover:rounded-md w-full text-left p-2"
+                    className="px-2 flex justify-between gap-2"
                   >
-                    Logout
+                  <TbLogin className="text-lg text-[#E10101]" />
+                             <h1 className="font-medium">Log Out</h1>
                   </button>
                 </DropdownItem>
               </DropdownMenu>
