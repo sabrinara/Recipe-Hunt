@@ -10,6 +10,7 @@ import MoreImage from "./component/pages/home/MoreImage";
 import SomeRecipe from "./component/pages/home/SomeRecipe";
 import Sponser from "./component/pages/home/Sponser";
 import StaticHomeSection from "./component/pages/home/StaticHomeSection";
+import SharedTitle from "./component/pages/shared/SharedTitle";
 
 const Home = () => {
     return (
@@ -21,9 +22,7 @@ const Home = () => {
             {/* <HomeCategory /> */}
             <div>
                 <Link href="/recipe">
-                    <h1 className="text-3xl md:text-5xl md:my-14 font-serif text-center font-semibold" >
-                        Check all the <span className="underline underline-offset-2 text-[#E10101] ">Recipes</span>
-                    </h1>
+                    <SharedTitle title="Check Out our" subtitle="All Recipes"/>
                 </Link>
                 <SomeRecipe />
             </div>
