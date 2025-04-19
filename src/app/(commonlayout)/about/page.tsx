@@ -1,11 +1,12 @@
 import React from 'react';
 import AboutBanner from './aboutBanner/page';
+import ALLUsers from './ALLUsers';
 
 const About = () => {
     return (
         <div>
             <AboutBanner/>
-            <h1>About</h1>
+            <ALLUsers/>
         </div>
     );
 };
